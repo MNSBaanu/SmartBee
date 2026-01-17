@@ -3,20 +3,19 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Colors } from '@/constants/theme';
 
-// iOS-style BeeWith theme
+// Simple BeeWith theme
 const BeeWithTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: Colors.light.accent, // BeeWith Yellow
-    background: Colors.light.background, // iOS light gray
-    card: Colors.light.secondaryBackground, // White cards
-    text: Colors.light.label, // Black text
-    border: Colors.light.separator, // iOS separator
-    notification: Colors.light.accent, // Yellow notifications
+    primary: Colors.primary,
+    background: Colors.background,
+    card: Colors.background,
+    text: Colors.text,
+    border: Colors.border,
+    notification: Colors.primary,
   },
 };
 
@@ -25,8 +24,6 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <ThemeProvider value={BeeWithTheme}>
       <Stack>
@@ -36,18 +33,10 @@ export default function RootLayout() {
           options={{ 
             presentation: 'modal', 
             title: 'Modal',
-            headerStyle: {
-              backgroundColor: Colors.light.secondaryBackground,
-            },
-            headerTitleStyle: {
-              color: Colors.light.label,
-              fontSize: 17,
-              fontWeight: '600',
-            },
           }} 
         />
       </Stack>
-      <StatusBar style="dark" backgroundColor={Colors.light.background} />
+      <StatusBar style="dark" backgroundColor={Colors.background} />
     </ThemeProvider>
   );
 }
