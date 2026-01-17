@@ -4,18 +4,19 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Colors } from '@/constants/theme';
 
-// Custom BeeWith theme
+// iOS-style BeeWith theme
 const BeeWithTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#FFB800', // Yellow
-    background: '#FFFFFF', // White
-    card: '#FFFFFF', // White
-    text: '#000000', // Black
-    border: '#E0E0E0', // Light gray
-    notification: '#FFB800', // Yellow
+    primary: Colors.light.accent, // BeeWith Yellow
+    background: Colors.light.background, // iOS light gray
+    card: Colors.light.secondaryBackground, // White cards
+    text: Colors.light.label, // Black text
+    border: Colors.light.separator, // iOS separator
+    notification: Colors.light.accent, // Yellow notifications
   },
 };
 
@@ -30,9 +31,23 @@ export default function RootLayout() {
     <ThemeProvider value={BeeWithTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen 
+          name="modal" 
+          options={{ 
+            presentation: 'modal', 
+            title: 'Modal',
+            headerStyle: {
+              backgroundColor: Colors.light.secondaryBackground,
+            },
+            headerTitleStyle: {
+              color: Colors.light.label,
+              fontSize: 17,
+              fontWeight: '600',
+            },
+          }} 
+        />
       </Stack>
-      <StatusBar style="dark" backgroundColor="#FFFFFF" />
+      <StatusBar style="dark" backgroundColor={Colors.light.background} />
     </ThemeProvider>
   );
 }

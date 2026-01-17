@@ -1,7 +1,8 @@
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors, Spacing, BorderRadius, Shadows } from '@/constants/theme';
 
 export default function GroupsScreen() {
   const myGroups = [
@@ -35,58 +36,77 @@ export default function GroupsScreen() {
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* iOS-style header with action button */}
       <ThemedView style={styles.header}>
-        <ThemedText type="title">My Groups</ThemedText>
+        <ThemedText style={styles.title}>Groups</ThemedText>
         <TouchableOpacity style={styles.createButton}>
-          <IconSymbol name="plus" size={20} color="#fff" />
-          <ThemedText style={styles.createButtonText}>Create</ThemedText>
+          <IconSymbol name="plus" size={16} color="#FFFFFF" />
+          <ThemedText style={styles.createButtonText}>New</ThemedText>
         </TouchableOpacity>
       </ThemedView>
 
+      {/* My Groups Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Active Groups</ThemedText>
+        <ThemedText style={styles.sectionTitle}>My Groups</ThemedText>
         
-        {myGroups.map((group, index) => (
-          <TouchableOpacity key={index} style={styles.groupCard}>
-            <ThemedView style={styles.groupIcon}>
-              <ThemedText style={styles.groupEmoji}>{group.emoji}</ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.groupContent}>
-              <ThemedText type="defaultSemiBold">{group.name}</ThemedText>
-              <ThemedText style={styles.groupMeta}>
-                {group.members} members • {group.lastActivity}
-              </ThemedText>
-            </ThemedView>
-            {group.unread > 0 && (
-              <ThemedView style={styles.unreadBadge}>
-                <ThemedText style={styles.unreadText}>{group.unread}</ThemedText>
-              </ThemedView>
-            )}
-          </TouchableOpacity>
-        ))}
+        <View style={styles.groupsList}>
+          {myGroups.map((group, index) => (
+            <TouchableOpacity key={index} style={[
+              styles.groupItem,
+              index === myGroups.length - 1 && styles.lastItem
+            ]}>
+              <View style={styles.groupIcon}>
+                <ThemedText style={styles.groupEmoji}>{group.emoji}</ThemedText>
+              </View>
+              <View style={styles.groupContent}>
+                <ThemedText style={styles.groupName}>{group.name}</ThemedText>
+                <ThemedText style={styles.groupMeta}>
+                  {group.members} members • {group.lastActivity}
+                </ThemedText>
+              </View>
+              <View style={styles.groupActions}>
+                {group.unread > 0 && (
+                  <View style={styles.unreadBadge}>
+                    <ThemedText style={styles.unreadText}>{group.unread}</ThemedText>
+                  </View>
+                )}
+                <IconSymbol name="chevron.right" size={16} color={Colors.light.tertiaryLabel} />
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
       </ThemedView>
 
+      {/* Suggested Groups Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Suggested for You</ThemedText>
+        <ThemedText style={styles.sectionTitle}>Suggested for You</ThemedText>
         
-        {suggestedGroups.map((group, index) => (
-          <TouchableOpacity key={index} style={styles.suggestionCard}>
-            <ThemedView style={styles.groupIcon}>
-              <ThemedText style={styles.groupEmoji}>{group.emoji}</ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.groupContent}>
-              <ThemedText type="defaultSemiBold">{group.name}</ThemedText>
-              <ThemedText style={styles.groupMeta}>
-                {group.members} members
-              </ThemedText>
-            </ThemedView>
-            <TouchableOpacity style={styles.joinButton}>
-              <ThemedText style={styles.joinButtonText}>Join</ThemedText>
+        <View style={styles.groupsList}>
+          {suggestedGroups.map((group, index) => (
+            <TouchableOpacity key={index} style={[
+              styles.groupItem,
+              index === suggestedGroups.length - 1 && styles.lastItem
+            ]}>
+              <View style={styles.groupIcon}>
+                <ThemedText style={styles.groupEmoji}>{group.emoji}</ThemedText>
+              </View>
+              <View style={styles.groupContent}>
+                <ThemedText style={styles.groupName}>{group.name}</ThemedText>
+                <ThemedText style={styles.groupMeta}>
+                  {group.members} members
+                </ThemedText>
+              </View>
+              <TouchableOpacity style={styles.joinButton}>
+                <ThemedText style={styles.joinButtonText}>Join</ThemedText>
+              </TouchableOpacity>
             </TouchableOpacity>
-          </TouchableOpacity>
-        ))}
+          ))}
+        </View>
       </ThemedView>
+
+      {/* Bottom spacing for tab bar */}
+      <View style={styles.bottomSpacing} />
     </ScrollView>
   );
 }
@@ -94,103 +114,103 @@ export default function GroupsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // White background
+    backgroundColor: Colors.light.background,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: Spacing.md,
     paddingTop: 60,
-    backgroundColor: '#FFFFFF',
+    paddingBottom: Spacing.md,
+    backgroundColor: Colors.light.background,
+  },
+  title: {
+    fontSize: 34,
+    fontWeight: '700',
+    color: Colors.light.label,
+    letterSpacing: -0.5,
   },
   createButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFB800', // Yellow background
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    gap: 6,
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
+    backgroundColor: Colors.light.accent,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    gap: 4,
+    ...Shadows.small,
   },
   createButtonText: {
-    color: '#FFFFFF', // White text on yellow
+    color: '#FFFFFF',
+    fontSize: 15,
     fontWeight: '600',
   },
   section: {
-    padding: 20,
-    backgroundColor: '#FFFFFF',
+    marginBottom: Spacing.lg,
   },
   sectionTitle: {
-    marginBottom: 16,
-    fontSize: 20,
-    color: '#000000', // Black text
+    fontSize: 22,
+    fontWeight: '600',
+    color: Colors.light.label,
+    marginBottom: Spacing.md,
+    marginHorizontal: Spacing.md,
   },
-  groupCard: {
+  groupsList: {
+    backgroundColor: Colors.light.secondaryBackground,
+    marginHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    ...Shadows.small,
+  },
+  groupItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFB800', // Yellow border
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    padding: Spacing.md,
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.light.separator,
   },
-  suggestionCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E0E0E0', // Light gray border for suggestions
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
+  lastItem: {
+    borderBottomWidth: 0,
   },
   groupIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#FFF3CD', // Light yellow background
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.light.tertiaryBackground,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#FFB800',
+    marginRight: Spacing.md,
   },
   groupEmoji: {
-    fontSize: 24,
+    fontSize: 20,
   },
   groupContent: {
-    marginLeft: 16,
     flex: 1,
   },
+  groupName: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.light.label,
+    marginBottom: 2,
+  },
   groupMeta: {
-    fontSize: 14,
-    color: '#666666', // Dark gray
-    marginTop: 4,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+  },
+  groupActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
   },
   unreadBadge: {
-    backgroundColor: '#FF3B30',
-    borderRadius: 12,
-    minWidth: 24,
-    height: 24,
+    backgroundColor: Colors.light.systemRed,
+    borderRadius: 10,
+    minWidth: 20,
+    height: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 8,
+    paddingHorizontal: 6,
   },
   unreadText: {
     color: '#FFFFFF',
@@ -198,19 +218,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   joinButton: {
-    backgroundColor: '#FFB800', // Yellow background
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 16,
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 2,
+    backgroundColor: Colors.light.accent,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 14,
   },
   joinButtonText: {
-    color: '#FFFFFF', // White text
+    color: '#FFFFFF',
+    fontSize: 13,
     fontWeight: '600',
-    fontSize: 14,
+  },
+  bottomSpacing: {
+    height: Spacing.xl,
   },
 });

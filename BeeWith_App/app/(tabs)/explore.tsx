@@ -1,63 +1,107 @@
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors, Spacing, BorderRadius, Shadows } from '@/constants/theme';
 
 export default function ExploreScreen() {
   const categories = [
-    { name: 'Tech & Innovation', icon: 'laptopcomputer', count: 24 },
-    { name: 'Arts & Creativity', icon: 'paintbrush.fill', count: 18 },
-    { name: 'Sports & Fitness', icon: 'figure.run', count: 31 },
-    { name: 'Food & Cooking', icon: 'fork.knife', count: 15 },
-    { name: 'Travel & Adventure', icon: 'airplane', count: 22 },
-    { name: 'Learning & Education', icon: 'book.fill', count: 19 },
+    { name: 'Technology', icon: 'laptopcomputer', count: 24, color: '#007AFF' },
+    { name: 'Arts & Design', icon: 'paintbrush.fill', count: 18, color: '#FF3B30' },
+    { name: 'Sports & Fitness', icon: 'figure.run', count: 31, color: '#34C759' },
+    { name: 'Food & Cooking', icon: 'fork.knife', count: 15, color: '#FF9500' },
+    { name: 'Travel', icon: 'airplane', count: 22, color: '#5856D6' },
+    { name: 'Education', icon: 'book.fill', count: 19, color: '#AF52DE' },
   ];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* iOS-style large title header */}
       <ThemedView style={styles.header}>
-        <ThemedText type="title">Explore Communities</ThemedText>
+        <ThemedText style={styles.title}>Explore</ThemedText>
         <ThemedText style={styles.subtitle}>
           Find your tribe and discover new interests
         </ThemedText>
       </ThemedView>
 
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBar}>
+          <IconSymbol name="magnifyingglass" size={16} color={Colors.light.tertiaryLabel} />
+          <ThemedText style={styles.searchPlaceholder}>Search communities...</ThemedText>
+        </View>
+      </View>
+
+      {/* Categories Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Popular Categories</ThemedText>
+        <ThemedText style={styles.sectionTitle}>Categories</ThemedText>
         
-        {categories.map((category, index) => (
-          <TouchableOpacity key={index} style={styles.categoryCard}>
-            <IconSymbol name={category.icon} size={28} color="#FFB800" />
-            <ThemedView style={styles.categoryContent}>
-              <ThemedText type="defaultSemiBold">{category.name}</ThemedText>
+        <View style={styles.categoriesGrid}>
+          {categories.map((category, index) => (
+            <TouchableOpacity key={index} style={styles.categoryCard}>
+              <View style={[styles.categoryIcon, { backgroundColor: category.color }]}>
+                <IconSymbol name={category.icon} size={24} color="#FFFFFF" />
+              </View>
+              <ThemedText style={styles.categoryName}>{category.name}</ThemedText>
               <ThemedText style={styles.categoryCount}>
-                {category.count} active groups
+                {category.count} groups
               </ThemedText>
-            </ThemedView>
-            <IconSymbol name="chevron.right" size={16} color="#666" />
-          </TouchableOpacity>
-        ))}
+            </TouchableOpacity>
+          ))}
+        </View>
       </ThemedView>
 
+      {/* Trending Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Trending Now</ThemedText>
+        <ThemedText style={styles.sectionTitle}>Trending Now</ThemedText>
         
-        <ThemedView style={styles.trendingCard}>
-          <ThemedText type="defaultSemiBold">🔥 Weekend Hiking Group</ThemedText>
-          <ThemedText style={styles.trendingDescription}>
-            Join 47 adventurers exploring local trails this weekend
-          </ThemedText>
-          <ThemedText style={styles.trendingMeta}>📍 Local • 2.3k interested</ThemedText>
-        </ThemedView>
+        <View style={styles.trendingList}>
+          <TouchableOpacity style={styles.trendingItem}>
+            <View style={styles.trendingIcon}>
+              <ThemedText style={styles.trendingEmoji}>🔥</ThemedText>
+            </View>
+            <View style={styles.trendingContent}>
+              <ThemedText style={styles.trendingTitle}>Weekend Hiking Group</ThemedText>
+              <ThemedText style={styles.trendingDescription}>
+                Join 47 adventurers exploring local trails this weekend
+              </ThemedText>
+              <ThemedText style={styles.trendingMeta}>📍 Local • 2.3k interested</ThemedText>
+            </View>
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.tertiaryLabel} />
+          </TouchableOpacity>
 
-        <ThemedView style={styles.trendingCard}>
-          <ThemedText type="defaultSemiBold">💻 React Native Study Circle</ThemedText>
-          <ThemedText style={styles.trendingDescription}>
-            Weekly meetups for mobile developers to share knowledge
-          </ThemedText>
-          <ThemedText style={styles.trendingMeta}>🌐 Online • 1.8k members</ThemedText>
-        </ThemedView>
+          <TouchableOpacity style={styles.trendingItem}>
+            <View style={styles.trendingIcon}>
+              <ThemedText style={styles.trendingEmoji}>💻</ThemedText>
+            </View>
+            <View style={styles.trendingContent}>
+              <ThemedText style={styles.trendingTitle}>React Native Study Circle</ThemedText>
+              <ThemedText style={styles.trendingDescription}>
+                Weekly meetups for mobile developers to share knowledge
+              </ThemedText>
+              <ThemedText style={styles.trendingMeta}>🌐 Online • 1.8k members</ThemedText>
+            </View>
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.tertiaryLabel} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.trendingItem}>
+            <View style={styles.trendingIcon}>
+              <ThemedText style={styles.trendingEmoji}>🎨</ThemedText>
+            </View>
+            <View style={styles.trendingContent}>
+              <ThemedText style={styles.trendingTitle}>Digital Art Collective</ThemedText>
+              <ThemedText style={styles.trendingDescription}>
+                Creative minds sharing techniques and inspiration
+              </ThemedText>
+              <ThemedText style={styles.trendingMeta}>🎯 Creative • 892 members</ThemedText>
+            </View>
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.tertiaryLabel} />
+          </TouchableOpacity>
+        </View>
       </ThemedView>
+
+      {/* Bottom spacing for tab bar */}
+      <View style={styles.bottomSpacing} />
     </ScrollView>
   );
 }
@@ -65,75 +109,137 @@ export default function ExploreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // White background
+    backgroundColor: Colors.light.background,
   },
   header: {
-    padding: 20,
+    paddingHorizontal: Spacing.md,
     paddingTop: 60,
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    paddingBottom: Spacing.md,
+    backgroundColor: Colors.light.background,
+  },
+  title: {
+    fontSize: 34,
+    fontWeight: '700',
+    color: Colors.light.label,
+    marginBottom: Spacing.xs,
+    letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666666', // Dark gray
-    textAlign: 'center',
-    marginTop: 8,
+    fontSize: 17,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    lineHeight: 22,
   },
-  section: {
-    padding: 20,
-    backgroundColor: '#FFFFFF',
+  searchContainer: {
+    paddingHorizontal: Spacing.md,
+    marginBottom: Spacing.lg,
   },
-  sectionTitle: {
-    marginBottom: 16,
-    fontSize: 20,
-    color: '#000000', // Black text
-  },
-  categoryCard: {
+  searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFB800', // Yellow border
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    backgroundColor: Colors.light.secondaryBackground,
+    borderRadius: BorderRadius.sm,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: 12,
+    gap: Spacing.sm,
+    ...Shadows.small,
   },
-  categoryContent: {
-    marginLeft: 16,
-    flex: 1,
+  searchPlaceholder: {
+    fontSize: 17,
+    color: Colors.light.tertiaryLabel,
+  },
+  section: {
+    marginBottom: Spacing.lg,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: '600',
+    color: Colors.light.label,
+    marginBottom: Spacing.md,
+    marginHorizontal: Spacing.md,
+  },
+  categoriesGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: Spacing.md,
+    gap: Spacing.md,
+  },
+  categoryCard: {
+    width: '47%',
+    backgroundColor: Colors.light.secondaryBackground,
+    borderRadius: BorderRadius.md,
+    padding: Spacing.md,
+    alignItems: 'center',
+    ...Shadows.small,
+  },
+  categoryIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  categoryName: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.light.label,
+    textAlign: 'center',
+    marginBottom: 4,
   },
   categoryCount: {
-    fontSize: 14,
-    color: '#666666', // Dark gray
-    marginTop: 4,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    textAlign: 'center',
   },
-  trendingCard: {
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFB800', // Yellow border
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+  trendingList: {
+    backgroundColor: Colors.light.secondaryBackground,
+    marginHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    ...Shadows.small,
+  },
+  trendingItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: Spacing.md,
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.light.separator,
+  },
+  trendingIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.light.tertiaryBackground,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: Spacing.md,
+  },
+  trendingEmoji: {
+    fontSize: 20,
+  },
+  trendingContent: {
+    flex: 1,
+  },
+  trendingTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.light.label,
+    marginBottom: 4,
   },
   trendingDescription: {
-    fontSize: 14,
-    color: '#333333', // Dark text
-    marginTop: 8,
-    lineHeight: 20,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    lineHeight: 18,
+    marginBottom: 4,
   },
   trendingMeta: {
     fontSize: 12,
-    color: '#999999', // Light gray
-    marginTop: 8,
+    fontWeight: '400',
+    color: Colors.light.tertiaryLabel,
+  },
+  bottomSpacing: {
+    height: Spacing.xl,
   },
 });

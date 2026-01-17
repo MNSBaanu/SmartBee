@@ -12,54 +12,95 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#FFB800', // Yellow for active tabs
-        tabBarInactiveTintColor: '#666666', // Dark gray for inactive tabs
+        tabBarActiveTintColor: Colors.light.accent, // BeeWith yellow
+        tabBarInactiveTintColor: Colors.light.tabIconDefault, // iOS gray
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF', // White background
-          borderTopColor: '#E0E0E0', // Light gray border
-          borderTopWidth: 1,
+          backgroundColor: Colors.light.secondaryBackground, // White background
+          borderTopColor: Colors.light.separator, // iOS separator color
+          borderTopWidth: 0.5, // Thin iOS-style border
+          paddingTop: 8,
+          paddingBottom: 34, // Extra padding for home indicator
+          height: 88, // iOS tab bar height with safe area
           shadowColor: '#000000',
-          shadowOffset: { width: 0, height: -2 },
+          shadowOffset: { width: 0, height: -1 },
           shadowOpacity: 0.1,
           shadowRadius: 4,
           elevation: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 10,
+          fontWeight: '500', // iOS medium weight
+          marginTop: 4,
+        },
+        tabBarIconStyle: {
+          marginTop: 4,
         },
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={focused ? 26 : 24} 
+              name={focused ? "house.fill" : "house"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="safari.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={focused ? 26 : 24} 
+              name={focused ? "safari.fill" : "safari"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="groups"
         options={{
           title: 'Groups',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.3.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={focused ? 26 : 24} 
+              name={focused ? "person.3.fill" : "person.3"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="messages"
         options={{
           title: 'Messages',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="message.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={focused ? 26 : 24} 
+              name={focused ? "message.fill" : "message"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.crop.circle.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={focused ? 26 : 24} 
+              name={focused ? "person.crop.circle.fill" : "person.crop.circle"} 
+              color={color} 
+            />
+          ),
         }}
       />
     </Tabs>

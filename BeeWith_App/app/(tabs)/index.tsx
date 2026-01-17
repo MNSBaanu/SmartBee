@@ -1,57 +1,95 @@
-import { StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Colors, Spacing, BorderRadius, Shadows } from '@/constants/theme';
 
 export default function HomeScreen() {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* iOS-style large title header */}
       <ThemedView style={styles.header}>
-        <ThemedText type="title" style={styles.title}>🐝 BeeWith</ThemedText>
+        <ThemedText style={styles.greeting}>Good Morning</ThemedText>
+        <ThemedText style={styles.title}>🐝 BeeWith</ThemedText>
         <ThemedText style={styles.subtitle}>Connect, Collaborate, Create Together</ThemedText>
       </ThemedView>
 
+      {/* Quick Actions Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Quick Actions</ThemedText>
+        <ThemedText style={styles.sectionTitle}>Quick Actions</ThemedText>
         
-        <TouchableOpacity style={styles.actionCard}>
-          <IconSymbol name="person.2.fill" size={24} color="#FFB800" />
-          <ThemedView style={styles.actionContent}>
-            <ThemedText type="defaultSemiBold">Find People</ThemedText>
+        <View style={styles.actionsGrid}>
+          <TouchableOpacity style={styles.actionCard}>
+            <View style={styles.actionIconContainer}>
+              <IconSymbol name="person.2.fill" size={24} color="#FFFFFF" />
+            </View>
+            <ThemedText style={styles.actionTitle}>Find People</ThemedText>
             <ThemedText style={styles.actionDescription}>
               Discover others with similar interests
             </ThemedText>
-          </ThemedView>
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard}>
-          <IconSymbol name="plus.circle.fill" size={24} color="#FFB800" />
-          <ThemedView style={styles.actionContent}>
-            <ThemedText type="defaultSemiBold">Create Group</ThemedText>
+          <TouchableOpacity style={styles.actionCard}>
+            <View style={styles.actionIconContainer}>
+              <IconSymbol name="plus.circle.fill" size={24} color="#FFFFFF" />
+            </View>
+            <ThemedText style={styles.actionTitle}>Create Group</ThemedText>
             <ThemedText style={styles.actionDescription}>
               Start a new community or project
             </ThemedText>
-          </ThemedView>
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.actionCard}>
-          <IconSymbol name="calendar" size={24} color="#FFB800" />
-          <ThemedView style={styles.actionContent}>
-            <ThemedText type="defaultSemiBold">Join Events</ThemedText>
+          <TouchableOpacity style={styles.actionCard}>
+            <View style={styles.actionIconContainer}>
+              <IconSymbol name="calendar" size={24} color="#FFFFFF" />
+            </View>
+            <ThemedText style={styles.actionTitle}>Join Events</ThemedText>
             <ThemedText style={styles.actionDescription}>
               Participate in local activities
             </ThemedText>
-          </ThemedView>
-        </TouchableOpacity>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.actionCard}>
+            <View style={styles.actionIconContainer}>
+              <IconSymbol name="message.fill" size={24} color="#FFFFFF" />
+            </View>
+            <ThemedText style={styles.actionTitle}>Messages</ThemedText>
+            <ThemedText style={styles.actionDescription}>
+              Chat with your connections
+            </ThemedText>
+          </TouchableOpacity>
+        </View>
       </ThemedView>
 
+      {/* Recent Activity Section */}
       <ThemedView style={styles.section}>
-        <ThemedText type="subtitle" style={styles.sectionTitle}>Recent Activity</ThemedText>
-        <ThemedView style={styles.activityCard}>
-          <ThemedText>Welcome to BeeWith! 🎉</ThemedText>
-          <ThemedText style={styles.activityTime}>Just now</ThemedText>
-        </ThemedView>
+        <ThemedText style={styles.sectionTitle}>Recent Activity</ThemedText>
+        
+        <View style={styles.activityList}>
+          <View style={styles.activityItem}>
+            <View style={styles.activityIcon}>
+              <ThemedText style={styles.activityEmoji}>🎉</ThemedText>
+            </View>
+            <View style={styles.activityContent}>
+              <ThemedText style={styles.activityTitle}>Welcome to BeeWith!</ThemedText>
+              <ThemedText style={styles.activityTime}>Just now</ThemedText>
+            </View>
+          </View>
+
+          <View style={styles.activityItem}>
+            <View style={styles.activityIcon}>
+              <ThemedText style={styles.activityEmoji}>👥</ThemedText>
+            </View>
+            <View style={styles.activityContent}>
+              <ThemedText style={styles.activityTitle}>3 new groups match your interests</ThemedText>
+              <ThemedText style={styles.activityTime}>2 hours ago</ThemedText>
+            </View>
+          </View>
+        </View>
       </ThemedView>
+
+      {/* Bottom spacing for tab bar */}
+      <View style={styles.bottomSpacing} />
     </ScrollView>
   );
 }
@@ -59,73 +97,120 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // White background
+    backgroundColor: Colors.light.background, // iOS light gray background
   },
   header: {
-    padding: 20,
+    paddingHorizontal: Spacing.md,
     paddingTop: 60,
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    paddingBottom: Spacing.lg,
+    backgroundColor: Colors.light.background,
+  },
+  greeting: {
+    fontSize: 17,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    marginBottom: 4,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#000000', // Black text
+    fontSize: 34,
+    fontWeight: '700', // iOS bold weight
+    color: Colors.light.label,
+    marginBottom: Spacing.xs,
+    letterSpacing: -0.5, // iOS large title letter spacing
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666666', // Dark gray
-    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    lineHeight: 22,
   },
   section: {
-    padding: 20,
-    backgroundColor: '#FFFFFF',
+    marginBottom: Spacing.lg,
   },
   sectionTitle: {
-    marginBottom: 16,
-    fontSize: 20,
-    color: '#000000', // Black text
+    fontSize: 22,
+    fontWeight: '600', // iOS semibold
+    color: Colors.light.label,
+    marginBottom: Spacing.md,
+    marginHorizontal: Spacing.md,
+  },
+  actionsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: Spacing.md,
+    gap: Spacing.md,
   },
   actionCard: {
-    flexDirection: 'row',
+    width: '47%', // Two columns with gap
+    backgroundColor: Colors.light.secondaryBackground,
+    borderRadius: BorderRadius.md,
+    padding: Spacing.md,
     alignItems: 'center',
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFB800', // Yellow border
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    ...Shadows.medium,
   },
-  actionContent: {
-    marginLeft: 16,
-    flex: 1,
+  actionIconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: Colors.light.accent,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  actionTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: Colors.light.label,
+    textAlign: 'center',
+    marginBottom: 4,
   },
   actionDescription: {
-    fontSize: 14,
-    color: '#666666', // Dark gray
-    marginTop: 4,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.light.secondaryLabel,
+    textAlign: 'center',
+    lineHeight: 18,
   },
-  activityCard: {
-    padding: 16,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFB800', // Yellow border
-    shadowColor: '#FFB800',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+  activityList: {
+    backgroundColor: Colors.light.secondaryBackground,
+    marginHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    ...Shadows.small,
+  },
+  activityItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: Spacing.md,
+    borderBottomWidth: 0.5,
+    borderBottomColor: Colors.light.separator,
+  },
+  activityIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.light.tertiaryBackground,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: Spacing.md,
+  },
+  activityEmoji: {
+    fontSize: 16,
+  },
+  activityContent: {
+    flex: 1,
+  },
+  activityTitle: {
+    fontSize: 15,
+    fontWeight: '400',
+    color: Colors.light.label,
+    marginBottom: 2,
   },
   activityTime: {
-    fontSize: 12,
-    color: '#999999',
-    marginTop: 8,
+    fontSize: 13,
+    fontWeight: '400',
+    color: Colors.light.tertiaryLabel,
+  },
+  bottomSpacing: {
+    height: Spacing.xl, // Extra space for tab bar
   },
 });
