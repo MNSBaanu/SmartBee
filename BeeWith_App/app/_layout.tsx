@@ -5,6 +5,20 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
+// Custom BeeWith theme
+const BeeWithTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#FFB800', // Yellow
+    background: '#FFFFFF', // White
+    card: '#FFFFFF', // White
+    text: '#000000', // Black
+    border: '#E0E0E0', // Light gray
+    notification: '#FFB800', // Yellow
+  },
+};
+
 export const unstable_settings = {
   anchor: '(tabs)',
 };
@@ -13,12 +27,12 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={BeeWithTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" backgroundColor="#FFFFFF" />
     </ThemeProvider>
   );
 }

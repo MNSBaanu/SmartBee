@@ -5,25 +5,31 @@
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = '#FFB800'; // BeeWith Yellow
+const tintColorDark = '#FFB800'; // BeeWith Yellow for dark mode too
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: '#000000', // Black text
+    background: '#FFFFFF', // White background
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    icon: '#666666', // Dark gray for icons
+    tabIconDefault: '#666666',
     tabIconSelected: tintColorLight,
+    cardBackground: '#FFFFFF', // White card backgrounds
+    border: '#E0E0E0', // Light gray borders
+    accent: '#FFB800', // Yellow accent
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#000000', // Keep black text even in dark mode
+    background: '#FFFFFF', // Keep white background even in dark mode
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#666666',
+    tabIconDefault: '#666666',
     tabIconSelected: tintColorDark,
+    cardBackground: '#FFFFFF',
+    border: '#E0E0E0',
+    accent: '#FFB800',
   },
 };
 
