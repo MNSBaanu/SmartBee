@@ -1,3 +1,3 @@
-# BeeWith Web 
+# BeeWith 
 
-**Local connections, right from your browser.**
+
