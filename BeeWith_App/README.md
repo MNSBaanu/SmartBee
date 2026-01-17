@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# 🐝 BeeWith - Connect & Collaborate
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+BeeWith is a community-focused mobile app that helps people connect, collaborate, and create together. Built with React Native and Expo, it provides a platform for discovering like-minded individuals, joining interest-based groups, and participating in local events.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- **🏠 Home Dashboard**: Quick access to activities and community updates
+- **🔍 Explore Communities**: Discover groups by interests and categories
+- **👥 Group Management**: Join and manage your community groups
+- **💬 Messaging**: Connect with individuals and group chats
+- **👤 Profile**: Customize your profile and showcase interests
 
+## 🚀 Getting Started
+
+1. **Install dependencies**
    ```bash
+   cd BeeWith_App
    npm install
    ```
 
-2. Start the app
-
+2. **Start the development server**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. **Run on your device**
+   - Scan QR code with Expo Go app
+   - Press `a` for Android emulator
+   - Press `i` for iOS simulator
+   - Press `w` for web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🛠 Tech Stack
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Framework**: React Native with Expo
+- **Navigation**: Expo Router with file-based routing
+- **UI**: Custom themed components with light/dark mode
+- **Icons**: SF Symbols via expo-symbols
+- **Animations**: React Native Reanimated
+- **TypeScript**: Full type safety
 
-## Get a fresh project
+## 📱 App Structure
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/
+├── (tabs)/
+│   ├── index.tsx      # Home screen
+│   ├── explore.tsx    # Community discovery
+│   ├── groups.tsx     # Group management
+│   ├── messages.tsx   # Chat interface
+│   ├── profile.tsx    # User profile
+│   └── _layout.tsx    # Tab navigation
+├── modal.tsx          # Modal screens
+└── _layout.tsx        # Root layout
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🎨 Design System
 
-## Learn more
+- **Primary Color**: #FFB800 (Bee Yellow)
+- **Typography**: System fonts with custom themed text
+- **Components**: Reusable themed components for consistency
+- **Icons**: SF Symbols for native feel
 
-To learn more about developing your project with Expo, look at the following resources:
+## 🔄 Development Workflow
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. **Feature Development**: Create new screens in `app/` directory
+2. **Components**: Add reusable components to `components/`
+3. **Styling**: Use themed components for consistent design
+4. **Navigation**: Leverage file-based routing for new screens
 
-## Join the community
+## 🤝 Contributing
 
-Join our community of developers creating universal apps.
+This is a community-focused project. Feel free to contribute by:
+- Adding new features
+- Improving UI/UX
+- Fixing bugs
+- Enhancing documentation
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📄 License
+
+This project is open source and available under the MIT License.
