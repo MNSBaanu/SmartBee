@@ -28,13 +28,6 @@ export default function RootLayout() {
     <ThemeProvider value={BeeWithTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen 
-          name="modal" 
-          options={{ 
-            presentation: 'modal', 
-            title: 'Modal',
-          }} 
-        />
       </Stack>
       <StatusBar style="dark" backgroundColor={Colors.background} />
     </ThemeProvider>
