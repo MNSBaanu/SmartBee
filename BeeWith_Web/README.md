@@ -59,121 +59,154 @@ Example challenges:
 
 ---
 
-## 🛠 Technology Stack
+## 🛠 Technology Stack (MERN)
 
 ### Frontend
-- HTML5  
-- CSS3  
-- JavaScript  
-- React.js  
-- Tailwind CSS  
+- **React.js** – UI library
+- **React Router** – Client-side routing
+- **Tailwind CSS** – Utility-first CSS framework
+- **Axios** – HTTP client for API calls
+- **Socket.IO Client** – Real-time communication
 
-### Backend
-- Node.js  
-- Express.js  
-- REST APIs  
+### Backend (BeeWith API)
+- **Node.js** – JavaScript runtime
+- **Express.js** – Web framework
+- **REST APIs** – API architecture
 
 ### Database
-- MongoDB  
+- **MongoDB** – NoSQL database
+- **Mongoose** – ODM for MongoDB
 
 ### Real-Time Features
-- Socket.IO  
+- **Socket.IO** – WebSocket communication
 
 ### Authentication
-- JWT (JSON Web Tokens)
+- **JWT** – JSON Web Tokens
 
 ### Deployment
-- Frontend: Vercel  
-- Backend: Render  
-- Database: MongoDB Atlas  
+- **Frontend**: Vercel / Netlify
+- **Backend**: Render / Railway
+- **Database**: MongoDB Atlas  
 
 ---
 
-## 🧩 System Overview
+## 🧩 System Architecture
 
 ```text
-Client (Browser)
+BeeWith Web (React.js)
    |
    | REST API / WebSocket
    |
-Server (Node.js + Express)
+BeeWith API (Node.js + Express)
    |
-Database (MongoDB)
-🧪 Development Roadmap
-Phase 1 – Website Core
-User authentication
-
-Skill profiles
-
-Skill exchange posts
-
-Phase 2 – Challenges
-Create and join challenges
-
-Team formation
-
-Submissions and leaderboards
-
-Phase 3 – Collaboration
-Project workspaces
-
-Chat system
-
-Peer reviews
-
-Phase 4 – Optional Expansion
-Micro-freelance gigs
-
-Verified teams
-
-Advanced analytics
-
-🎯 Target Users
-University students
-
-Self-learners and beginners
-
-Developers, designers, writers
-
-Community learning groups
-
-🔮 Future Enhancements
-AI-based skill matching
-
-Smart team recommendations
-
-Auto-generated portfolios
-
-Optional paid gigs
-
-Mobile app (React Native)
-
-📂 Project Status
-🟡 In Development
-Initial focus is on building a scalable, free-first web platform.
-
-🤝 Contributing
-Contributions, feedback, and suggestions are welcome.
-Feel free to fork the repository or open an issue.
-
-📜 License
-This project is licensed under the MIT License.
-
-🐝 Vision
-BeeWith aims to create a collaborative ecosystem where skills, teamwork, and challenges matter more than money.
-
-Build skills. Build teams. Build together.
-
-markdown
-Copy code
+MongoDB Database
+```
 
 ---
 
-### ✅ Want me to:
-- Customize this for **academic submission**
-- Simplify it for a **beginner-level project**
-- Add a **Screenshots section**
-- Write a **one-paragraph CV description**
-- Create a **Landing Page content copy**
+## 🚀 Getting Started
 
-Just say the word — we’ll polish BeeWith like a real startup 🐝🚀
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- BeeWith API running locally or deployed
+
+### Installation
+
+1. **Navigate to web directory**
+   ```bash
+   cd BeeWith_Web
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   Create a `.env` file:
+   ```env
+   REACT_APP_API_URL=http://localhost:5000/api
+   REACT_APP_SOCKET_URL=http://localhost:5000
+   ```
+
+4. **Start development server**
+   ```bash
+   npm start
+   ```
+
+5. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🧪 Development Roadmap
+
+**Phase 1 – Website Core**
+- User authentication
+- Skill profiles
+- Skill exchange posts
+
+**Phase 2 – Challenges**
+- Create and join challenges
+- Team formation
+- Submissions and leaderboards
+
+**Phase 3 – Collaboration**
+- Project workspaces
+- Chat system
+- Peer reviews
+
+**Phase 4 – Optional Expansion**
+- Micro-freelance gigs
+- Verified teams
+- Advanced analytics
+
+---
+
+## 🎯 Target Users
+
+- University students
+- Self-learners and beginners
+- Developers, designers, writers
+- Community learning groups
+
+---
+
+## 🔮 Future Enhancements
+
+- AI-based skill matching
+- Smart team recommendations
+- Auto-generated portfolios
+- Optional paid gigs
+- Progressive Web App (PWA)
+
+---
+
+## 📂 Project Status
+
+🟡 In Development  
+Initial focus is on building a scalable, free-first web platform using the MERN stack.
+
+---
+
+## 🤝 Contributing
+
+Contributions, feedback, and suggestions are welcome.
+Feel free to fork the repository or open an issue.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🐝 Vision
+
+BeeWith aims to create a collaborative ecosystem where skills, teamwork, and challenges matter more than money.
+
+**Build skills. Build teams. Build together.**
