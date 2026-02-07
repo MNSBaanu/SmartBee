@@ -1,4 +1,4 @@
-# 🐝 BeeWith – Challenge-Driven Skill Collaboration Mobile App
+# 🐝 BeeWith – Mobile App
 
 BeeWith is a free, challenge-driven collaboration platform that helps people connect through skills, teamwork, and real-world projects. Inspired by the collaborative nature of a beehive, BeeWith focuses on **learning by doing**, **working together**, and **growing without financial barriers**.
 
