@@ -2,15 +2,16 @@
 
 Frontend for BeeWith's developer-support platform.
 
-This app is focused on a simple and professional MVP where developers can submit repositories and view AI-assisted engineering feedback.
+This application delivers BeeWith's initial user experience where Code Health is one module within a broader AI developer assistant.
 
-## MVP Goals
+## Scope (MVP)
 
 The web app should support:
-1. Repository submission flow (URL or connected provider later)
+1. Code Health module: repository submission and analysis
 2. Analysis status tracking (queued, running, completed)
 3. Findings dashboard grouped by category
-4. Clear severity labels and file-path references
+4. Role-based view modes (Frontend, Backend, QA, DevOps, Security)
+5. Foundation for additional developer-assistant workflows
 
 ## Planned Feedback Categories
 
@@ -81,9 +82,14 @@ Product pivot in progress from collaboration platform to developer-support AI.
 Current focus:
 1. Define clean information architecture for analysis reports
 2. Implement submission and report list screens
-3. Connect with backend analysis endpoints
+3. Add role-aware filters and role-specific recommendation blocks
+4. Keep UI ready for follow-up modules beyond repository scanning
 
 ## Contributing
 
 Contributions are welcome.
 Please open an issue for bugs, feature proposals, or UX improvements.
+
+## Project Ownership
+
+Product Concept and Direction: MNS Baanu

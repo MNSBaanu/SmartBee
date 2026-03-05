@@ -2,7 +2,9 @@
 
 Backend service for BeeWith's developer-support platform.
 
-This API will accept repository submissions, run analysis workflows, and return structured findings such as bugs, duplicate code, hardcoded values, and improvement suggestions.
+This API powers the Code Health module in phase 1 and is designed to expand into broader developer-assistant workflows.
+
+Phase 1 includes repository submissions and structured findings such as bugs, duplicate code, hardcoded values, and improvement suggestions.
 
 ## Current State
 
@@ -17,13 +19,19 @@ BeeWith_API/
   README.md
 ```
 
-## Backend MVP Scope
+## Scope (MVP)
 
 Phase 1 should provide:
 1. Repository intake endpoint
 2. Analysis job creation and status endpoint
 3. Findings retrieval endpoint
 4. Basic static checks before deeper AI analysis
+
+Next phases should support:
+1. Developer Q&A assistance on top of findings
+2. Project-level coding standards and rule sets
+3. Team history and repeated-pattern insights
+4. Role-aware responses (Frontend, Backend, QA, DevOps, Security)
 
 ## Planned API Modules
 
@@ -37,6 +45,7 @@ Phase 1 should provide:
 Each issue should include:
 - Category (`bug`, `duplicate`, `hardcoded`, `smell`, `improvement`)
 - Severity (`low`, `medium`, `high`, `critical`)
+- Role context (`frontend`, `backend`, `qa`, `devops`, `security`)
 - File path
 - Optional line reference
 - Short explanation
@@ -81,3 +90,7 @@ This README intentionally reflects the current scaffold state and avoids assumpt
 
 Contributions are welcome during MVP definition.
 Open issues for endpoint design, analysis rule ideas, and architecture suggestions.
+
+## Project Ownership
+
+Product Concept and Direction: MNS Baanu

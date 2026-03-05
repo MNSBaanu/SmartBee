@@ -1,73 +1,86 @@
 import './App.css'
 
 function App() {
+  const roleModes = ['Frontend', 'Backend', 'QA', 'DevOps', 'Security']
+
+  const findings = [
+    {
+      id: 'F-101',
+      category: 'bug',
+      severity: 'high',
+      file: 'src/services/auth.js',
+      summary: 'Potential null access when user token is missing.',
+    },
+    {
+      id: 'F-102',
+      category: 'duplicate',
+      severity: 'medium',
+      file: 'src/utils/formatDate.js',
+      summary: 'Similar date formatting logic appears in multiple files.',
+    },
+    {
+      id: 'F-103',
+      category: 'hardcoded',
+      severity: 'low',
+      file: 'src/config/appConfig.js',
+      summary: 'API base URL is hardcoded instead of using environment variables.',
+    },
+  ]
+
   return (
-    <div className="app">
-      <header className="header">
-        <div className="logo">🐝 BeeWith</div>
-        <nav className="nav">
-          <a href="#hive">The Hive</a>
-          <a href="#features">Features</a>
-          <a href="#about">About</a>
-          <button className="btn-primary">Join the Hive</button>
-        </nav>
+    <div className="app-shell">
+      <header className="page-header">
+        <h1 className="page-title">BeeWith Developer Support</h1>
+        <p className="page-subtitle">
+          Code Health is one included module in a broader AI developer support platform.
+        </p>
       </header>
 
-      <main className="hero">
-        <div className="hero-badge">🍯 Free-First Collaboration Platform</div>
-        <h1>
-          Build Skills. Build Teams.<br />
-          <span className="highlight">Build Together.</span>
-        </h1>
-        <p>
-          Where busy bees collaborate on real projects, share knowledge, 
-          and create something sweet together. Join our thriving hive today.
-        </p>
-        <div className="hero-buttons">
-          <button className="btn-primary btn-large">Start Buzzing</button>
-          <button className="btn-secondary btn-large">Explore the Hive</button>
-        </div>
-      </main>
+      <section className="panel">
+        <h2 className="panel-title">1) Code Health: Submit Repository</h2>
+        <label className="field-label" htmlFor="repoUrl">
+          Repository URL
+        </label>
+        <input
+          className="input-control"
+          id="repoUrl"
+          placeholder="https://github.com/owner/repository"
+        />
+        <button className="btn-primary">Run Code Health Check</button>
+      </section>
 
-      <section className="features">
-        <div className="section-header">
-          <div className="section-subtitle">Why BeeWith</div>
-          <h2>Everything You Need to Thrive</h2>
-        </div>
-        <div className="feature-grid">
-          <div className="feature-card">
-            <div className="bee-icon">🐝</div>
-            <h3>Worker Bees Unite</h3>
-            <p>Connect with talented individuals, share your expertise, and pollinate ideas across the hive</p>
-          </div>
-          <div className="feature-card">
-            <div className="bee-icon">🏆</div>
-            <h3>Hive Challenges</h3>
-            <p>Take on solo missions, team swarms, or colony-wide challenges to sharpen your skills</p>
-          </div>
-          <div className="feature-card">
-            <div className="bee-icon">🍯</div>
-            <h3>Build the Honeycomb</h3>
-            <p>Form productive swarms and construct real projects together, cell by cell</p>
-          </div>
-          <div className="feature-card">
-            <div className="bee-icon">⭐</div>
-            <h3>Earn Your Stripes</h3>
-            <p>Build reputation through meaningful contributions and rise to queen bee status</p>
-          </div>
+      <section className="panel">
+        <h2 className="panel-title">Role-Aware Review Mode</h2>
+        <p className="panel-note">Choose perspective-specific recommendations for the same findings.</p>
+        <div className="role-list">
+          {roleModes.map((role) => (
+            <span key={role} className="role-chip">{role}</span>
+          ))}
         </div>
       </section>
 
-      <section className="cta-section">
-        <h2>Ready to Join the Swarm?</h2>
-        <p>Be part of a thriving community where collaboration creates honey</p>
-        <button className="btn-primary btn-large">Buzz In Now</button>
+      <section className="panel">
+        <h2 className="panel-title">2) Analysis Status</h2>
+        <div className="status-grid">
+          <p className="status-item"><strong>Analysis ID:</strong> ANL-0001</p>
+          <p className="status-item"><strong>Status:</strong> Running</p>
+          <p className="status-item"><strong>Progress:</strong> 42%</p>
+        </div>
       </section>
 
-      <footer className="footer">
-        <p>© 2024 BeeWith - Where collaboration creates honey</p>
-        <p className="tagline">Be Together. Build Together. Bee Together.</p>
-      </footer>
+      <section className="panel">
+        <h2 className="panel-title">3) Findings (Mock)</h2>
+        {findings.map((item) => (
+          <article key={item.id} className="finding-card">
+            <p className="finding-head">
+              <strong>{item.id}</strong> | {item.category} |{' '}
+              <span className={`severity ${item.severity}`}>{item.severity}</span>
+            </p>
+            <p className="finding-file"><strong>File:</strong> {item.file}</p>
+            <p className="finding-summary">{item.summary}</p>
+          </article>
+        ))}
+      </section>
     </div>
   )
 }
