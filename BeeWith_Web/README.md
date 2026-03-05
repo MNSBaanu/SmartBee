@@ -1,212 +1,89 @@
-# 🐝 BeeWith – Challenge-Driven Skill Collaboration Website
+# BeeWith Web
 
-BeeWith is a free, challenge-driven collaboration platform that helps people connect through skills, teamwork, and real-world projects. Inspired by the collaborative nature of a beehive, BeeWith focuses on **learning by doing**, **working together**, and **growing without financial barriers**.
+Frontend for BeeWith's developer-support platform.
 
-> **Be Together. Build Together.**
+This app is focused on a simple and professional MVP where developers can submit repositories and view AI-assisted engineering feedback.
 
----
+## MVP Goals
 
-## 🌟 Purpose of the Website
+The web app should support:
+1. Repository submission flow (URL or connected provider later)
+2. Analysis status tracking (queued, running, completed)
+3. Findings dashboard grouped by category
+4. Clear severity labels and file-path references
 
-The BeeWith website serves as the primary platform where users can:
-- Discover and showcase skills
-- Participate in individual and team challenges
-- Collaborate on projects
-- Build reputation through contribution rather than payments
+## Planned Feedback Categories
 
-The platform is designed to be **free-first**, especially for students, beginners, and early-career professionals.
+- `Bugs`
+- `Code Smells`
+- `Duplicate Code`
+- `Hardcoded Values`
+- `Improvement Suggestions`
 
----
+## Tech Stack
 
-## 🚀 Core Features
+- React 18
+- React Router 6
+- Vite 5
 
-### 🧠 Skill Collaboration
-- User profiles with skill listings
-- Skill offer and skill request posts
-- Peer-to-peer collaboration
-
-### 🏆 Challenges (Main Feature)
-- **Solo Challenges** – Improve individual skills  
-- **Team Challenges** – Build real projects together  
-- **Community Challenges** – Open participation with leaderboards  
-
-Example challenges:
-- 48-Hour UI Design Challenge  
-- Build a Web App in 5 Days  
-- Bug-Fix Sprint  
-
-### 👥 Team & Project Builder
-- Create or join teams
-- Role-based collaboration (Developer, Designer, etc.)
-- Project workspaces with task tracking
-
-### 🎖 Reputation & Gamification
-- Contribution-based reputation points
-- Achievement badges
-- Public leaderboards
-
-### 💬 Communication
-- One-to-one chat
-- Team chat rooms
-- Project-based discussions
-
----
-
-## 🌐 Platform Scope
-
-- **Website:** Full dashboard for challenges, teams, and projects  
-- **Mobile App (Planned):** Notifications, chat, and quick actions  
-
----
-
-## 🛠 Technology Stack (MERN)
-
-### Frontend
-- **React.js** – UI library
-- **React Router** – Client-side routing
-- **Tailwind CSS** – Utility-first CSS framework
-- **Axios** – HTTP client for API calls
-- **Socket.IO Client** – Real-time communication
-
-### Backend (BeeWith API)
-- **Node.js** – JavaScript runtime
-- **Express.js** – Web framework
-- **REST APIs** – API architecture
-
-### Database
-- **MongoDB** – NoSQL database
-- **Mongoose** – ODM for MongoDB
-
-### Real-Time Features
-- **Socket.IO** – WebSocket communication
-
-### Authentication
-- **JWT** – JSON Web Tokens
-
-### Deployment
-- **Frontend**: Vercel / Netlify
-- **Backend**: Render / Railway
-- **Database**: MongoDB Atlas  
-
----
-
-## 🧩 System Architecture
-
-```text
-BeeWith Web (React.js)
-   |
-   | REST API / WebSocket
-   |
-BeeWith API (Node.js + Express)
-   |
-MongoDB Database
-```
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
-- BeeWith API running locally or deployed
 
-### Installation
+- Node.js 18+
+- npm
 
-1. **Navigate to web directory**
-   ```bash
-   cd BeeWith_Web
-   ```
+### Run Locally
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+```bash
+cd BeeWith_Web
+npm install
+npm run dev
+```
 
-3. **Configure environment variables**
-   Create a `.env` file:
-   ```env
-   REACT_APP_API_URL=http://localhost:5000/api
-   REACT_APP_SOCKET_URL=http://localhost:5000
-   ```
+The app runs on Vite's default local server.
 
-4. **Start development server**
-   ```bash
-   npm start
-   ```
+### Build
 
-5. **Build for production**
-   ```bash
-   npm run build
-   ```
+```bash
+npm run build
+```
 
----
+### Preview Production Build
 
-## 🧪 Development Roadmap
+```bash
+npm run preview
+```
 
-**Phase 1 – Website Core**
-- User authentication
-- Skill profiles
-- Skill exchange posts
+## Suggested Environment Variables
 
-**Phase 2 – Challenges**
-- Create and join challenges
-- Team formation
-- Submissions and leaderboards
+Create `BeeWith_Web/.env` when API integration starts:
 
-**Phase 3 – Collaboration**
-- Project workspaces
-- Chat system
-- Peer reviews
+```env
+VITE_API_BASE_URL=http://localhost:5000
+```
 
-**Phase 4 – Optional Expansion**
-- Micro-freelance gigs
-- Verified teams
-- Advanced analytics
+## Folder Overview
 
----
+```text
+BeeWith_Web/
+  src/
+    components/
+    pages/
+    services/
+    store/
+```
 
-## 🎯 Target Users
+## Current Status
 
-- University students
-- Self-learners and beginners
-- Developers, designers, writers
-- Community learning groups
+Product pivot in progress from collaboration platform to developer-support AI.
 
----
+Current focus:
+1. Define clean information architecture for analysis reports
+2. Implement submission and report list screens
+3. Connect with backend analysis endpoints
 
-## 🔮 Future Enhancements
+## Contributing
 
-- AI-based skill matching
-- Smart team recommendations
-- Auto-generated portfolios
-- Optional paid gigs
-- Progressive Web App (PWA)
-
----
-
-## 📂 Project Status
-
-🟡 In Development  
-Initial focus is on building a scalable, free-first web platform using the MERN stack.
-
----
-
-## 🤝 Contributing
-
-Contributions, feedback, and suggestions are welcome.
-Feel free to fork the repository or open an issue.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 🐝 Vision
-
-BeeWith aims to create a collaborative ecosystem where skills, teamwork, and challenges matter more than money.
-
-**Build skills. Build teams. Build together.**
+Contributions are welcome.
+Please open an issue for bugs, feature proposals, or UX improvements.
