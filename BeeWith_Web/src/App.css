@@ -1,151 +1,49 @@
 .app-shell {
-  max-width: 920px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 32px 20px 56px;
-}
-
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-title {
-  margin-bottom: 8px;
-  font-size: 2rem;
-  line-height: 1.2;
-}
-
-.page-subtitle {
-  color: #5a5f66;
+  padding: 56px 20px;
 }
 
 .panel {
-  border: 1px solid #e2e6ea;
-  border-radius: 12px;
+  border: 1px solid #d9deea;
+  border-radius: 14px;
   background: #ffffff;
-  padding: 16px;
-  margin-bottom: 18px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  padding: 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 16px rgba(18, 28, 45, 0.06);
+}
+
+.badge {
+  display: inline-block;
+  background: #eef4ff;
+  color: #234a8a;
+  border: 1px solid #cfe0ff;
+  border-radius: 999px;
+  padding: 2px 10px;
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.title {
+  margin-bottom: 8px;
+  font-size: 2rem;
+  line-height: 1.15;
+  color: #202531;
+}
+
+.subtitle {
+  color: #525b6a;
 }
 
 .panel-title {
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-}
-
-.panel-note {
-  margin-bottom: 10px;
-  color: #4e5560;
-}
-
-.role-list {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.role-chip {
-  background: #f0f4fa;
-  border: 1px solid #d7e0ec;
-  color: #294768;
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.field-label {
-  display: block;
   margin-bottom: 8px;
-  font-weight: 600;
+  font-size: 1.1rem;
+  color: #202531;
 }
 
-.input-control {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccd4dd;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 0.98rem;
-}
-
-.input-control:focus {
-  outline: none;
-  border-color: #2d6cdf;
-  box-shadow: 0 0 0 3px rgba(45, 108, 223, 0.12);
-}
-
-.btn-primary {
-  background: #2d6cdf;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background: #1f5bc3;
-}
-
-.status-grid {
-  display: grid;
-  gap: 8px;
-}
-
-.status-item {
-  color: #22262b;
-}
-
-.finding-card {
-  border: 1px solid #ecf0f4;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 10px;
-  background: #fcfdff;
-}
-
-.finding-head {
-  margin-bottom: 4px;
-  color: #22262b;
-}
-
-.finding-file {
-  margin-bottom: 4px;
-  color: #4e5560;
-}
-
-.finding-summary {
-  color: #333942;
-}
-
-.severity {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.severity.low {
-  background: #eef7ff;
-  color: #1c66b3;
-}
-
-.severity.medium {
-  background: #fff6e8;
-  color: #9e5c00;
-}
-
-.severity.high {
-  background: #ffecef;
-  color: #b42318;
-}
-
-.severity.critical {
-  background: #fde9ed;
-  color: #8f0b2d;
+.panel-text {
+  color: #3c4452;
 }
 
 @media (max-width: 640px) {

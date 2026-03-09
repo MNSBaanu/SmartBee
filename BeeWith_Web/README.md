@@ -1,30 +1,18 @@
 # BeeWith Web
 
-Frontend for BeeWith's developer-support platform.
+Frontend starter for BeeWith.
 
-This application delivers BeeWith's initial user experience where Code Health is one module within a broader AI developer assistant.
+This app is currently a clean React + Vite scaffold while the new product idea is being finalized.
 
-## Scope (MVP)
+## Scope
 
-The web app should support:
-1. Code Health module: repository submission and analysis
-2. Analysis status tracking (queued, running, completed)
-3. Findings dashboard grouped by category
-4. Role-based view modes (Frontend, Backend, QA, DevOps, Security)
-5. Foundation for additional developer-assistant workflows
-
-## Planned Feedback Categories
-
-- `Bugs`
-- `Code Smells`
-- `Duplicate Code`
-- `Hardcoded Values`
-- `Improvement Suggestions`
+1. Keep a stable base layout
+2. Add feature modules after idea selection
+3. Integrate with `BeeWith_API` when backend endpoints are ready
 
 ## Tech Stack
 
 - React 18
-- React Router 6
 - Vite 5
 
 ## Getting Started
@@ -56,7 +44,7 @@ npm run build
 npm run preview
 ```
 
-## Suggested Environment Variables
+## Environment Variables
 
 Create `BeeWith_Web/.env` when API integration starts:
 
@@ -69,21 +57,15 @@ VITE_API_BASE_URL=http://localhost:5000
 ```text
 BeeWith_Web/
   src/
-    components/
-    pages/
-    services/
-    store/
+    App.jsx
+    App.css
+    index.css
+    main.jsx
 ```
 
 ## Current Status
 
-Product pivot in progress from collaboration platform to developer-support AI.
-
-Current focus:
-1. Define clean information architecture for analysis reports
-2. Implement submission and report list screens
-3. Add role-aware filters and role-specific recommendation blocks
-4. Keep UI ready for follow-up modules beyond repository scanning
+Project content intentionally simplified to avoid locking into the old idea.
 
 ## Contributing
 

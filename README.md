@@ -1,47 +1,32 @@
 # BeeWith
 
-BeeWith is an AI-powered developer support platform.
+BeeWith is a starter project space for building a new product idea.
 
-Repository analysis is one core module, but the product is broader: BeeWith helps teams improve code quality, answer engineering questions, and provide role-based guidance.
+The previous concept has been removed so a new direction can be started cleanly.
 
-## What BeeWith Does
+## Current Status
 
-- Code Health: analyze repositories for issues and improvements
-- Developer Assistant: provide practical engineering guidance
-- Role-Aware Feedback: tailor outputs for Frontend, Backend, QA, DevOps, and Security
+- Web app scaffold is available in `BeeWith_Web`
+- API folder scaffold is available in `BeeWith_API`
+- No finalized product scope yet
 
-## MVP Focus
-
-1. Repository submission
-2. Analysis status tracking
-3. Findings dashboard with severity and file references
-4. Role-based recommendations
-
-## Analysis Categories
-
-- Bugs
-- Code smells
-- Duplicate code
-- Hardcoded values
-- Improvement suggestions
-
-## Current Repository Structure
+## Repository Structure
 
 ```text
 BeeWith/
-  BeeWith_API/    # Backend service (in progress)
-  BeeWith_Web/    # Frontend app (React + Vite)
+  BeeWith_API/    # Backend scaffold
+  BeeWith_Web/    # Frontend scaffold (React + Vite)
   README.md
 ```
 
 ## Tech Stack
 
-- Frontend: React, React Router, Vite
-- Backend: Node.js service scaffold (`BeeWith_API`)
+- Frontend: React + Vite
+- Backend: Node.js (scaffold)
 
-## Status
+## Next Step
 
-Product pivot in progress. Initial development is focused on delivering a clean and professional MVP.
+Finalize a new product idea, then create feature modules in web and API.
 
 ## Contributing
 
@@ -49,8 +34,4 @@ Contributions are welcome through issues and pull requests.
 
 ## License
 
-License will be finalized as part of the MVP setup.
-
-## Project Ownership
-
-Product Concept and Direction: MNS Baanu
+To be decided.

@@ -5,24 +5,14 @@
 }
 
 :root {
-  --primary-gold: #FFB800;
-  --primary-dark: #e6a600;
-  --honey-light: #fff9e6;
-  --honey-lighter: #fffbf0;
-  --text-dark: #2c2c2c;
-  --text-gray: #666;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 32px rgba(255, 184, 0, 0.2);
+  --text-dark: #242a35;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
+  background: #f4f7fb;
   color: var(--text-dark);
   line-height: 1.6;
 }
