@@ -1,57 +1,8 @@
-.app-shell {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 56px 20px;
-}
-
-.panel {
-  border: 1px solid #d9deea;
-  border-radius: 14px;
-  background: #ffffff;
-  padding: 22px;
-  margin-bottom: 14px;
-  box-shadow: 0 3px 16px rgba(18, 28, 45, 0.06);
-}
-
-.badge {
-  display: inline-block;
-  background: #eef4ff;
-  color: #234a8a;
-  border: 1px solid #cfe0ff;
-  border-radius: 999px;
-  padding: 2px 10px;
-  margin-bottom: 12px;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.title {
-  margin-bottom: 8px;
-  font-size: 2rem;
-  line-height: 1.15;
-  color: #202531;
-}
-
-.subtitle {
-  color: #525b6a;
-}
-
-.panel-title {
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-  color: #202531;
-}
-
-.panel-text {
-  color: #3c4452;
-}
-
-@media (max-width: 640px) {
-  .app-shell {
-    padding: 20px 14px 40px;
-  }
-
-  .page-title {
-    font-size: 1.6rem;
-  }
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1rem;
 }
