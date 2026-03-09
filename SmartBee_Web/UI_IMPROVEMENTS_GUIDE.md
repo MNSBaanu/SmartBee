@@ -1,4 +1,4 @@
-# 🎨 BeeWith Web - UI Improvements Guide
+# 🎨 Smart Bee Web - UI Improvements Guide
 
 This guide provides actionable UI improvements you can implement yourself. Each improvement includes what to do, where to do it, and example code.
 
@@ -474,7 +474,7 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
-      <Link to="/" className="logo">🐝 BeeWith</Link>
+      <Link to="/" className="logo">🐝 Smart Bee</Link>
       
       {/* Mobile menu button */}
       <button 
@@ -1980,7 +1980,7 @@ export default function ScrollToTop() {
 
 **Usage**:
 ```jsx
-<h1 className="gradient-text">BeeWith</h1>
+<h1 className="gradient-text">Smart Bee</h1>
 <h2 className="gradient-text-animated">Join the Hive</h2>
 ```
 

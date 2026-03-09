@@ -4,7 +4,7 @@ function App() {
   return (
     <main className="app-shell">
       <section className="panel">
-        <p className="badge">BeeWith</p>
+        <p className="badge">Smart Bee</p>
         <h1 className="title">Fresh Start</h1>
         <p className="subtitle">
           Unwanted content was removed. This project is now ready for your new idea.

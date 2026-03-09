@@ -1,6 +1,6 @@
-# BeeWith Web
+# Smart Bee Web
 
-Frontend starter for BeeWith.
+Frontend starter for Smart Bee.
 
 This app is currently a clean React + Vite scaffold while the new product idea is being finalized.
 
@@ -8,7 +8,7 @@ This app is currently a clean React + Vite scaffold while the new product idea i
 
 1. Keep a stable base layout
 2. Add feature modules after idea selection
-3. Integrate with `BeeWith_API` when backend endpoints are ready
+3. Integrate with `SmartBee_API` when backend endpoints are ready
 
 ## Tech Stack
 
@@ -25,7 +25,7 @@ This app is currently a clean React + Vite scaffold while the new product idea i
 ### Run Locally
 
 ```bash
-cd BeeWith_Web
+cd SmartBee_Web
 npm install
 npm run dev
 ```
@@ -46,7 +46,7 @@ npm run preview
 
 ## Environment Variables
 
-Create `BeeWith_Web/.env` when API integration starts:
+Create `SmartBee_Web/.env` when API integration starts:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000
@@ -55,7 +55,7 @@ VITE_API_BASE_URL=http://localhost:5000
 ## Folder Overview
 
 ```text
-BeeWith_Web/
+SmartBee_Web/
   src/
     App.jsx
     App.css

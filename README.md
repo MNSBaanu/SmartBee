@@ -1,21 +1,21 @@
-# BeeWith
+# Smart Bee
 
-BeeWith is a starter project space for building a new product idea.
+Smart Bee is a starter project space for building a new product idea.
 
 The previous concept has been removed so a new direction can be started cleanly.
 
 ## Current Status
 
-- Web app scaffold is available in `BeeWith_Web`
-- API folder scaffold is available in `BeeWith_API`
+- Web app scaffold is available in `SmartBee_Web`
+- API folder scaffold is available in `SmartBee_API`
 - No finalized product scope yet
 
 ## Repository Structure
 
 ```text
-BeeWith/
-  BeeWith_API/    # Backend scaffold
-  BeeWith_Web/    # Frontend scaffold (React + Vite)
+SmartBee/
+  SmartBee_API/   # Backend scaffold
+  SmartBee_Web/   # Frontend scaffold (React + Vite)
   README.md
 ```
 

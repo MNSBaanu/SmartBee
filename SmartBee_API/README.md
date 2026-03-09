@@ -1,6 +1,6 @@
-# BeeWith API
+# Smart Bee API
 
-Backend starter for BeeWith.
+Backend starter for Smart Bee.
 
 This folder is kept as a scaffold while the new product direction is being finalized.
 
@@ -9,7 +9,7 @@ This folder is kept as a scaffold while the new product direction is being final
 At the moment, the repository is prepared for backend initialization only.
 
 ```text
-BeeWith_API/
+SmartBee_API/
   README.md
 ```
 
