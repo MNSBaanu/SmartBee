@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Layout } from '../components/Layout';
-import { Plus, Trash2, Edit2, MapPin, Clock } from 'lucide-react';
+import { Plus, Trash2, CreditCard as Edit2, MapPin, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 
 export const Lectures = () => {

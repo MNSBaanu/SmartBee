@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Layout } from '../components/Layout';
-import { BarChart3, TrendingUp, Award } from 'lucide-react';
+import { ChartBar as BarChart3, TrendingUp, Award } from 'lucide-react';
 
 export const Progress = () => {
   const { user } = useAuth();

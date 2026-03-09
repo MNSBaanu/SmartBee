@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Layout } from '../components/Layout';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
+import { Plus, Trash2, CreditCard as Edit2 } from 'lucide-react';
 
 export const Courses = () => {
   const { user } = useAuth();

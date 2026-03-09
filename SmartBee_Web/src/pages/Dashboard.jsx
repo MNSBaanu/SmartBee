@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Layout } from '../components/Layout';
-import { Calendar, BookOpen, CheckCircle, AlertCircle } from 'lucide-react';
+import { Calendar, BookOpen, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react';
 import { formatDistanceToNow, format, isToday, isTomorrow } from 'date-fns';
 
 export const Dashboard = () => {
