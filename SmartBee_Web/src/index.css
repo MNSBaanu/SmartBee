@@ -1,6 +1,23 @@
+:root {
+  --bg-main: #fdfdfc;
+  --text-main: #111111;
+  --text-soft: #4d4d4d;
+  --bee-yellow: #f4c430;
+  --bee-yellow-soft: #fff0b7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  font-family: 'Airbnb Cereal VF', 'Circular', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  color: #222222;
+  background-color: #fff;
   margin: 0;
-  font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
 }
