@@ -1,1 +1,8 @@
-/* SmartBee App Styles */
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
