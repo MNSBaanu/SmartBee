@@ -26,12 +26,10 @@
   gap: 0.7rem;
 }
 
-.brand-dot {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 999px;
-  background: var(--bee-yellow);
-  box-shadow: 0 0 0 4px var(--bee-yellow-soft);
+.brand-logo {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
 }
 
 h1,

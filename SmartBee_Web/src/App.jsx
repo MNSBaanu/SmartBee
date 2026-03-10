@@ -10,7 +10,7 @@ function Navigation() {
     <>
       <header className="topbar air-frame">
         <div className="brand-wrap">
-          <span className="brand-dot" aria-hidden="true" />
+          <img src="/SmartBee.png" alt="SmartBee Logo" className="brand-logo" />
           <h1>SmartBee</h1>
         </div>
         <nav className="top-nav" aria-label="Main navigation">

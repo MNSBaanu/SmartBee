@@ -1,112 +1,252 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Collapsible } from '@/components/ui/collapsible';
-import { ExternalLink } from '@/components/external-link';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { StyleSheet, ScrollView, View, TouchableOpacity, Image } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Fonts } from '@/constants/theme';
+import { Colors } from '@/constants/theme';
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
+  const features = [
+    {
+      icon: 'calendar',
+      title: 'Smart Planner',
+      description: 'AI-powered daily planning that adapts to your schedule and priorities.',
+    },
+    {
+      icon: 'book.fill',
+      title: 'Module Management',
+      description: 'Track all your courses, credits, and instructors in one place.',
+    },
+    {
+      icon: 'chart.bar.fill',
+      title: 'Attendance Tracking',
+      description: 'Monitor your attendance and get alerts when you need to attend more classes.',
+    },
+    {
+      icon: 'bell.fill',
+      title: 'Smart Reminders',
+      description: 'Never miss a deadline with intelligent notifications and reminders.',
+    },
+    {
+      icon: 'person.2.fill',
+      title: 'Virtual Friend',
+      description: 'Your AI companion that helps break down tasks and keeps you motivated.',
+    },
+    {
+      icon: 'checkmark.circle.fill',
+      title: 'Task Management',
+      description: 'Organize assignments, projects, and activities efficiently.',
+    },
+  ];
+
+  const stats = [
+    { label: 'Active Students', value: '10K+' },
+    { label: 'Universities', value: '50+' },
+    { label: 'Success Rate', value: '95%' },
+  ];
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText
-          type="title"
-          style={{
-            fontFamily: Fonts.rounded,
-          }}>
-          Explore
+    <ThemedView style={styles.container}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={require('@/assets/images/SmartBee.png')}
+              style={styles.logo}
+              resizeMode="contain"
+            />
+          </View>
+          <ThemedText type="title">Explore SmartBee</ThemedText>
+          <ThemedText style={styles.subtitle}>
+            Your intelligent campus companion for academic success
+          </ThemedText>
+        </View>
+
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          {stats.map((stat, index) => (
+            <ThemedView key={index} style={styles.statCard}>
+              <ThemedText type="title" style={styles.statValue}>
+                {stat.value}
+              </ThemedText>
+              <ThemedText style={styles.statLabel}>{stat.label}</ThemedText>
+            </ThemedView>
+          ))}
+        </View>
+
+        {/* Features */}
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          Features
         </ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image
-          source={require('@/assets/images/react-logo.png')}
-          style={{ width: 100, height: 100, alignSelf: 'center' }}
-        />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful{' '}
-          <ThemedText type="defaultSemiBold" style={{ fontFamily: Fonts.mono }}>
-            react-native-reanimated
-          </ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+
+        {features.map((feature, index) => (
+          <ThemedView key={index} style={styles.featureCard}>
+            <View
+              style={[
+                styles.iconContainer,
+                { backgroundColor: Colors.light.tint + '20' },
+              ]}>
+              <IconSymbol
+                name={feature.icon}
+                size={28}
+                color={Colors.light.tint}
+              />
+            </View>
+            <View style={styles.featureContent}>
+              <ThemedText type="subtitle" style={styles.featureTitle}>
+                {feature.title}
+              </ThemedText>
+              <ThemedText style={styles.featureDescription}>{feature.description}</ThemedText>
+            </View>
+          </ThemedView>
+        ))}
+
+        {/* About */}
+        <ThemedView style={styles.aboutCard}>
+          <ThemedText type="subtitle" style={styles.aboutTitle}>
+            About SmartBee
+          </ThemedText>
+          <ThemedText style={styles.aboutText}>
+            SmartBee is designed to help students manage their academic life efficiently. From
+            tracking modules and attendance to planning your day with AI assistance, we're here to
+            make your campus experience smoother and more productive.
+          </ThemedText>
+          <TouchableOpacity
+            style={[
+              styles.learnMoreButton,
+              { backgroundColor: Colors.light.tint },
+            ]}>
+            <ThemedText style={styles.learnMoreText}>Learn More</ThemedText>
+          </TouchableOpacity>
+        </ThemedView>
+
+        {/* Footer */}
+        <View style={styles.footer}>
+          <ThemedText style={styles.footerText}>SmartBee v1.0.0</ThemedText>
+          <ThemedText style={styles.footerText}>Made with 💛 for students</ThemedText>
+        </View>
+
+        <View style={{ height: 20 }} />
+      </ScrollView>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
   },
-  titleContainer: {
+  scrollView: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 60,
+  },
+  header: {
+    marginBottom: 24,
+    alignItems: 'center',
+  },
+  logoContainer: {
+    marginBottom: 16,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+  },
+  subtitle: {
+    fontSize: 14,
+    opacity: 0.7,
+    marginTop: 8,
+    lineHeight: 20,
+  },
+  statsContainer: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 12,
+    marginBottom: 24,
+  },
+  statCard: {
+    flex: 1,
+    borderRadius: 16,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  statValue: {
+    fontSize: 24,
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 12,
+    opacity: 0.6,
+    textAlign: 'center',
+  },
+  sectionTitle: {
+    marginBottom: 16,
+    fontSize: 20,
+  },
+  featureCard: {
+    flexDirection: 'row',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    gap: 16,
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  featureContent: {
+    flex: 1,
+  },
+  featureTitle: {
+    fontSize: 16,
+    marginBottom: 4,
+  },
+  featureDescription: {
+    fontSize: 14,
+    opacity: 0.7,
+    lineHeight: 20,
+  },
+  aboutCard: {
+    borderRadius: 20,
+    padding: 20,
+    marginTop: 12,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  aboutTitle: {
+    fontSize: 18,
+    marginBottom: 12,
+  },
+  aboutText: {
+    fontSize: 14,
+    opacity: 0.7,
+    lineHeight: 22,
+    marginBottom: 16,
+  },
+  learnMoreButton: {
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+  },
+  learnMoreText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  footer: {
+    alignItems: 'center',
+    gap: 4,
+    paddingVertical: 16,
+  },
+  footerText: {
+    fontSize: 12,
+    opacity: 0.5,
   },
 });
