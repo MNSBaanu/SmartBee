@@ -27,30 +27,12 @@ export default function ScheduleScreen() {
   const days: DayOfWeek[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   
   const schedule: WeekSchedule = {
-    Monday: [
-      { time: '9:00 AM', subject: 'Operating Systems', room: 'B-204', type: 'Lecture' },
-      { time: '11:00 AM', subject: 'DBMS Lab', room: 'Lab-3', type: 'Lab' },
-      { time: '2:00 PM', subject: 'Data Structures', room: 'A-101', type: 'Lecture' },
-    ],
-    Tuesday: [
-      { time: '10:00 AM', subject: 'Artificial Intelligence', room: 'C-305', type: 'Lecture' },
-      { time: '1:00 PM', subject: 'Web Development', room: 'Lab-2', type: 'Lab' },
-    ],
-    Wednesday: [
-      { time: '9:00 AM', subject: 'Operating Systems', room: 'B-204', type: 'Lecture' },
-      { time: '12:00 PM', subject: 'Computer Networks', room: 'A-203', type: 'Lecture' },
-    ],
-    Thursday: [
-      { time: '10:00 AM', subject: 'Artificial Intelligence', room: 'C-305', type: 'Lecture' },
-      { time: '2:00 PM', subject: 'Software Engineering', room: 'B-101', type: 'Lecture' },
-    ],
-    Friday: [
-      { time: '9:00 AM', subject: 'DBMS', room: 'A-102', type: 'Lecture' },
-      { time: '11:00 AM', subject: 'Project Work', room: 'Lab-1', type: 'Lab' },
-    ],
-    Saturday: [
-      { time: '10:00 AM', subject: 'Seminar', room: 'Auditorium', type: 'Event' },
-    ],
+    Monday: [],
+    Tuesday: [],
+    Wednesday: [],
+    Thursday: [],
+    Friday: [],
+    Saturday: [],
   };
 
   return (
@@ -123,8 +105,13 @@ export default function ScheduleScreen() {
           ))
         ) : (
           <ThemedView style={styles.emptyState}>
-            <IconSymbol name="calendar.badge.exclamationmark" size={48} color={Colors.light.icon} />
-            <ThemedText style={styles.emptyText}>No classes scheduled</ThemedText>
+            <IconSymbol name="calendar.badge.exclamationmark" size={64} color={Colors.light.icon} />
+            <ThemedText type="subtitle" style={styles.emptyTitle}>
+              No classes scheduled
+            </ThemedText>
+            <ThemedText style={styles.emptyText}>
+              Your schedule for {selectedDay} is empty
+            </ThemedText>
           </ThemedView>
         )}
 
@@ -235,11 +222,20 @@ const styles = StyleSheet.create({
   emptyState: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 40,
-    gap: 12,
+    padding: 48,
+    marginTop: 40,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#e0e0e0',
+    borderStyle: 'dashed',
+  },
+  emptyTitle: {
+    marginTop: 16,
+    marginBottom: 8,
   },
   emptyText: {
     fontSize: 14,
     opacity: 0.6,
+    textAlign: 'center',
   },
 });

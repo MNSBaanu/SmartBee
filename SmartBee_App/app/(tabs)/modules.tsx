@@ -24,32 +24,7 @@ interface Module {
 }
 
 export default function ModulesScreen() {
-  const [modules, setModules] = useState<Module[]>([
-    {
-      id: 1,
-      code: 'CS301',
-      name: 'Operating Systems',
-      credits: '4',
-      semester: 'Fall 2026',
-      instructor: 'Dr. Smith',
-    },
-    {
-      id: 2,
-      code: 'CS302',
-      name: 'Database Management Systems',
-      credits: '4',
-      semester: 'Fall 2026',
-      instructor: 'Dr. Johnson',
-    },
-    {
-      id: 3,
-      code: 'CS303',
-      name: 'Artificial Intelligence',
-      credits: '3',
-      semester: 'Fall 2026',
-      instructor: 'Dr. Williams',
-    },
-  ]);
+  const [modules, setModules] = useState<Module[]>([]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -142,47 +117,59 @@ export default function ModulesScreen() {
       </View>
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {modules.map((module) => (
-          <ThemedView key={module.id} style={styles.moduleCard}>
-            <View style={styles.moduleHeader}>
-              <View style={styles.moduleInfo}>
-                <View style={styles.codeTag}>
-                  <ThemedText style={styles.codeText}>{module.code}</ThemedText>
-                </View>
-                <ThemedText type="subtitle" style={styles.moduleName}>
-                  {module.name}
-                </ThemedText>
-              </View>
-              <View style={styles.actions}>
-                <TouchableOpacity
-                  style={styles.iconButton}
-                  onPress={() => handleEdit(module)}>
-                  <IconSymbol name="pencil" size={20} color={Colors.light.text} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.iconButton}
-                  onPress={() => handleDelete(module.id)}>
-                  <IconSymbol name="trash" size={20} color="#ff3b30" />
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.moduleDetails}>
-              <View style={styles.detailRow}>
-                <ThemedText style={styles.detailLabel}>Credits:</ThemedText>
-                <ThemedText>{module.credits}</ThemedText>
-              </View>
-              <View style={styles.detailRow}>
-                <ThemedText style={styles.detailLabel}>Semester:</ThemedText>
-                <ThemedText>{module.semester}</ThemedText>
-              </View>
-              <View style={styles.detailRow}>
-                <ThemedText style={styles.detailLabel}>Instructor:</ThemedText>
-                <ThemedText>{module.instructor}</ThemedText>
-              </View>
-            </View>
+        {modules.length === 0 ? (
+          <ThemedView style={styles.emptyState}>
+            <IconSymbol name="book" size={64} color={Colors.light.icon} />
+            <ThemedText type="subtitle" style={styles.emptyTitle}>
+              No Modules Yet
+            </ThemedText>
+            <ThemedText style={styles.emptyText}>
+              Start by adding your first module using the + button above
+            </ThemedText>
           </ThemedView>
-        ))}
+        ) : (
+          modules.map((module) => (
+            <ThemedView key={module.id} style={styles.moduleCard}>
+              <View style={styles.moduleHeader}>
+                <View style={styles.moduleInfo}>
+                  <View style={styles.codeTag}>
+                    <ThemedText style={styles.codeText}>{module.code}</ThemedText>
+                  </View>
+                  <ThemedText type="subtitle" style={styles.moduleName}>
+                    {module.name}
+                  </ThemedText>
+                </View>
+                <View style={styles.actions}>
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => handleEdit(module)}>
+                    <IconSymbol name="pencil" size={20} color={Colors.light.text} />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => handleDelete(module.id)}>
+                    <IconSymbol name="trash" size={20} color="#ff3b30" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={styles.moduleDetails}>
+                <View style={styles.detailRow}>
+                  <ThemedText style={styles.detailLabel}>Credits:</ThemedText>
+                  <ThemedText>{module.credits}</ThemedText>
+                </View>
+                <View style={styles.detailRow}>
+                  <ThemedText style={styles.detailLabel}>Semester:</ThemedText>
+                  <ThemedText>{module.semester}</ThemedText>
+                </View>
+                <View style={styles.detailRow}>
+                  <ThemedText style={styles.detailLabel}>Instructor:</ThemedText>
+                  <ThemedText>{module.instructor}</ThemedText>
+                </View>
+              </View>
+            </ThemedView>
+          ))
+        )}
       </ScrollView>
 
       <Modal
@@ -404,6 +391,26 @@ const styles = StyleSheet.create({
   detailLabel: {
     opacity: 0.6,
     fontSize: 14,
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 48,
+    marginTop: 60,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#e0e0e0',
+    borderStyle: 'dashed',
+  },
+  emptyTitle: {
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  emptyText: {
+    fontSize: 14,
+    opacity: 0.6,
+    textAlign: 'center',
+    lineHeight: 20,
   },
   modalOverlay: {
     flex: 1,

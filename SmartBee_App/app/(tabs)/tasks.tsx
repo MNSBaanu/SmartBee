@@ -24,35 +24,7 @@ interface Task {
 }
 
 export default function TasksScreen() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: 'AI Mini Project',
-      description: 'Complete the machine learning assignment',
-      dueDate: 'Today, 11:59 PM',
-      priority: 'High',
-      completed: false,
-      category: 'Assignment',
-    },
-    {
-      id: 2,
-      title: 'DBMS Lab Report',
-      description: 'Submit lab 5 report',
-      dueDate: 'Tomorrow',
-      priority: 'Medium',
-      completed: false,
-      category: 'Lab',
-    },
-    {
-      id: 3,
-      title: 'Library Book Return',
-      description: 'Return "Operating Systems" book',
-      dueDate: 'Mar 15',
-      priority: 'Low',
-      completed: false,
-      category: 'Other',
-    },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [filter, setFilter] = useState<'All' | 'Pending' | 'Completed'>('All');
@@ -190,9 +162,16 @@ export default function TasksScreen() {
 
         {filteredTasks.length === 0 && (
           <ThemedView style={styles.emptyState}>
-            <IconSymbol name="checkmark.circle" size={48} color={Colors.light.icon} />
+            <IconSymbol name="checkmark.circle" size={64} color={Colors.light.icon} />
+            <ThemedText type="subtitle" style={styles.emptyTitle}>
+              {filter === 'Completed' ? 'No completed tasks yet' : 'No tasks yet'}
+            </ThemedText>
             <ThemedText style={styles.emptyText}>
-              {filter === 'Completed' ? 'No completed tasks yet' : 'No tasks found'}
+              {filter === 'All' 
+                ? 'Start by adding your first task using the + button above'
+                : filter === 'Pending'
+                ? 'No pending tasks found'
+                : 'Complete some tasks to see them here'}
             </ThemedText>
           </ThemedView>
         )}
@@ -324,11 +303,21 @@ const styles = StyleSheet.create({
   emptyState: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 40,
-    gap: 12,
+    padding: 48,
+    marginTop: 40,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#e0e0e0',
+    borderStyle: 'dashed',
+  },
+  emptyTitle: {
+    marginTop: 16,
+    marginBottom: 8,
   },
   emptyText: {
     fontSize: 14,
     opacity: 0.6,
+    textAlign: 'center',
+    lineHeight: 20,
   },
 });
