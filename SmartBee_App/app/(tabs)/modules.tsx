@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   Alert,
+  Image,
 } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -113,17 +114,31 @@ export default function ModulesScreen() {
   return (
     <ThemedView style={styles.container}>
       <View style={styles.header}>
-        <View>
-          <ThemedText type="title">Campus Modules</ThemedText>
-          <ThemedText style={styles.subtitle}>
-            Manage your academic modules and courses
-          </ThemedText>
+        <View style={styles.headerLeft}>
+          <View>
+            <ThemedText type="title">Campus Modules</ThemedText>
+            <ThemedText style={styles.subtitle}>
+              Manage your academic modules and courses
+            </ThemedText>
+          </View>
         </View>
-        <TouchableOpacity
-          style={[styles.addButton, { backgroundColor: Colors.light.tint }]}
-          onPress={handleAddNew}>
-          <IconSymbol name="plus" size={24} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.headerRight}>
+          <TouchableOpacity style={styles.beeButton}>
+            <View style={styles.beeIconContainer}>
+              <Image
+                source={require('@/assets/images/SmartBee.png')}
+                style={styles.beeLogo}
+                resizeMode="contain"
+              />
+            </View>
+            <ThemedText style={styles.beeLabel}>Bee AI</ThemedText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.addButton, { backgroundColor: Colors.light.tint }]}
+            onPress={handleAddNew}>
+            <IconSymbol name="plus" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -288,6 +303,39 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginBottom: 20,
+  },
+  headerLeft: {
+    flex: 1,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
+  },
+  beeButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+  },
+  beeIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#FEF3C7',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 4,
+    borderWidth: 2,
+    borderColor: '#FECC0B',
+  },
+  beeLogo: {
+    width: 36,
+    height: 36,
+  },
+  beeLabel: {
+    fontSize: 10,
+    fontWeight: '600',
+    color: '#FECC0B',
   },
   subtitle: {
     fontSize: 14,

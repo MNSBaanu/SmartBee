@@ -1,58 +1,68 @@
 import { StyleSheet, ScrollView, View, TouchableOpacity, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 
 export default function ExploreScreen() {
+  const router = useRouter();
   const campusFeatures = [
+    {
+      icon: 'waveform',
+      title: 'AI Lecture Notes',
+      description: 'Record & convert to notes',
+      color: '#FECC0B',
+      route: '/lecture-notes',
+    },
     {
       icon: 'chart.bar.fill',
       title: 'Attendance',
       description: 'Track your class attendance',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'person.2.fill',
       title: 'Study Groups',
       description: 'Find and join study groups',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'building.2.fill',
       title: 'Campus Map',
       description: 'Navigate around campus',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'bell.fill',
       title: 'Notifications',
       description: 'Manage your alerts',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'doc.text.fill',
       title: 'Resources',
       description: 'Study materials and notes',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'calendar.badge.clock',
       title: 'Events',
       description: 'Campus events and activities',
       color: '#FECC0B',
+      route: null,
     },
     {
       icon: 'graduationcap.fill',
       title: 'GPA Calculator',
       description: 'Calculate your GPA',
       color: '#FECC0B',
-    },
-    {
-      icon: 'person.circle.fill',
-      title: 'Profile',
-      description: 'Manage your account',
-      color: '#FECC0B',
+      route: null,
     },
   ];
 
@@ -97,7 +107,11 @@ export default function ExploreScreen() {
 
         <View style={styles.featuresGrid}>
           {campusFeatures.map((feature, index) => (
-            <TouchableOpacity key={index} style={styles.featureCard}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.featureCard}
+              onPress={() => feature.route && router.push(feature.route as any)}
+            >
               <ThemedView style={styles.featureCardInner}>
                 <View
                   style={[
