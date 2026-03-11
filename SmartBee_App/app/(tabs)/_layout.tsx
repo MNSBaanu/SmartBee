@@ -15,26 +15,75 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarStyle: {
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={26} 
+              name={focused ? "house.fill" : "house"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="modules"
         options={{
           title: 'Modules',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="book.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={26} 
+              name={focused ? "book.fill" : "book"} 
+              color={color} 
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: 'Schedule',
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={26} 
+              name={focused ? "calendar" : "calendar"} 
+              color={color} 
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="tasks"
+        options={{
+          title: 'Tasks',
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={26} 
+              name={focused ? "checkmark.circle.fill" : "checkmark.circle"} 
+              color={color} 
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'More',
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol 
+              size={26} 
+              name={focused ? "line.3.horizontal" : "line.3.horizontal"} 
+              color={color} 
+            />
+          ),
         }}
       />
     </Tabs>

@@ -13,10 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#FECC0B",
-        "foregroundImage": "./assets/images/SmartBee.png",
-        "backgroundImage": "./assets/images/SmartBee.png",
-        "monochromeImage": "./assets/images/SmartBee.png"
+        "backgroundColor": "#FFFFFF",
+        "foregroundImage": "./assets/images/SmartBee.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
@@ -33,10 +31,7 @@
           "image": "./assets/images/SmartBee.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#FECC0B",
-          "dark": {
-            "backgroundColor": "#FECC0B"
-          }
+          "backgroundColor": "#FFFFFF"
         }
       ]
     ],

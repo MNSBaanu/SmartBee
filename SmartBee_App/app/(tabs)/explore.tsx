@@ -5,43 +5,55 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 
 export default function ExploreScreen() {
-  const features = [
-    {
-      icon: 'calendar',
-      title: 'Smart Planner',
-      description: 'AI-powered daily planning that adapts to your schedule and priorities.',
-    },
-    {
-      icon: 'book.fill',
-      title: 'Module Management',
-      description: 'Track all your courses, credits, and instructors in one place.',
-    },
+  const campusFeatures = [
     {
       icon: 'chart.bar.fill',
-      title: 'Attendance Tracking',
-      description: 'Monitor your attendance and get alerts when you need to attend more classes.',
-    },
-    {
-      icon: 'bell.fill',
-      title: 'Smart Reminders',
-      description: 'Never miss a deadline with intelligent notifications and reminders.',
+      title: 'Attendance',
+      description: 'Track your class attendance',
+      color: '#3B82F6',
     },
     {
       icon: 'person.2.fill',
-      title: 'Virtual Friend',
-      description: 'Your AI companion that helps break down tasks and keeps you motivated.',
+      title: 'Study Groups',
+      description: 'Find and join study groups',
+      color: '#8B5CF6',
     },
     {
-      icon: 'checkmark.circle.fill',
-      title: 'Task Management',
-      description: 'Organize assignments, projects, and activities efficiently.',
+      icon: 'building.2.fill',
+      title: 'Campus Map',
+      description: 'Navigate around campus',
+      color: '#10B981',
     },
-  ];
-
-  const stats = [
-    { label: 'Active Students', value: '10K+' },
-    { label: 'Universities', value: '50+' },
-    { label: 'Success Rate', value: '95%' },
+    {
+      icon: 'bell.fill',
+      title: 'Notifications',
+      description: 'Manage your alerts',
+      color: '#F59E0B',
+    },
+    {
+      icon: 'doc.text.fill',
+      title: 'Resources',
+      description: 'Study materials and notes',
+      color: '#EF4444',
+    },
+    {
+      icon: 'calendar.badge.clock',
+      title: 'Events',
+      description: 'Campus events and activities',
+      color: '#EC4899',
+    },
+    {
+      icon: 'graduationcap.fill',
+      title: 'GPA Calculator',
+      description: 'Calculate your GPA',
+      color: '#06B6D4',
+    },
+    {
+      icon: 'person.circle.fill',
+      title: 'Profile',
+      description: 'Manage your account',
+      color: '#6B7280',
+    },
   ];
 
   return (
@@ -56,74 +68,96 @@ export default function ExploreScreen() {
               resizeMode="contain"
             />
           </View>
-          <ThemedText type="title">Explore SmartBee</ThemedText>
+          <ThemedText type="title">More Features</ThemedText>
           <ThemedText style={styles.subtitle}>
-            Your intelligent campus companion for academic success
+            Explore all campus management tools
           </ThemedText>
         </View>
 
-        {/* Stats */}
+        {/* Quick Stats */}
         <View style={styles.statsContainer}>
-          {stats.map((stat, index) => (
-            <ThemedView key={index} style={styles.statCard}>
-              <ThemedText type="title" style={styles.statValue}>
-                {stat.value}
-              </ThemedText>
-              <ThemedText style={styles.statLabel}>{stat.label}</ThemedText>
-            </ThemedView>
+          <ThemedView style={styles.statCard}>
+            <ThemedText type="title" style={styles.statValue}>89%</ThemedText>
+            <ThemedText style={styles.statLabel}>Attendance</ThemedText>
+          </ThemedView>
+          <ThemedView style={styles.statCard}>
+            <ThemedText type="title" style={styles.statValue}>3.8</ThemedText>
+            <ThemedText style={styles.statLabel}>GPA</ThemedText>
+          </ThemedView>
+          <ThemedView style={styles.statCard}>
+            <ThemedText type="title" style={styles.statValue}>5</ThemedText>
+            <ThemedText style={styles.statLabel}>Pending</ThemedText>
+          </ThemedView>
+        </View>
+
+        {/* Campus Features Grid */}
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          Campus Tools
+        </ThemedText>
+
+        <View style={styles.featuresGrid}>
+          {campusFeatures.map((feature, index) => (
+            <TouchableOpacity key={index} style={styles.featureCard}>
+              <ThemedView style={styles.featureCardInner}>
+                <View
+                  style={[
+                    styles.iconContainer,
+                    { backgroundColor: feature.color + '20' },
+                  ]}>
+                  <IconSymbol
+                    name={feature.icon}
+                    size={28}
+                    color={feature.color}
+                  />
+                </View>
+                <ThemedText style={styles.featureTitle}>{feature.title}</ThemedText>
+                <ThemedText style={styles.featureDescription}>
+                  {feature.description}
+                </ThemedText>
+              </ThemedView>
+            </TouchableOpacity>
           ))}
         </View>
 
-        {/* Features */}
+        {/* Settings Section */}
         <ThemedText type="subtitle" style={styles.sectionTitle}>
-          Features
+          Settings
         </ThemedText>
 
-        {features.map((feature, index) => (
-          <ThemedView key={index} style={styles.featureCard}>
-            <View
-              style={[
-                styles.iconContainer,
-                { backgroundColor: Colors.light.tint + '20' },
-              ]}>
-              <IconSymbol
-                name={feature.icon}
-                size={28}
-                color={Colors.light.tint}
-              />
+        <ThemedView style={styles.settingsCard}>
+          <TouchableOpacity style={styles.settingItem}>
+            <View style={styles.settingLeft}>
+              <IconSymbol name="gear" size={20} color={Colors.light.icon} />
+              <ThemedText>Preferences</ThemedText>
             </View>
-            <View style={styles.featureContent}>
-              <ThemedText type="subtitle" style={styles.featureTitle}>
-                {feature.title}
-              </ThemedText>
-              <ThemedText style={styles.featureDescription}>{feature.description}</ThemedText>
-            </View>
-          </ThemedView>
-        ))}
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.icon} />
+          </TouchableOpacity>
 
-        {/* About */}
-        <ThemedView style={styles.aboutCard}>
-          <ThemedText type="subtitle" style={styles.aboutTitle}>
-            About SmartBee
-          </ThemedText>
-          <ThemedText style={styles.aboutText}>
-            SmartBee is designed to help students manage their academic life efficiently. From
-            tracking modules and attendance to planning your day with AI assistance, we're here to
-            make your campus experience smoother and more productive.
-          </ThemedText>
-          <TouchableOpacity
-            style={[
-              styles.learnMoreButton,
-              { backgroundColor: Colors.light.tint },
-            ]}>
-            <ThemedText style={styles.learnMoreText}>Learn More</ThemedText>
+          <View style={styles.divider} />
+
+          <TouchableOpacity style={styles.settingItem}>
+            <View style={styles.settingLeft}>
+              <IconSymbol name="questionmark.circle" size={20} color={Colors.light.icon} />
+              <ThemedText>Help & Support</ThemedText>
+            </View>
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.icon} />
+          </TouchableOpacity>
+
+          <View style={styles.divider} />
+
+          <TouchableOpacity style={styles.settingItem}>
+            <View style={styles.settingLeft}>
+              <IconSymbol name="info.circle" size={20} color={Colors.light.icon} />
+              <ThemedText>About SmartBee</ThemedText>
+            </View>
+            <IconSymbol name="chevron.right" size={16} color={Colors.light.icon} />
           </TouchableOpacity>
         </ThemedView>
 
         {/* Footer */}
         <View style={styles.footer}>
           <ThemedText style={styles.footerText}>SmartBee v1.0.0</ThemedText>
-          <ThemedText style={styles.footerText}>Made with 💛 for students</ThemedText>
+          <ThemedText style={styles.footerText}>Your Campus Companion</ThemedText>
         </View>
 
         <View style={{ height: 20 }} />
@@ -149,14 +183,15 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 60,
+    height: 60,
   },
   subtitle: {
     fontSize: 14,
     opacity: 0.7,
     marginTop: 8,
     lineHeight: 20,
+    textAlign: 'center',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -184,14 +219,22 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     fontSize: 20,
   },
-  featureCard: {
+  featuresGrid: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    marginBottom: 24,
+  },
+  featureCard: {
+    width: '48%',
+  },
+  featureCardInner: {
     borderRadius: 16,
     padding: 16,
-    marginBottom: 12,
     borderWidth: 1,
     borderColor: '#e0e0e0',
-    gap: 16,
+    alignItems: 'center',
+    minHeight: 140,
   },
   iconContainer: {
     width: 56,
@@ -199,46 +242,41 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  featureContent: {
-    flex: 1,
+    marginBottom: 12,
   },
   featureTitle: {
-    fontSize: 16,
+    fontSize: 14,
+    fontWeight: '600',
     marginBottom: 4,
+    textAlign: 'center',
   },
   featureDescription: {
-    fontSize: 14,
-    opacity: 0.7,
-    lineHeight: 20,
+    fontSize: 11,
+    opacity: 0.6,
+    textAlign: 'center',
+    lineHeight: 16,
   },
-  aboutCard: {
-    borderRadius: 20,
-    padding: 20,
-    marginTop: 12,
+  settingsCard: {
+    borderRadius: 16,
+    padding: 16,
     marginBottom: 24,
     borderWidth: 1,
     borderColor: '#e0e0e0',
   },
-  aboutTitle: {
-    fontSize: 18,
-    marginBottom: 12,
-  },
-  aboutText: {
-    fontSize: 14,
-    opacity: 0.7,
-    lineHeight: 22,
-    marginBottom: 16,
-  },
-  learnMoreButton: {
-    borderRadius: 12,
-    padding: 14,
+  settingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingVertical: 12,
   },
-  learnMoreText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 15,
+  settingLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#f0f0f0',
   },
   footer: {
     alignItems: 'center',
