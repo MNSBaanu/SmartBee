@@ -1,4 +1,10 @@
-﻿.page-shell {
+﻿:root {
+  --bee-yellow: #FECC0B;
+  --bee-yellow-soft: #FEF3C7;
+  --text-soft: #767676;
+}
+
+.page-shell {
   min-height: 100vh;
   max-width: 1140px;
   margin: 0 auto;
@@ -8,7 +14,7 @@
 .topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  alignitems: center;
   margin-bottom: 1rem;
   gap: 1rem;
 }
@@ -75,7 +81,38 @@ h3 {
 
 .nav-chip-active {
   color: #111;
-  background: #f7f7f7;
+  background: var(--bee-yellow-soft);
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.bee-ai-btn {
+  border: 2px solid var(--bee-yellow);
+  background: var(--bee-yellow-soft);
+  color: #92400E;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.bee-ai-btn:hover {
+  background: var(--bee-yellow);
+  transform: translateY(-1px);
+}
+
+.bee-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
 }
 
 .search-bar {
@@ -107,11 +144,24 @@ h3 {
   border: 0;
   border-radius: 999px;
   margin: 0.25rem;
-  background: #111;
-  color: #fff;
+  background: var(--bee-yellow);
+  color: #92400E;
   padding: 0.68rem 1.1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-cta:hover {
+  background: #FDB90B;
+  transform: translateY(-1px);
+}
+
+.coming-soon {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.5rem;
+  color: #767676;
 }
 
 .content-grid {
@@ -188,9 +238,10 @@ input {
 }
 
 .primary-btn {
-  border-color: #111;
-  background: #111;
-  color: #fff;
+  border-color: var(--bee-yellow);
+  background: var(--bee-yellow);
+  color: #92400E;
+  font-weight: 600;
 }
 
 .secondary-btn {

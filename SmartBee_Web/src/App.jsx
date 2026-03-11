@@ -6,6 +6,14 @@ import Modules from './pages/Modules'
 function Navigation() {
   const location = useLocation()
   
+  const navItems = [
+    { path: '/', label: 'Home' },
+    { path: '/modules', label: 'Modules' },
+    { path: '/schedule', label: 'Schedule' },
+    { path: '/tasks', label: 'Tasks' },
+    { path: '/more', label: 'More' },
+  ]
+  
   return (
     <>
       <header className="topbar air-frame">
@@ -14,19 +22,23 @@ function Navigation() {
           <h1>SmartBee</h1>
         </div>
         <nav className="top-nav" aria-label="Main navigation">
-          <Link to="/">
-            <button type="button" className={`nav-chip ${location.pathname === '/' ? 'nav-chip-active' : ''}`}>
-              Home
-            </button>
-          </Link>
-          <Link to="/modules">
-            <button type="button" className={`nav-chip ${location.pathname === '/modules' ? 'nav-chip-active' : ''}`}>
-              Modules
-            </button>
-          </Link>
-          <button type="button" className="nav-chip">Virtual Friend</button>
+          {navItems.map((item) => (
+            <Link key={item.path} to={item.path}>
+              <button 
+                type="button" 
+                className={`nav-chip ${location.pathname === item.path ? 'nav-chip-active' : ''}`}
+              >
+                {item.label}
+              </button>
+            </Link>
+          ))}
         </nav>
-        <button type="button" className="ghost-btn">My Profile</button>
+        <div className="header-actions">
+          <button type="button" className="bee-ai-btn">
+            <img src="/SmartBee.png" alt="Bee AI" className="bee-icon" />
+            <span>Bee AI</span>
+          </button>
+        </div>
       </header>
 
       <section className="search-bar air-frame" aria-label="Quick planner">
@@ -56,6 +68,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/modules" element={<Modules />} />
+          <Route path="/schedule" element={<div className="coming-soon">Schedule - Coming Soon</div>} />
+          <Route path="/tasks" element={<div className="coming-soon">Tasks - Coming Soon</div>} />
+          <Route path="/more" element={<div className="coming-soon">More - Coming Soon</div>} />
         </Routes>
       </div>
     </BrowserRouter>

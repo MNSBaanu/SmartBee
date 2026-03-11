@@ -2,11 +2,7 @@ import { useState } from 'react'
 import '../App.css'
 
 function Modules() {
-  const [modules, setModules] = useState([
-    { id: 1, code: 'CS301', name: 'Operating Systems', credits: 4, semester: 'Fall 2026', instructor: 'Dr. Smith' },
-    { id: 2, code: 'CS302', name: 'Database Management Systems', credits: 4, semester: 'Fall 2026', instructor: 'Dr. Johnson' },
-    { id: 3, code: 'CS303', name: 'Artificial Intelligence', credits: 3, semester: 'Fall 2026', instructor: 'Dr. Williams' },
-  ])
+  const [modules, setModules] = useState([])
   
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState({
