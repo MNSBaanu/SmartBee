@@ -4,39 +4,39 @@ Backend API service for SmartBee - providing data management and business logic 
 
 ## Overview
 
-SmartBee API is a RESTful service that handles all backend operations for the SmartBee platform, including user authentication, module management, attendance tracking, task scheduling, and AI-powered features.
+SmartBee API is a RESTful service that handles backend operations for the SmartBee platform, including user authentication, module management, attendance tracking, task scheduling, and AI-powered features.
 
 ## Status
 
-🚧 **In Development** - API structure and endpoints are being designed and implemented.
+✅ **Initial implementation** — Express server, JWT auth, CRUD endpoints, Swagger docs, and Vitest tests. Uses an in-memory store by default; configure Supabase for persistent storage.
 
-## Planned Features
+## Features
 
-- 🔐 **Authentication** - User registration, login, and session management
-- 📚 **Module Management** - CRUD operations for academic modules
-- 📊 **Attendance Tracking** - Record and retrieve attendance data
-- 📅 **Task Management** - Create, update, and track tasks and assignments
-- 🤖 **AI Integration** - Virtual friend chat and smart planning features
-- 🔔 **Notifications** - Push notifications for reminders and alerts
-- 📈 **Analytics** - Student performance and progress tracking
+- 🔐 **Authentication** — Register, login, logout, and current user (`/api/auth`)
+- 📚 **Module Management** — CRUD for academic modules (`/api/modules`)
+- 📊 **Attendance Tracking** — Record, list, and statistics (`/api/attendance`)
+- 📅 **Task Management** — CRUD for tasks and assignments (`/api/tasks`)
+- 🤖 **AI Integration** — Virtual friend chat (`/api/chat`); planner generation (`/api/planner`)
+- 🔔 **Notifications** — Planned
+- 📈 **Analytics** — Attendance stats available; broader analytics planned
 
-## Tech Stack (Planned)
+## Tech Stack
 
-- **Runtime**: Node.js
-- **Framework**: Express.js or Fastify
-- **Database**: PostgreSQL (via Supabase)
-- **Authentication**: JWT or Supabase Auth
-- **API Documentation**: Swagger/OpenAPI
-- **Validation**: Joi or Zod
-- **Testing**: Jest or Vitest
+- **Runtime**: Node.js 18+
+- **Framework**: Express.js
+- **Database**: In-memory (dev) / PostgreSQL via Supabase (production)
+- **Authentication**: JWT
+- **API Documentation**: Swagger UI at `/api/docs`
+- **Validation**: Zod
+- **Testing**: Vitest + Supertest
 
-## Planned API Endpoints
+## API Endpoints
 
 ### Authentication
 ```
 POST   /api/auth/register      # Register new user
 POST   /api/auth/login         # User login
-POST   /api/auth/logout        # User logout
+POST   /api/auth/logout        # User logout (Bearer token)
 GET    /api/auth/me            # Get current user
 ```
 
@@ -51,7 +51,7 @@ DELETE /api/modules/:id        # Delete module
 
 ### Attendance
 ```
-GET    /api/attendance         # Get attendance records
+GET    /api/attendance         # Get attendance records (?moduleId, ?from, ?to)
 POST   /api/attendance         # Record attendance
 GET    /api/attendance/stats   # Get attendance statistics
 ```
@@ -73,83 +73,96 @@ GET    /api/chat/history       # Get chat history
 
 ### Planner
 ```
-GET    /api/planner/daily      # Get daily plan
+GET    /api/planner/daily      # Get daily plan (?date=YYYY-MM-DD)
 POST   /api/planner/generate   # Generate AI-powered plan
 ```
 
-## Getting Started (Future)
+### Health
+```
+GET    /api/health             # Service health check
+```
+
+Protected routes require header: `Authorization: Bearer <token>`
+
+## Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- PostgreSQL or Supabase account
-- npm or yarn
+- npm
 
 ### Installation
 ```bash
-# Install dependencies
+cd SmartBee_API
+
 npm install
 
-# Set up environment variables
 cp .env.example .env
 
-# Run database migrations
 npm run migrate
 
-# Start development server
 npm run dev
+```
 
-# Run tests
+API: `http://localhost:3000`  
+Docs: `http://localhost:3000/api/docs`
+
+```bash
 npm test
 ```
 
-## Environment Variables (Planned)
+## Environment Variables
 
 ```env
 NODE_ENV=development
 PORT=3000
 DATABASE_URL=postgresql://...
 JWT_SECRET=your-secret-key
+JWT_EXPIRES_IN=7d
 SUPABASE_URL=https://...
 SUPABASE_KEY=your-key
 AI_API_KEY=your-ai-key
 ```
 
-## Project Structure (Planned)
+## Project Structure
 
 ```
 SmartBee_API/
 ├── src/
-│   ├── controllers/     # Request handlers
-│   ├── models/          # Database models
-│   ├── routes/          # API routes
-│   ├── middleware/      # Custom middleware
-│   ├── services/        # Business logic
-│   ├── utils/           # Helper functions
-│   ├── config/          # Configuration files
-│   └── index.js         # Entry point
-├── tests/               # Test files
-├── .env.example         # Environment template
-├── package.json         # Dependencies
-└── README.md           # This file
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── services/
+│   ├── validators/
+│   ├── config/
+│   └── index.js
+├── scripts/
+│   └── migrate.js
+├── tests/
+├── .env.example
+├── package.json
+└── README.md
 ```
 
 ## Development Roadmap
 
-- [ ] Set up Express/Fastify server
-- [ ] Configure database connection
-- [ ] Implement authentication system
-- [ ] Create module management endpoints
-- [ ] Add attendance tracking
-- [ ] Implement task management
-- [ ] Integrate AI services
+- [x] Set up Express server
+- [x] Configure database connection (Supabase client + in-memory fallback)
+- [x] Implement authentication system
+- [x] Create module management endpoints
+- [x] Add attendance tracking
+- [x] Implement task management
+- [x] Integrate AI services (stub; wire real provider with `AI_API_KEY`)
 - [ ] Add notification system
-- [ ] Write API documentation
-- [ ] Add comprehensive tests
+- [x] Write API documentation (Swagger)
+- [x] Add comprehensive tests (initial suite)
 - [ ] Set up CI/CD pipeline
+- [ ] Persist all entities in Supabase/PostgreSQL
 
 ## API Documentation
 
-API documentation will be available at `/api/docs` once implemented using Swagger UI.
+Interactive docs: **http://localhost:3000/api/docs**  
+OpenAPI JSON: **http://localhost:3000/api/docs.json**
 
 ## Contributing
 
