@@ -10,6 +10,16 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Cursor / Stitch MCP
+.cursor/mcp.json
+
+# Vite
 *.local
 
 # Editor directories and files

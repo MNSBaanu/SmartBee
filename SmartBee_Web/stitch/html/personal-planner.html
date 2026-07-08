@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartBee | Personal Planner</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#5c4300",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed": "#d4e5ef",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#d3c5ad",
+                        "on-secondary-fixed-variant": "#394951",
+                        "primary": "#795900",
+                        "tertiary": "#5f5f4f",
+                        "on-tertiary-fixed": "#1c1c0f",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e5e3ce",
+                        "on-secondary-container": "#55656d",
+                        "surface-bright": "#f8f9fa",
+                        "tertiary-fixed-dim": "#c9c7b3",
+                        "inverse-primary": "#f8bd2a",
+                        "secondary": "#506169",
+                        "primary-fixed-dim": "#f8bd2a",
+                        "background": "#f8f9fa",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#191c1d",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#261a00",
+                        "surface-container-low": "#f3f4f5",
+                        "on-surface-variant": "#4f4633",
+                        "on-tertiary-container": "#555545",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed-variant": "#474838",
+                        "primary-container": "#fbc02d",
+                        "surface": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadb",
+                        "secondary-fixed-dim": "#b8c9d3",
+                        "outline": "#817661",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#ffdfa0",
+                        "on-secondary-fixed": "#0d1e25",
+                        "secondary-container": "#d1e2ec",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#795900",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-container": "#6c5000",
+                        "tertiary-container": "#cbcab5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "lg": "48px",
+                        "xl": "64px",
+                        "margin-desktop": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1e2ec;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-surface sticky top-0 z-50 flex justify-between items-center w-full px-margin-desktop py-4 max-w-full mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-headline-md font-bold">savings</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">SmartBee</span>
+</div>
+<div class="hidden md:flex items-center gap-2">
+<a class="bg-primary-fixed text-on-primary-fixed rounded-full px-4 py-1 font-medium text-body-md font-body-md" href="#">Home</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-body-md font-body-md" href="#">Modules</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-body-md font-body-md" href="#">Schedule</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-body-md font-body-md" href="#">Tasks</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-body-md font-body-md" href="#">More</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+            Bee AI
+        </button>
+</nav>
+<main class="px-margin-desktop py-base max-w-[1600px] mx-auto space-y-gutter">
+<!-- Header Hero Area -->
+<header class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-stretch">
+<!-- Greeting & Summary -->
+<div class="md:col-span-8 bg-primary-fixed/20 p-md rounded-xl card-shadow border border-white/50 flex flex-col justify-between">
+<div>
+<p class="text-label-bold font-label-bold text-primary uppercase tracking-widest mb-1">TODAY AT A GLANCE</p>
+<h1 class="text-headline-xl font-headline-xl text-on-surface mb-2">Focus Mode: Engaged, Baanu</h1>
+<p class="text-body-lg font-body-lg text-secondary max-w-2xl">You have 2 core lectures today and a submission due tonight. Your focus levels are peaking between 2:00 PM and 4:00 PM.</p>
+</div>
+<div class="mt-md flex gap-sm">
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-sm hover:translate-y-[-2px] transition-transform">
+<span class="material-symbols-outlined">timer</span> Start Focus Session
+                    </button>
+<button class="bg-white text-on-surface-variant border border-outline-variant px-6 py-3 rounded-xl font-bold hover:bg-surface-container-low transition-colors">
+                        View Full Planner
+                    </button>
+</div>
+</div>
+<!-- Focus Session Micro-Widget -->
+<div class="md:col-span-4 bg-surface-container-lowest p-md rounded-xl card-shadow border border-outline-variant flex flex-col items-center justify-center text-center">
+<div class="relative w-32 h-32 mb-4">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary-container" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="100" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-headline-md font-headline-md">25:00</span>
+<span class="text-label-md font-label-md text-secondary">Pomodoro</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-secondary">
+<button class="material-symbols-outlined hover:text-primary transition-colors">skip_previous</button>
+<button class="material-symbols-outlined text-4xl text-on-surface hover:text-primary transition-colors" style="font-variation-settings: 'FILL' 1;">play_circle</button>
+<button class="material-symbols-outlined hover:text-primary transition-colors">skip_next</button>
+</div>
+<div class="mt-4 flex items-center gap-2 text-label-md font-label-md px-3 py-1 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-[16px]">music_note</span>
+<span>Lo-Fi Beats for Study</span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Main Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column: Tasks & Habits -->
+<div class="md:col-span-4 space-y-gutter">
+<!-- Task Manager -->
+<section class="bg-surface-container-lowest p-md rounded-xl card-shadow border border-outline-variant">
+<div class="flex justify-between items-center mb-md">
+<h2 class="text-headline-md font-headline-md">Task Manager</h2>
+<button class="material-symbols-outlined text-primary hover:bg-primary-fixed rounded-full p-1 transition-colors">add</button>
+</div>
+<div class="space-y-sm">
+<!-- Task Item -->
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-bright transition-all">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container cursor-pointer flex-shrink-0"></div>
+<div class="flex-1">
+<p class="text-body-md font-medium">Complete AI Mini Project</p>
+<span class="text-label-md font-label-md text-error px-2 py-0.5 bg-error-container rounded-full">High Priority</span>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-bright transition-all">
+<div class="w-6 h-6 rounded-full border-2 border-secondary-container cursor-pointer flex-shrink-0"></div>
+<div class="flex-1">
+<p class="text-body-md font-medium">Buy new notebook</p>
+<span class="text-label-md font-label-md text-on-secondary-container px-2 py-0.5 bg-secondary-container rounded-full">Low</span>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
+</div>
+<div class="group flex items-center gap-3 p-3 rounded-lg border border-transparent hover:border-outline-variant hover:bg-surface-bright transition-all">
+<div class="w-6 h-6 rounded-full border-2 border-primary-fixed-dim cursor-pointer flex-shrink-0"></div>
+<div class="flex-1">
+<p class="text-body-md font-medium">Read OS Chapter 4</p>
+<span class="text-label-md font-label-md text-on-primary-fixed-variant px-2 py-0.5 bg-primary-fixed rounded-full">Medium</span>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">drag_indicator</span>
+</div>
+</div>
+</section>
+<!-- Habit Tracker -->
+<section class="bg-surface-container-lowest p-md rounded-xl card-shadow border border-outline-variant">
+<h2 class="text-headline-md font-headline-md mb-md">Daily Habits</h2>
+<div class="space-y-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">menu_book</span>
+<div>
+<p class="text-body-md font-bold">Library Visit</p>
+<p class="text-label-md font-label-md text-secondary">Goal: 1h daily</p>
+</div>
+</div>
+<div class="flex gap-1">
+<div class="w-2 h-6 bg-primary-container rounded-full"></div>
+<div class="w-2 h-6 bg-primary-container rounded-full"></div>
+<div class="w-2 h-6 bg-primary-container rounded-full"></div>
+<div class="w-2 h-6 bg-surface-container-high rounded-full"></div>
+<div class="w-2 h-6 bg-surface-container-high rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary bg-secondary-container p-2 rounded-lg">fitness_center</span>
+<div>
+<p class="text-body-md font-bold">Gym Session</p>
+<p class="text-label-md font-label-md text-secondary">3/4 times a week</p>
+</div>
+</div>
+<div class="flex gap-1">
+<div class="w-2 h-6 bg-secondary-container rounded-full"></div>
+<div class="w-2 h-6 bg-secondary-container rounded-full"></div>
+<div class="w-2 h-6 bg-surface-container-high rounded-full"></div>
+<div class="w-2 h-6 bg-surface-container-high rounded-full"></div>
+<div class="w-2 h-6 bg-surface-container-high rounded-full"></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Middle/Right Column: Weekly Schedule -->
+<div class="md:col-span-8 space-y-gutter">
+<section class="bg-surface-container-lowest p-md rounded-xl card-shadow border border-outline-variant overflow-hidden">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-md gap-4">
+<h2 class="text-headline-md font-headline-md">Weekly Schedule</h2>
+<div class="flex bg-surface-container-low rounded-lg p-1">
+<button class="px-4 py-1 rounded-md bg-white shadow-sm text-label-bold font-label-bold">Grid</button>
+<button class="px-4 py-1 rounded-md text-label-bold font-label-bold text-secondary">List</button>
+</div>
+</div>
+<!-- Calendar Grid Layout -->
+<div class="overflow-x-auto custom-scrollbar">
+<div class="min-w-[800px] grid grid-cols-6 gap-sm">
+<!-- Time column -->
+<div class="col-span-1 space-y-12 text-right pr-4 pt-10">
+<span class="text-label-md font-label-md text-secondary block">09:00</span>
+<span class="text-label-md font-label-md text-secondary block">10:00</span>
+<span class="text-label-md font-label-md text-secondary block">11:00</span>
+<span class="text-label-md font-label-md text-secondary block">12:00</span>
+<span class="text-label-md font-label-md text-secondary block">01:00</span>
+</div>
+<!-- Day Columns -->
+<div class="col-span-1">
+<div class="text-center mb-4 text-label-bold font-label-bold text-primary">MON</div>
+<div class="h-16 bg-primary-fixed/30 border border-primary-fixed-dim rounded-lg p-2 mb-2">
+<p class="text-[10px] font-bold text-on-primary-fixed">DBMS Lab</p>
+</div>
+<div class="h-32"></div>
+<div class="h-16 bg-secondary-container border border-secondary rounded-lg p-2 opacity-50">
+<p class="text-[10px] font-bold">Lunch</p>
+</div>
+</div>
+<div class="col-span-1">
+<div class="text-center mb-4 text-label-bold font-label-bold text-secondary">TUE</div>
+<div class="h-24"></div>
+<div class="h-24 bg-tertiary-fixed border border-outline-variant rounded-lg p-2">
+<p class="text-[10px] font-bold">Algorithms</p>
+</div>
+</div>
+<div class="col-span-1">
+<div class="text-center mb-4 text-label-bold font-label-bold text-on-surface bg-primary-container/20 rounded-full py-1">WED</div>
+<div class="h-12"></div>
+<div class="h-24 bg-primary-container border border-primary rounded-lg p-2 shadow-md ring-2 ring-primary-container ring-offset-2">
+<p class="text-[10px] font-bold">Operating Systems</p>
+<p class="text-[8px]">Room B-204</p>
+</div>
+<div class="h-12"></div>
+<div class="h-16 bg-error-container border border-error rounded-lg p-2">
+<p class="text-[10px] font-bold">AI Project Sync</p>
+</div>
+</div>
+<div class="col-span-1">
+<div class="text-center mb-4 text-label-bold font-label-bold text-secondary">THU</div>
+<div class="h-32 bg-surface-container-high rounded-lg p-2 mb-2">
+<p class="text-[10px] font-bold">Study Block</p>
+</div>
+</div>
+<div class="col-span-1">
+<div class="text-center mb-4 text-label-bold font-label-bold text-secondary">FRI</div>
+<div class="h-24 bg-tertiary-fixed border border-outline-variant rounded-lg p-2">
+<p class="text-[10px] font-bold">Web Dev</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Library Map / Location Context -->
+<div class="relative rounded-xl overflow-hidden h-48 card-shadow border border-outline-variant group">
+<img class="w-full h-full object-cover" data-alt="A minimalist, top-down isometric digital map illustration of a university campus library floor plan. Soft warm yellow lighting highlights study zones, while grey tones represent hallways. The aesthetic is clean, academic, and organized, matching a productivity dashboard UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTdBYLBcU76uyQJUFiOaVrmO-WcOD166KMP9gGT6b9ZscFPbzJ83dQxSw8n1eptv0s_llwR6i9DsY25cw0dYBSQy02FAKA1zoWiMx3KtB30bPUBrwLB3CgUmpNowkPob6tYzmdNEU_VbSGsT7vGTjbaw56fLtw-M-NOq7H54XCV0FjUpZ9KkB8BiEeZ9yN126q9E3t4ckRflDwnBZfO6Fw1R23bPRL29zCgNEQDIr-m0RtZARyAbT_8R2jvCyc-3n-4inWnywsWQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/80 to-transparent flex flex-col justify-end p-md">
+<span class="text-label-bold font-label-bold text-primary-container uppercase">PREFERRED SPOT</span>
+<h3 class="text-white text-headline-md font-headline-md">Floor 3, Quiet Zone</h3>
+</div>
+</div>
+<!-- Campus Events / Social -->
+<div class="bg-surface-container-lowest p-md rounded-xl card-shadow border border-outline-variant">
+<h2 class="text-headline-sm font-headline-sm mb-sm">Social Hub</h2>
+<div class="space-y-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A professional studio headshot of a young female university student smiling warmly, high-key lighting, bright light mode aesthetic, blurred library background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQyPUwH7SoQGTa_ZgYmDalpVCzQjvYFYwP3WKsQb7QjxnmATDRn_Vl0_nFcZlFIN-Qlr0YhtG_oRq-5kU1ZVtcGTRDlAaVl1L3l74tBjF1wwqnX5onJoqzBs6E1BBtlGwih3FGpHOvmpSfd_v7CgujCHTwH24i7eiu1qpSymr47PqoP-5quZjox_uSWzOIg50tEDAFPwlqAo535hmGhU07zDBdnslqJX4vZz9cGxe2d13Ce6lzMwqDpRWrIw26K8Hga2tUcz1U2A"/>
+</div>
+<div class="flex-1">
+<p class="text-body-sm font-bold">Sarah invited you</p>
+<p class="text-label-md font-label-md text-secondary">Coding Club Meetup @ 4PM</p>
+</div>
+<button class="material-symbols-outlined text-primary">check_circle</button>
+</div>
+<hr class="border-outline-variant"/>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-secondary-fixed">
+<img class="w-full h-full object-cover" data-alt="A friendly headshot of a diverse male college student wearing a yellow sweatshirt, cheerful expression, modern campus setting, cinematic soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY3Myz-hbm-9mOOlq-CAxobLAOo9kAiVkcBVj-2yu7yEDrUYr_LeWlUGbeJRZBUnrWh4chYJ4oe_XQNpjkhchJYRyu-U0wOZxGAs2-q-cRhBeWEoHi-dojqWpSS3CpxjOEtyTN2vUNHJphB7mWTIVS9ODZ_0vhRgobePIIE9gYgaGq05g8hJFrkyrkOnGkJzKelZ94V_EdqphdaboWoKfmbNJsPYWC5Y2TbswNrusohWVs7EuvGfbNuFBGztSckhL5Xv6ErO8e6A"/>
+</div>
+<div class="flex-1">
+<p class="text-body-sm font-bold">John shared a note</p>
+<p class="text-label-md font-label-md text-secondary">OS Exam Prep - Part 1</p>
+</div>
+<button class="material-symbols-outlined text-secondary">download</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Chat Prompt / Floating Action -->
+<div class="fixed bottom-margin-desktop right-margin-desktop z-40">
+<div class="bg-surface-container-lowest rounded-full shadow-xl border border-outline-variant pl-6 pr-2 py-2 flex items-center gap-4 max-w-lg w-screen md:w-auto">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md flex-1" placeholder="Ask Bee to plan your day..." type="text"/>
+<button class="bg-primary-container text-on-primary-container w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 transition-transform active:scale-95 shadow-md">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<!-- Side Navigation (Suppressed on small screens based on JSON guidelines) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant shadow-sm py-md z-[60]">
+<div class="px-6 mb-8 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-headline-md">savings</span>
+<span class="text-headline-md font-headline-md text-primary font-bold">Baanu</span>
+</div>
+<div class="flex flex-col flex-1 overflow-y-auto">
+<a class="bg-primary-container text-on-primary-container rounded-lg mx-2 flex items-center gap-3 p-3 translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-label-md font-label-md">Courses</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-md font-label-md">Social Hub</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-md font-label-md">Planner</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</div>
+<div class="mt-auto px-2 space-y-1">
+<button class="w-full bg-primary-container text-on-primary-container rounded-xl py-3 font-bold mb-4 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span> New Task
+            </button>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Help</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Adjust Main Content for SideNav Presence on Desktop -->
+<script>
+        // Simple logic to adjust main padding if sidebar is fixed
+        if (window.innerWidth >= 1024) {
+            document.querySelector('main').style.paddingLeft = 'calc(256px + 40px)';
+            document.querySelector('nav').style.paddingLeft = 'calc(256px + 40px)';
+        }
+    </script>
+</body></html>

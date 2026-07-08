@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartBee - Student Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#5c4300",
+                    "inverse-surface": "#2e3132",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed": "#d4e5ef",
+                    "surface-container-high": "#e7e8e9",
+                    "outline-variant": "#d3c5ad",
+                    "on-secondary-fixed-variant": "#394951",
+                    "primary": "#795900",
+                    "tertiary": "#5f5f4f",
+                    "on-tertiary-fixed": "#1c1c0f",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#e5e3ce",
+                    "on-secondary-container": "#55656d",
+                    "surface-bright": "#f8f9fa",
+                    "tertiary-fixed-dim": "#c9c7b3",
+                    "inverse-primary": "#f8bd2a",
+                    "secondary": "#506169",
+                    "primary-fixed-dim": "#f8bd2a",
+                    "background": "#f8f9fa",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#191c1d",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#261a00",
+                    "surface-container-low": "#f3f4f5",
+                    "on-surface-variant": "#4f4633",
+                    "on-tertiary-container": "#555545",
+                    "surface-container": "#edeeef",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-fixed-variant": "#474838",
+                    "primary-container": "#fbc02d",
+                    "surface": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d9dadb",
+                    "secondary-fixed-dim": "#b8c9d3",
+                    "outline": "#817661",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "primary-fixed": "#ffdfa0",
+                    "on-secondary-fixed": "#0d1e25",
+                    "secondary-container": "#d1e2ec",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#795900",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary-container": "#6c5000",
+                    "tertiary-container": "#cbcab5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "lg": "48px",
+                    "xl": "64px",
+                    "margin-desktop": "40px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "body-sm": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-bold": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- Sidebar Navigation -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline shadow-sm flex flex-col py-md z-50">
+<div class="px-6 mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+<span class="text-headline-md font-headline-md font-bold text-primary">SmartBee</span>
+</div>
+<div class="flex-1 space-y-1">
+<!-- Active State: Dashboard -->
+<a class="bg-primary-container text-on-primary-container rounded-lg mx-2 flex items-center gap-3 p-3 transition-transform translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-label-md font-label-md">Courses</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-md font-label-md">Social Hub</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-md font-label-md">Planner</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</div>
+<div class="px-4 mt-auto mb-6">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-md hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                New Task
+            </button>
+</div>
+<div class="border-t border-outline-variant pt-4">
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Help</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high rounded-lg mx-2 flex items-center gap-3 p-3 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-md font-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Top AppBar Integration -->
+<header class="fixed top-0 right-0 left-64 h-16 glass-effect z-40 px-margin-desktop flex items-center justify-between">
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex items-center gap-2">
+<a class="bg-primary-fixed text-on-primary-fixed rounded-full px-4 py-1 font-medium text-label-bold" href="#">Home</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-label-bold" href="#">Modules</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-label-bold" href="#">Schedule</a>
+<a class="text-secondary hover:text-primary px-4 py-1 transition-colors text-label-bold" href="#">Tasks</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-fixed-dim hover:bg-primary-container px-4 py-2 rounded-full flex items-center gap-2 transition-all group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">smart_toy</span>
+<span class="text-on-primary-container font-bold text-label-md">Bee AI</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant">
+<div class="text-right">
+<p class="text-label-bold text-on-surface">Baanu</p>
+<p class="text-[10px] text-on-surface-variant">CS Junior</p>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly young university student of South Asian descent, wearing a modern knit sweater. The lighting is soft and natural, suggesting a bright campus setting. The background is slightly blurred with soft greens and whites of a college courtyard. Minimalist and corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZpKFGXWbf1MO1_YJuP3jTCFomYU5DnC5BdCllhQ865mbayZMyefKe0duJWgNfJCfCYpnMqcRuJbmg7KMdN8hQiPOu_XusBK9EDvMlC8VqvFNToUsndkbdJN3kTvRE4KQ3rsgIAGoYZtgmpFC7E-5ZH1O4DFQLeB7SxIHiG_1AhDvVGGko2aGHUNHaVK3KJM6sOcx5VmIi5QI5cYtfAj-KESiy4TfGDRGMfQTW5jQNrRSUJ2u_1gDq-GhMWCXlm-MMNRiZUz4phQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 px-margin-desktop pb-12">
+<!-- Welcome Header -->
+<div class="mb-8 flex justify-between items-end">
+<div>
+<p class="text-label-bold text-primary mb-1 uppercase tracking-widest">Today at a glance</p>
+<h1 class="text-headline-xl font-headline-xl text-on-surface">Good Morning, Baanu</h1>
+<p class="text-body-md text-on-surface-variant mt-2">You have 2 classes, 1 assignment due, and a club event at 4:00 PM.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary-container text-on-primary-container px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-sm hover:translate-y-[-2px] transition-all">
+<span class="material-symbols-outlined">event</span>
+                    Open My Planner
+                </button>
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">timer</span>
+                    Start Focus Session
+                </button>
+</div>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="bento-grid">
+<!-- Bee AI Virtual Friend Card -->
+<div class="col-span-12 lg:col-span-8 bg-primary-fixed-dim rounded-xl p-md card-shadow flex flex-col md:flex-row gap-6 items-center relative overflow-hidden">
+<div class="absolute -top-12 -right-12 opacity-10">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+</div>
+<div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg shrink-0">
+<span class="material-symbols-outlined text-primary text-5xl animate-bounce" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex-1">
+<p class="text-label-bold text-on-primary-fixed-variant mb-2 uppercase">Virtual Friend</p>
+<h3 class="text-headline-md font-headline-md text-on-primary-fixed-variant mb-3">Bee says:</h3>
+<p class="text-body-lg italic text-on-primary-fixed mb-4">"You are closest to your goal when you do the next small task. Want me to break your assignment into 3 quick steps?"</p>
+<div class="flex items-center gap-2 bg-white rounded-xl p-1 shadow-sm border border-outline-variant focus-within:ring-2 focus-within:ring-primary transition-all">
+<input class="flex-1 bg-transparent border-none focus:ring-0 px-4 py-2 text-body-md" placeholder="Ask Bee to plan your day..." type="text"/>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold">Send</button>
+</div>
+</div>
+</div>
+<!-- Next Class Countdown -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-bold">CLASS</span>
+<span class="material-symbols-outlined text-primary">sensors</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Operating Systems</h3>
+<p class="text-body-md text-on-surface-variant">Starts in <span class="text-primary font-bold">45 mins</span> • Room B-204</p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant flex gap-4">
+<button class="flex-1 py-2 rounded-lg text-label-bold text-primary border border-primary hover:bg-primary-fixed transition-colors">Join Online</button>
+<button class="flex-1 py-2 rounded-lg text-label-bold bg-primary text-on-primary">Route to Class</button>
+</div>
+</div>
+<!-- Tasks List -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-md font-headline-md text-on-surface">Tasks</h3>
+<button class="text-primary text-label-bold hover:underline">View All</button>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-4 group cursor-pointer">
+<div class="w-6 h-6 border-2 border-outline-variant rounded-md flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<div class="flex-1">
+<p class="text-body-md font-medium text-on-surface">Submit OS Quiz</p>
+<p class="text-label-md text-error">Due in 2h</p>
+</div>
+</li>
+<li class="flex items-center gap-4 group cursor-pointer opacity-70">
+<div class="w-6 h-6 border-2 border-primary bg-primary rounded-md flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md font-medium text-on-surface line-through">Buy Coffee</p>
+<p class="text-label-md text-on-surface-variant">Done at 9:00 AM</p>
+</div>
+</li>
+<li class="flex items-center gap-4 group cursor-pointer">
+<div class="w-6 h-6 border-2 border-outline-variant rounded-md flex items-center justify-center group-hover:border-primary transition-colors"></div>
+<div class="flex-1">
+<p class="text-body-md font-medium text-on-surface">Prep for Club Meetup</p>
+<p class="text-label-md text-on-surface-variant">Today, 4:00 PM</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Attendance & Stats -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow flex flex-col justify-between">
+<div>
+<h3 class="text-label-bold text-on-surface-variant uppercase mb-4 tracking-wider">Attendance Track</h3>
+<div class="flex items-end gap-4 mb-6">
+<span class="text-headline-xl font-headline-xl text-on-surface">89%</span>
+<span class="text-label-md text-primary bg-primary-fixed px-2 py-0.5 rounded-full font-bold mb-2">+2% this week</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[89%] transition-all duration-1000"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-4 italic">"Need 3 more attended classes this week to reach your 95% goal."</p>
+</div>
+<button class="w-full mt-6 py-3 rounded-xl border-2 border-dashed border-outline-variant text-on-surface-variant font-bold hover:border-primary hover:text-primary transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                    Report Attendance
+                </button>
+</div>
+<!-- Upcoming Events -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md border border-outline-variant card-shadow">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-6">Upcoming</h3>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="text-center w-16 shrink-0">
+<p class="text-label-bold text-on-surface-variant">10:00</p>
+<p class="text-[10px] text-on-surface-variant uppercase">AM</p>
+</div>
+<div class="flex-1 pl-4 border-l-4 border-primary">
+<p class="text-body-md font-bold text-on-surface">DBMS Lab</p>
+<p class="text-body-sm text-on-surface-variant">Block C, Lab 4</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="text-center w-16 shrink-0">
+<p class="text-label-bold text-on-surface-variant">1:30</p>
+<p class="text-[10px] text-on-surface-variant uppercase">PM</p>
+</div>
+<div class="flex-1 pl-4 border-l-4 border-secondary">
+<p class="text-body-md font-bold text-on-surface">Library Return</p>
+<p class="text-body-sm text-on-surface-variant">Campus Library</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="text-center w-16 shrink-0">
+<p class="text-label-bold text-on-surface-variant">4:00</p>
+<p class="text-[10px] text-on-surface-variant uppercase">PM</p>
+</div>
+<div class="flex-1 pl-4 border-l-4 border-primary-container">
+<p class="text-body-md font-bold text-on-surface">Coding Club</p>
+<p class="text-body-sm text-on-surface-variant">Student Union Hub</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Actions Hub -->
+<div class="col-span-12 bg-surface-container-low rounded-2xl p-md flex flex-wrap items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<div>
+<h4 class="text-body-lg font-bold">Quick Actions</h4>
+<p class="text-label-md text-on-surface-variant">Frequently used shortcuts</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="bg-white hover:bg-primary-container px-4 py-2 rounded-lg border border-outline-variant text-label-bold flex items-center gap-2 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container">local_cafe</span>
+                        Grab Coffee
+                    </button>
+<button class="bg-white hover:bg-primary-container px-4 py-2 rounded-lg border border-outline-variant text-label-bold flex items-center gap-2 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container">print</span>
+                        Print Credit
+                    </button>
+<button class="bg-white hover:bg-primary-container px-4 py-2 rounded-lg border border-outline-variant text-label-bold flex items-center gap-2 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container">directions_bus</span>
+                        Shuttle Map
+                    </button>
+<button class="bg-white hover:bg-primary-container px-4 py-2 rounded-lg border border-outline-variant text-label-bold flex items-center gap-2 transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container">restaurant</span>
+                        Mess Menu
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating AI Trigger (FAB Override) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary-container text-on-primary-container rounded-full shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 overflow-hidden group" id="bee-fab">
+<span class="material-symbols-outlined text-4xl group-hover:animate-pulse" style="font-variation-settings: 'FILL' 1;">nutrition</span>
+<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+</button>
+<script>
+        // Simple Interaction Script
+        document.getElementById('bee-fab').addEventListener('click', function() {
+            const beeIcon = this.querySelector('.material-symbols-outlined');
+            beeIcon.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+            beeIcon.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                beeIcon.style.transform = 'rotate(0deg) scale(1)';
+            }, 600);
+        });
+
+        // Background Atmosphere Micro-interactions
+        const cards = document.querySelectorAll('.card-shadow');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('transition-all', 'duration-300');
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.08)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.04)';
+            });
+        });
+    </script>
+</body></html>

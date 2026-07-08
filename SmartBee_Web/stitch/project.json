@@ -1,0 +1,43 @@
+{
+  "title": "Unified Student Life Hub",
+  "projectId": "839539877217445505",
+  "designSystem": {
+    "name": "Lumina Campus",
+    "assetId": "c0953a2d647941d89e89870489c68e49"
+  },
+  "screens": [
+    {
+      "title": "Design System",
+      "id": "asset-stub-assets_c0953a2d647941d89e89870489c68e49",
+      "note": "Fetched via list_design_systems (not get_screen)"
+    },
+    {
+      "title": "Dashboard Home",
+      "id": "42d493d543834d90b7134f367ac2e332",
+      "html": "html/dashboard-home.html",
+      "image": "images/dashboard-home.png",
+      "route": "/"
+    },
+    {
+      "title": "Course Dashboard",
+      "id": "0e5850dd83624d66992f0953d47362dd",
+      "html": "html/course-dashboard.html",
+      "image": "images/course-dashboard.png",
+      "route": "/courses"
+    },
+    {
+      "title": "Social & Events Hub",
+      "id": "10023007eb3a41baabf225848235bacc",
+      "html": "html/social-events-hub.html",
+      "image": "images/social-events-hub.png",
+      "route": "/social"
+    },
+    {
+      "title": "Personal Planner",
+      "id": "8bb7672a811c46358cd365ece6e7d950",
+      "html": "html/personal-planner.html",
+      "image": "images/personal-planner.png",
+      "route": "/planner"
+    }
+  ]
+}
