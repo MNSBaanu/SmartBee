@@ -42,6 +42,9 @@
 
   /* Layout */
   --sidebar-w: 264px;
+
+  /* Honeycomb cell */
+  --hex: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
 }
 
 * {

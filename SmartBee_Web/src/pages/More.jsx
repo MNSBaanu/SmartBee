@@ -62,8 +62,8 @@ function More() {
     <div className="page">
       <div className="page-header">
         <div>
-          <h2>More</h2>
-          <p className="muted">Attendance tracking and app information</p>
+          <h2>Honeycomb</h2>
+          <p className="muted">The extra cells of your hive</p>
         </div>
       </div>
 
@@ -73,8 +73,8 @@ function More() {
             <span className="material-symbols-outlined icon-fill">fact_check</span>
           </div>
           <div>
-            <h3>Attendance</h3>
-            <p className="muted">Mark your classes and keep an eye on your attendance rate</p>
+            <h3>Hive Visits</h3>
+            <p className="muted">Log the classes you showed up to and watch your rate</p>
           </div>
         </div>
 
@@ -114,7 +114,7 @@ function More() {
             <div className="form-field form-field-submit">
               <button type="submit" className="btn btn-primary">
                 <span className="material-symbols-outlined">add_task</span>
-                Record
+                Log Visit
               </button>
             </div>
           </div>
@@ -125,7 +125,7 @@ function More() {
             <div className="stat-row">
               <article className="stat-tile card tone-bee">
                 <span className="stat-icon material-symbols-outlined icon-fill">percent</span>
-                <p className="eyebrow">Overall Rate</p>
+                <p className="eyebrow">Hive Rate</p>
                 <h3>{overallRate}%</h3>
                 <div className="progress">
                   <div className="progress-fill" style={{ width: `${overallRate}%` }} />
@@ -133,15 +133,15 @@ function More() {
               </article>
               <article className="stat-tile card tone-info">
                 <span className="stat-icon material-symbols-outlined icon-fill">event_available</span>
-                <p className="eyebrow">Classes Marked</p>
+                <p className="eyebrow">Visits Logged</p>
                 <h3>{total}</h3>
-                <p className="muted small">Across {byModule.length} module{byModule.length === 1 ? '' : 's'}</p>
+                <p className="muted small">Across {byModule.length} blossom{byModule.length === 1 ? '' : 's'}</p>
               </article>
               <article className="stat-tile card tone-success">
                 <span className="stat-icon material-symbols-outlined icon-fill">how_to_reg</span>
-                <p className="eyebrow">Attended</p>
+                <p className="eyebrow">Showed Up</p>
                 <h3>{presentCount}</h3>
-                <p className="muted small">Keep showing up</p>
+                <p className="muted small">Keep the hive busy</p>
               </article>
             </div>
 
@@ -152,7 +152,7 @@ function More() {
                     <div className="entity-badge">{stat.module.slice(0, 2).toUpperCase()}</div>
                     <div className="entity-title">
                       <span className="pill pill-soft">{stat.module}</span>
-                      <h3>{stat.rate}% attended</h3>
+                      <h3>{stat.rate}% visited</h3>
                     </div>
                   </div>
                   <div className="progress">
@@ -178,7 +178,7 @@ function More() {
               <div className="card-head">
                 <div>
                   <p className="eyebrow">History</p>
-                  <h3>Recent Records</h3>
+                  <h3>Recent Visits</h3>
                 </div>
               </div>
               <ul>
@@ -214,8 +214,8 @@ function More() {
             <div className="empty-icon">
               <span className="material-symbols-outlined">fact_check</span>
             </div>
-            <h3>No attendance recorded</h3>
-            <p className="muted">Mark a class above to start seeing your stats.</p>
+            <h3>No visits logged</h3>
+            <p className="muted">Log a class above and Bee will start tracking your rate.</p>
           </div>
         )}
       </section>

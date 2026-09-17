@@ -250,14 +250,13 @@
 .avatar {
   width: 2.35rem;
   height: 2.35rem;
-  border-radius: 50%;
+  clip-path: var(--hex);
   display: grid;
   place-items: center;
   font-weight: 700;
   font-size: 0.9rem;
   color: var(--bee-ink);
   background: linear-gradient(145deg, var(--bee-400), var(--bee-500));
-  box-shadow: var(--sh-1);
 }
 
 .bee-icon {
@@ -577,7 +576,7 @@
   place-items: center;
   width: 2.6rem;
   height: 2.6rem;
-  border-radius: var(--r-md);
+  clip-path: var(--hex);
   background: var(--bee-tint);
   color: var(--bee-600);
   flex-shrink: 0;
@@ -728,7 +727,7 @@
   width: 3.75rem;
   height: 3.75rem;
   margin: 0 auto 1rem;
-  border-radius: 50%;
+  clip-path: var(--hex);
   background: var(--bee-tint);
   color: var(--bee-600);
 }
@@ -785,7 +784,7 @@
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: var(--r-md);
+  clip-path: var(--hex);
   font-weight: 800;
   font-size: 0.9rem;
   flex-shrink: 0;
@@ -881,6 +880,7 @@
   border-radius: var(--r-xl);
   border: 1px solid #f6e4a8;
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='55.43' height='96' viewBox='0 0 55.43 96'%3E%3Cg fill='none' stroke='%23eab308' stroke-opacity='0.16' stroke-width='1'%3E%3Cpath d='M27.71 0L55.42 16V48L27.71 64L0 48V16Z'/%3E%3Cpath d='M0 48L27.71 64V96L0 112L-27.71 96V64Z'/%3E%3Cpath d='M55.43 48L83.14 64V96L55.43 112L27.72 96V64Z'/%3E%3Cpath d='M0 -48L27.71 -32V0L0 16L-27.71 0V-32Z'/%3E%3Cpath d='M55.43 -48L83.14 -32V0L55.43 16L27.72 0V-32Z'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(900px 300px at 100% 0%, rgba(254, 204, 11, 0.22), transparent 60%),
     linear-gradient(135deg, #ffffff 0%, var(--bee-tint) 100%);
   box-shadow: var(--sh-2);
@@ -1021,7 +1021,7 @@
   place-items: center;
   width: 2.4rem;
   height: 2.4rem;
-  border-radius: var(--r-md);
+  clip-path: var(--hex);
   font-size: 1.3rem;
 }
 
@@ -1080,7 +1080,7 @@
   height: 2.6rem;
   object-fit: contain;
   padding: 0.35rem;
-  border-radius: 50%;
+  clip-path: var(--hex);
   background: var(--bee-soft);
 }
 
@@ -1199,7 +1199,7 @@
   place-items: center;
   width: 2.2rem;
   height: 2.2rem;
-  border-radius: var(--r-sm);
+  clip-path: var(--hex);
   background: var(--surface-2);
   color: var(--ink-2);
   flex-shrink: 0;
@@ -1456,7 +1456,7 @@
   place-items: center;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: var(--r-sm);
+  clip-path: var(--hex);
   flex-shrink: 0;
 }
 

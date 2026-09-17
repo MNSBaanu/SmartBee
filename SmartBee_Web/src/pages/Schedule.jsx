@@ -51,7 +51,7 @@ function Schedule() {
   }
 
   const handleDelete = (id) => {
-    if (confirm('Remove this class from your schedule?')) {
+    if (confirm('Cancel this flight?')) {
       setEntries(entries.filter(entry => entry.id !== id))
     }
   }
@@ -105,8 +105,8 @@ function Schedule() {
     <div className="page">
       <div className="page-header">
         <div>
-          <h2>Weekly Schedule</h2>
-          <p className="muted">Plan your classes, labs, and tutorials</p>
+          <h2>Weekly Flight Plan</h2>
+          <p className="muted">Chart the routes your bee flies each week</p>
         </div>
         <div className="header-tools">
           <div className="segmented" role="group" aria-label="Schedule view">
@@ -133,14 +133,14 @@ function Schedule() {
             onClick={() => (showForm ? handleCancel() : setShowForm(true))}
           >
             <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
-            {showForm ? 'Cancel' : 'Add Class'}
+            {showForm ? 'Cancel' : 'Add Flight'}
           </button>
         </div>
       </div>
 
       {showForm && (
         <form className="page-form card" onSubmit={handleSubmit}>
-          <h3>{editingId ? 'Edit Class' : 'Add New Class'}</h3>
+          <h3>{editingId ? 'Edit Flight' : 'Add New Flight'}</h3>
           <div className="form-grid">
             <div className="form-field">
               <label htmlFor="title">Class Name</label>
@@ -217,7 +217,7 @@ function Schedule() {
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
               <span className="material-symbols-outlined">check</span>
-              {editingId ? 'Update Class' : 'Add Class'}
+              {editingId ? 'Update Flight' : 'Add Flight'}
             </button>
             <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
@@ -239,7 +239,7 @@ function Schedule() {
                   </span>
                 </div>
                 {dayEntries.length === 0
-                  ? <p className="muted small day-empty">Free day</p>
+                  ? <p className="muted small day-empty">No flights</p>
                   : dayEntries.map(renderEntry)}
               </section>
             )
@@ -256,7 +256,7 @@ function Schedule() {
               <section key={day} className="card list-day">
                 <div className="card-head">
                   <h3>{day}</h3>
-                  <span className="pill pill-soft">{dayEntries.length} scheduled</span>
+                  <span className="pill pill-soft">{dayEntries.length} flights</span>
                 </div>
                 <div className="list-day-entries">
                   {dayEntries.map(renderEntry)}
@@ -272,22 +272,22 @@ function Schedule() {
           <div className="empty-icon">
             <span className="material-symbols-outlined">calendar_month</span>
           </div>
-          <h3>Your week is empty</h3>
-          <p className="muted">Add your first class to start building a weekly schedule.</p>
+          <h3>No flights charted</h3>
+          <p className="muted">Map your first class and Bee will build the week around it.</p>
           <button
             type="button"
             className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
             <span className="material-symbols-outlined">add</span>
-            Add Your First Class
+            Chart Your First Flight
           </button>
         </div>
       )}
 
       {entries.length > 0 && (
         <p className="muted small page-footnote">
-          {entries.length} {entries.length === 1 ? 'class' : 'classes'} scheduled this week
+          {entries.length} {entries.length === 1 ? 'flight' : 'flights'} charted this week
         </p>
       )}
     </div>

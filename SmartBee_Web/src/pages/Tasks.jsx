@@ -43,7 +43,7 @@ function Tasks() {
   }
 
   const handleDelete = (id) => {
-    if (confirm('Are you sure you want to delete this task?')) {
+    if (confirm('Drop this to-bee from your list?')) {
       setTasks(tasks.filter(task => task.id !== id))
     }
   }
@@ -108,8 +108,8 @@ function Tasks() {
     <div className="page">
       <div className="page-header">
         <div>
-          <h2>Tasks</h2>
-          <p className="muted">Track assignments, deadlines, and study goals</p>
+          <h2>To-Bee List</h2>
+          <p className="muted">Everything your bee still has to gather</p>
         </div>
         <button
           type="button"
@@ -117,7 +117,7 @@ function Tasks() {
           onClick={() => (showForm ? handleCancel() : setShowForm(true))}
         >
           <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
-          {showForm ? 'Cancel' : 'Add Task'}
+          {showForm ? 'Cancel' : 'Add To-Bee'}
         </button>
       </div>
 
@@ -127,13 +127,13 @@ function Tasks() {
             <span className="stat-icon material-symbols-outlined icon-fill">pending_actions</span>
             <p className="eyebrow">Active</p>
             <h3>{activeCount}</h3>
-            <p className="muted small">Still to do</p>
+            <p className="muted small">Still to bee done</p>
           </article>
           <article className="stat-tile card tone-success">
             <span className="stat-icon material-symbols-outlined icon-fill">task_alt</span>
             <p className="eyebrow">Completed</p>
             <h3>{completedCount}</h3>
-            <p className="muted small">Nicely done</p>
+            <p className="muted small">Honey in the jar</p>
           </article>
           <article className="stat-tile card tone-danger">
             <span className="stat-icon material-symbols-outlined icon-fill">running_with_errors</span>
@@ -143,7 +143,7 @@ function Tasks() {
           </article>
           <article className="stat-tile card tone-bee">
             <span className="stat-icon material-symbols-outlined icon-fill">trending_up</span>
-            <p className="eyebrow">Progress</p>
+            <p className="eyebrow">Jar Filled</p>
             <h3>{progress}%</h3>
             <div className="progress">
               <div className="progress-fill" style={{ width: `${progress}%` }} />
@@ -154,7 +154,7 @@ function Tasks() {
 
       {showForm && (
         <form className="page-form card" onSubmit={handleSubmit}>
-          <h3>{editingId ? 'Edit Task' : 'Add New Task'}</h3>
+          <h3>{editingId ? 'Edit To-Bee' : 'Add New To-Bee'}</h3>
           <div className="form-grid">
             <div className="form-field full-width">
               <label htmlFor="title">Task</label>
@@ -210,7 +210,7 @@ function Tasks() {
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
               <span className="material-symbols-outlined">check</span>
-              {editingId ? 'Update Task' : 'Add Task'}
+              {editingId ? 'Update To-Bee' : 'Add To-Bee'}
             </button>
             <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
@@ -302,15 +302,15 @@ function Tasks() {
           <div className="empty-icon">
             <span className="material-symbols-outlined">checklist</span>
           </div>
-          <h3>No tasks yet</h3>
-          <p className="muted">Add one to start tracking your deadlines and assignments.</p>
+          <h3>Nothing to bee done</h3>
+          <p className="muted">Add a to-bee and Bee will keep it in sight.</p>
           <button
             type="button"
             className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
             <span className="material-symbols-outlined">add</span>
-            Add Your First Task
+            Add Your First To-Bee
           </button>
         </div>
       )}
@@ -320,8 +320,8 @@ function Tasks() {
           <div className="empty-icon">
             <span className="material-symbols-outlined">inbox</span>
           </div>
-          <h3>Nothing here</h3>
-          <p className="muted">No {filter.toLowerCase()} tasks right now.</p>
+          <h3>Empty cell</h3>
+          <p className="muted">No {filter.toLowerCase()} to-bees right now.</p>
         </div>
       )}
     </div>

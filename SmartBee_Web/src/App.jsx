@@ -8,11 +8,11 @@ import Tasks from './pages/Tasks'
 import More from './pages/More'
 
 const NAV_ITEMS = [
-  { path: '/', label: 'Dashboard', icon: 'space_dashboard' },
-  { path: '/modules', label: 'Modules', icon: 'school' },
-  { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
-  { path: '/tasks', label: 'Tasks', icon: 'checklist' },
-  { path: '/more', label: 'More', icon: 'tune' }
+  { path: '/', label: 'The Hive', icon: 'hive' },
+  { path: '/modules', label: 'Blossoms', icon: 'local_florist' },
+  { path: '/schedule', label: 'Flight Plan', icon: 'route' },
+  { path: '/tasks', label: 'To-Bee List', icon: 'checklist' },
+  { path: '/more', label: 'Honeycomb', icon: 'dashboard_customize' }
 ]
 
 function Sidebar({ open, onClose }) {
@@ -53,7 +53,7 @@ function Sidebar({ open, onClose }) {
           <div className="bee-promo">
             <span className="material-symbols-outlined icon-fill">auto_awesome</span>
             <h4>Ask Bee AI</h4>
-            <p>Break big assignments into small, doable steps.</p>
+            <p>Bee breaks big assignments into small, doable cells.</p>
             <button type="button" className="btn btn-primary btn-block">
               <span className="material-symbols-outlined">bolt</span>
               Start a chat
@@ -79,7 +79,7 @@ function Topbar({ onMenu }) {
 
       <div className="topbar-search">
         <span className="material-symbols-outlined">search</span>
-        <input type="search" placeholder="Search modules, tasks, classes…" aria-label="Search" />
+        <input type="search" placeholder="Search the hive…" aria-label="Search" />
       </div>
 
       <div className="topbar-actions">
