@@ -38,7 +38,7 @@ function Modules() {
   }
 
   const handleDelete = (id) => {
-    if (confirm('Remove this blossom from your garden?')) {
+    if (confirm('Are you sure you want to delete this module?')) {
       setModules(modules.filter(mod => mod.id !== id))
     }
   }
@@ -55,8 +55,8 @@ function Modules() {
     <div className="page">
       <div className="page-header">
         <div>
-          <h2>Your Blossoms</h2>
-          <p className="muted">Every module your bee gathers knowledge from</p>
+          <h2>Campus Modules</h2>
+          <p className="muted">Manage your academic modules and courses</p>
         </div>
         <div className="header-tools">
           {modules.length > 0 && (
@@ -71,14 +71,14 @@ function Modules() {
             onClick={() => (showForm ? handleCancel() : setShowForm(true))}
           >
             <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
-            {showForm ? 'Cancel' : 'Add Blossom'}
+            {showForm ? 'Cancel' : 'Add Module'}
           </button>
         </div>
       </div>
 
       {showForm && (
         <form className="page-form card" onSubmit={handleSubmit}>
-          <h3>{editingId ? 'Edit Blossom' : 'Add New Blossom'}</h3>
+          <h3>{editingId ? 'Edit Module' : 'Add New Module'}</h3>
           <div className="form-grid">
             <div className="form-field">
               <label htmlFor="code">Module Code</label>
@@ -139,7 +139,7 @@ function Modules() {
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
               <span className="material-symbols-outlined">check</span>
-              {editingId ? 'Update Blossom' : 'Add Blossom'}
+              {editingId ? 'Update Module' : 'Add Module'}
             </button>
             <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
@@ -207,17 +207,17 @@ function Modules() {
       {modules.length === 0 && !showForm && (
         <div className="empty-state card">
           <div className="empty-icon">
-            <span className="material-symbols-outlined">local_florist</span>
+            <span className="material-symbols-outlined">school</span>
           </div>
-          <h3>No blossoms yet</h3>
-          <p className="muted">Add your courses so Bee knows where to forage.</p>
+          <h3>No modules yet</h3>
+          <p className="muted">Add your courses to track credits, instructors, and schedules.</p>
           <button
             type="button"
             className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
             <span className="material-symbols-outlined">add</span>
-            Plant Your First Blossom
+            Add Your First Module
           </button>
         </div>
       )}

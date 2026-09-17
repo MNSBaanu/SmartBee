@@ -4,14 +4,14 @@ const STATS = [
   {
     label: 'Attendance',
     value: '89%',
-    hint: '3 more visits this week',
+    hint: '3 more classes this week',
     icon: 'fact_check',
     tone: 'success'
   },
   {
     label: 'Classes Today',
     value: '2',
-    hint: 'Next stop in 45 mins',
+    hint: 'Next one in 45 mins',
     icon: 'school',
     tone: 'info'
   },
@@ -23,9 +23,9 @@ const STATS = [
     tone: 'danger'
   },
   {
-    label: 'Buzz Streak',
+    label: 'Focus Streak',
     value: '4d',
-    hint: 'Days of steady buzzing',
+    hint: 'Keep the momentum going',
     icon: 'local_fire_department',
     tone: 'bee'
   }
@@ -54,11 +54,11 @@ function Home() {
           <div className="hero-actions">
             <button type="button" className="btn btn-primary">
               <span className="material-symbols-outlined">event_note</span>
-              Open Flight Plan
+              Open My Planner
             </button>
             <button type="button" className="btn btn-ghost">
               <span className="material-symbols-outlined">timer</span>
-              Start Buzz Session
+              Start Focus Session
             </button>
           </div>
         </div>
@@ -66,7 +66,7 @@ function Home() {
         <div className="hero-ring" aria-hidden="true">
           <div className="ring">
             <span className="ring-value">68%</span>
-            <span className="ring-label">Hive filled</span>
+            <span className="ring-label">Day done</span>
           </div>
         </div>
       </section>
@@ -105,7 +105,7 @@ function Home() {
         <section className="card next-class">
           <div className="card-head">
             <div>
-              <p className="eyebrow">Next stop</p>
+              <p className="eyebrow">Up next</p>
               <h3>Operating Systems</h3>
             </div>
             <span className="pill pill-info">In 45 mins</span>
@@ -127,7 +127,7 @@ function Home() {
           <div className="progress">
             <div className="progress-fill" style={{ width: '35%' }} />
           </div>
-          <p className="muted small">Blossom progress • 35% of syllabus gathered</p>
+          <p className="muted small">Module progress • 35% of syllabus covered</p>
         </section>
 
         <section className="card deadline-card">
@@ -139,12 +139,12 @@ function Home() {
             <span className="pill pill-danger">Due 11:59 PM</span>
           </div>
           <p className="muted">
-            Submission closes tonight. Bee suggests filling the evaluation cell first.
+            Submission closes tonight. Bee suggests finishing the evaluation section first.
           </p>
           <div className="hero-actions">
             <button type="button" className="btn btn-soft">
               <span className="material-symbols-outlined">splitscreen</span>
-              Break into cells
+              Break into steps
             </button>
           </div>
         </section>
@@ -154,7 +154,7 @@ function Home() {
             <div className="bee-head">
               <img src="/SmartBee.png" alt="" className="bee-avatar" />
               <div>
-                <p className="eyebrow">Hive Buddy</p>
+                <p className="eyebrow">Virtual Friend</p>
                 <h3>Bee says</h3>
               </div>
             </div>
@@ -181,7 +181,7 @@ function Home() {
           <div className="card-head">
             <div>
               <p className="eyebrow">Upcoming</p>
-              <h3>Rest of your flight</h3>
+              <h3>Rest of your day</h3>
             </div>
           </div>
           <ul className="timeline">

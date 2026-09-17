@@ -8,14 +8,14 @@ import Tasks from './pages/Tasks'
 import More from './pages/More'
 
 const NAV_ITEMS = [
-  { path: '/', label: 'The Hive', icon: 'hive' },
-  { path: '/modules', label: 'Blossoms', icon: 'local_florist' },
-  { path: '/schedule', label: 'Flight Plan', icon: 'route' },
-  { path: '/tasks', label: 'To-Bee List', icon: 'checklist' },
-  { path: '/more', label: 'Honeycomb', icon: 'dashboard_customize' }
+  { path: '/', label: 'Dashboard', icon: 'hive' },
+  { path: '/modules', label: 'Modules', icon: 'school' },
+  { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
+  { path: '/tasks', label: 'Tasks', icon: 'checklist' },
+  { path: '/more', label: 'More', icon: 'tune' }
 ]
 
-function Sidebar({ open, onClose }) {
+function Sidebar({ open, onClose, collapsed, onToggle }) {
   return (
     <>
       <div
@@ -27,6 +27,17 @@ function Sidebar({ open, onClose }) {
         <div className="sidebar-brand">
           <img src="/SmartBee.png" alt="" className="brand-logo" />
           <span className="brand-name">SmartBee</span>
+          <button
+            type="button"
+            className="icon-btn collapse-btn"
+            onClick={onToggle}
+            aria-expanded={!collapsed}
+            aria-label={collapsed ? 'Expand navigation' : 'Collapse navigation'}
+          >
+            <span className="material-symbols-outlined">
+              {collapsed ? 'chevron_right' : 'chevron_left'}
+            </span>
+          </button>
         </div>
 
         <nav className="sidebar-nav" aria-label="Main navigation">
@@ -35,6 +46,7 @@ function Sidebar({ open, onClose }) {
               key={item.path}
               to={item.path}
               end={item.path === '/'}
+              title={collapsed ? item.label : undefined}
               className={({ isActive }) => `nav-item ${isActive ? 'nav-item-active' : ''}`}
             >
               {({ isActive }) => (
@@ -42,7 +54,7 @@ function Sidebar({ open, onClose }) {
                   <span className={`material-symbols-outlined ${isActive ? 'icon-fill' : ''}`}>
                     {item.icon}
                   </span>
-                  <span>{item.label}</span>
+                  <span className="nav-label">{item.label}</span>
                 </>
               )}
             </NavLink>
@@ -51,12 +63,16 @@ function Sidebar({ open, onClose }) {
 
         <div className="sidebar-foot">
           <div className="bee-promo">
-            <span className="material-symbols-outlined icon-fill">auto_awesome</span>
+            <span className="material-symbols-outlined icon-fill promo-mark">auto_awesome</span>
             <h4>Ask Bee AI</h4>
-            <p>Bee breaks big assignments into small, doable cells.</p>
-            <button type="button" className="btn btn-primary btn-block">
+            <p>Bee breaks big assignments into small, doable steps.</p>
+            <button
+              type="button"
+              className="btn btn-primary btn-block"
+              title={collapsed ? 'Ask Bee AI' : undefined}
+            >
               <span className="material-symbols-outlined">bolt</span>
-              Start a chat
+              <span className="nav-label">Start a chat</span>
             </button>
           </div>
         </div>
@@ -79,7 +95,7 @@ function Topbar({ onMenu }) {
 
       <div className="topbar-search">
         <span className="material-symbols-outlined">search</span>
-        <input type="search" placeholder="Search the hive…" aria-label="Search" />
+        <input type="search" placeholder="Search modules, tasks, classes…" aria-label="Search" />
       </div>
 
       <div className="topbar-actions">
@@ -99,6 +115,7 @@ function Topbar({ onMenu }) {
 
 function Shell() {
   const [navOpen, setNavOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
   const location = useLocation()
 
   useEffect(() => {
@@ -106,8 +123,13 @@ function Shell() {
   }, [location.pathname])
 
   return (
-    <div className="app-shell">
-      <Sidebar open={navOpen} onClose={() => setNavOpen(false)} />
+    <div className={`app-shell ${collapsed ? 'app-shell-collapsed' : ''}`}>
+      <Sidebar
+        open={navOpen}
+        onClose={() => setNavOpen(false)}
+        collapsed={collapsed}
+        onToggle={() => setCollapsed(value => !value)}
+      />
       <div className="app-main">
         <Topbar onMenu={() => setNavOpen(true)} />
         <main className="app-content">
