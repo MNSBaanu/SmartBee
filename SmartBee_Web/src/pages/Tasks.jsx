@@ -63,6 +63,12 @@ function Tasks() {
   const activeCount = tasks.filter(task => !task.completed).length
   const completedCount = tasks.length - activeCount
 
+  const isOverdue = (task) =>
+    !task.completed && task.dueDate && new Date(`${task.dueDate}T23:59:59`) < new Date()
+
+  const overdueCount = tasks.filter(isOverdue).length
+  const progress = tasks.length ? Math.round((completedCount / tasks.length) * 100) : 0
+
   const countFor = (name) => {
     if (name === 'Active') return activeCount
     if (name === 'Completed') return completedCount
@@ -98,11 +104,8 @@ function Tasks() {
     return `Due in ${days}d`
   }
 
-  const isOverdue = (task) =>
-    !task.completed && task.dueDate && new Date(`${task.dueDate}T23:59:59`) < new Date()
-
   return (
-    <div className="modules-page">
+    <div className="page">
       <div className="page-header">
         <div>
           <h2>Tasks</h2>
@@ -110,32 +113,47 @@ function Tasks() {
         </div>
         <button
           type="button"
-          className="primary-btn"
+          className="btn btn-primary"
           onClick={() => (showForm ? handleCancel() : setShowForm(true))}
         >
-          {showForm ? 'Cancel' : '+ Add Task'}
+          <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
+          {showForm ? 'Cancel' : 'Add Task'}
         </button>
       </div>
 
       {tasks.length > 0 && (
-        <div className="task-summary">
-          <div className="summary-tile air-card">
-            <p className="section-label">Active</p>
+        <section className="stat-row">
+          <article className="stat-tile card tone-info">
+            <span className="stat-icon material-symbols-outlined icon-fill">pending_actions</span>
+            <p className="eyebrow">Active</p>
             <h3>{activeCount}</h3>
-          </div>
-          <div className="summary-tile air-card">
-            <p className="section-label">Completed</p>
+            <p className="muted small">Still to do</p>
+          </article>
+          <article className="stat-tile card tone-success">
+            <span className="stat-icon material-symbols-outlined icon-fill">task_alt</span>
+            <p className="eyebrow">Completed</p>
             <h3>{completedCount}</h3>
-          </div>
-          <div className="summary-tile air-card">
-            <p className="section-label">Overdue</p>
-            <h3>{tasks.filter(isOverdue).length}</h3>
-          </div>
-        </div>
+            <p className="muted small">Nicely done</p>
+          </article>
+          <article className="stat-tile card tone-danger">
+            <span className="stat-icon material-symbols-outlined icon-fill">running_with_errors</span>
+            <p className="eyebrow">Overdue</p>
+            <h3>{overdueCount}</h3>
+            <p className="muted small">Needs attention</p>
+          </article>
+          <article className="stat-tile card tone-bee">
+            <span className="stat-icon material-symbols-outlined icon-fill">trending_up</span>
+            <p className="eyebrow">Progress</p>
+            <h3>{progress}%</h3>
+            <div className="progress">
+              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </article>
+        </section>
       )}
 
       {showForm && (
-        <form className="page-form air-card" onSubmit={handleSubmit}>
+        <form className="page-form card" onSubmit={handleSubmit}>
           <h3>{editingId ? 'Edit Task' : 'Add New Task'}</h3>
           <div className="form-grid">
             <div className="form-field full-width">
@@ -190,10 +208,11 @@ function Tasks() {
             </div>
           </div>
           <div className="form-actions">
-            <button type="submit" className="primary-btn">
+            <button type="submit" className="btn btn-primary">
+              <span className="material-symbols-outlined">check</span>
               {editingId ? 'Update Task' : 'Add Task'}
             </button>
-            <button type="button" className="secondary-btn" onClick={handleCancel}>
+            <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
             </button>
           </div>
@@ -201,15 +220,16 @@ function Tasks() {
       )}
 
       {tasks.length > 0 && (
-        <div className="view-toggle task-filters" role="group" aria-label="Filter tasks">
+        <div className="segmented task-filters" role="group" aria-label="Filter tasks">
           {FILTERS.map(name => (
             <button
               key={name}
               type="button"
-              className={`toggle-chip ${filter === name ? 'toggle-chip-active' : ''}`}
+              className={`seg ${filter === name ? 'seg-active' : ''}`}
               onClick={() => setFilter(name)}
             >
-              {name} ({countFor(name)})
+              {name}
+              <span className="seg-count">{countFor(name)}</span>
             </button>
           ))}
         </div>
@@ -219,7 +239,7 @@ function Tasks() {
         {visibleTasks.map(task => (
           <article
             key={task.id}
-            className={`task-card air-card ${task.completed ? 'task-done' : ''}`}
+            className={`card task-card prio-${task.priority.toLowerCase()} ${task.completed ? 'task-done' : ''}`}
           >
             <label className="task-check">
               <input
@@ -233,37 +253,44 @@ function Tasks() {
             <div className="task-body">
               <div className="task-title-row">
                 <h3>{task.title}</h3>
-                <span className={`priority-tag priority-${task.priority.toLowerCase()}`}>
-                  {task.priority}
-                </span>
+                <span className={`pill pill-${task.priority.toLowerCase()}`}>{task.priority}</span>
               </div>
-              <p className="muted">
-                {[
-                  task.module,
-                  task.notes
-                ].filter(Boolean).join(' • ') || 'No module assigned'}
-              </p>
-              <span className={`task-due ${isOverdue(task) ? 'task-overdue' : ''}`}>
-                {formatDue(task.dueDate)}
-              </span>
+              <div className="meta-row">
+                {task.module && (
+                  <span className="meta">
+                    <span className="material-symbols-outlined">school</span>
+                    {task.module}
+                  </span>
+                )}
+                <span className={`meta ${isOverdue(task) ? 'meta-danger' : ''}`}>
+                  <span className="material-symbols-outlined">event</span>
+                  {formatDue(task.dueDate)}
+                </span>
+                {task.notes && (
+                  <span className="meta">
+                    <span className="material-symbols-outlined">sticky_note_2</span>
+                    {task.notes}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <div className="module-actions">
+            <div className="row-actions">
               <button
                 type="button"
                 className="icon-btn"
                 onClick={() => handleEdit(task)}
                 aria-label="Edit task"
               >
-                ✏️
+                <span className="material-symbols-outlined">edit</span>
               </button>
               <button
                 type="button"
-                className="icon-btn"
+                className="icon-btn icon-btn-danger"
                 onClick={() => handleDelete(task.id)}
                 aria-label="Delete task"
               >
-                🗑️
+                <span className="material-symbols-outlined">delete</span>
               </button>
             </div>
           </article>
@@ -271,21 +298,30 @@ function Tasks() {
       </div>
 
       {tasks.length === 0 && !showForm && (
-        <div className="empty-state air-card">
-          <p>No tasks yet — add one to start tracking your deadlines</p>
+        <div className="empty-state card">
+          <div className="empty-icon">
+            <span className="material-symbols-outlined">checklist</span>
+          </div>
+          <h3>No tasks yet</h3>
+          <p className="muted">Add one to start tracking your deadlines and assignments.</p>
           <button
             type="button"
-            className="primary-btn"
+            className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
+            <span className="material-symbols-outlined">add</span>
             Add Your First Task
           </button>
         </div>
       )}
 
       {tasks.length > 0 && visibleTasks.length === 0 && (
-        <div className="empty-state air-card">
-          <p>No {filter.toLowerCase()} tasks right now</p>
+        <div className="empty-state card">
+          <div className="empty-icon">
+            <span className="material-symbols-outlined">inbox</span>
+          </div>
+          <h3>Nothing here</h3>
+          <p className="muted">No {filter.toLowerCase()} tasks right now.</p>
         </div>
       )}
     </div>

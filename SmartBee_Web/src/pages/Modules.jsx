@@ -1,32 +1,33 @@
 import { useState } from 'react'
 import '../App.css'
 
+const emptyForm = {
+  code: '',
+  name: '',
+  credits: '',
+  semester: '',
+  instructor: ''
+}
+
 function Modules() {
   const [modules, setModules] = useState([])
-  
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    code: '',
-    name: '',
-    credits: '',
-    semester: '',
-    instructor: ''
-  })
+  const [formData, setFormData] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+
     if (editingId) {
-      setModules(modules.map(mod => 
+      setModules(modules.map(mod =>
         mod.id === editingId ? { ...formData, id: editingId } : mod
       ))
       setEditingId(null)
     } else {
       setModules([...modules, { ...formData, id: Date.now() }])
     }
-    
-    setFormData({ code: '', name: '', credits: '', semester: '', instructor: '' })
+
+    setFormData(emptyForm)
     setShowForm(false)
   }
 
@@ -43,29 +44,40 @@ function Modules() {
   }
 
   const handleCancel = () => {
-    setFormData({ code: '', name: '', credits: '', semester: '', instructor: '' })
+    setFormData(emptyForm)
     setEditingId(null)
     setShowForm(false)
   }
 
+  const totalCredits = modules.reduce((sum, mod) => sum + (Number(mod.credits) || 0), 0)
+
   return (
-    <div className="modules-page">
-      <div className="modules-header">
+    <div className="page">
+      <div className="page-header">
         <div>
           <h2>Campus Modules</h2>
           <p className="muted">Manage your academic modules and courses</p>
         </div>
-        <button 
-          type="button" 
-          className="primary-btn"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? 'Cancel' : '+ Add Module'}
-        </button>
+        <div className="header-tools">
+          {modules.length > 0 && (
+            <span className="pill pill-soft">
+              <span className="material-symbols-outlined">workspace_premium</span>
+              {totalCredits} credits
+            </span>
+          )}
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => (showForm ? handleCancel() : setShowForm(true))}
+          >
+            <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
+            {showForm ? 'Cancel' : 'Add Module'}
+          </button>
+        </div>
       </div>
 
       {showForm && (
-        <form className="module-form air-card" onSubmit={handleSubmit}>
+        <form className="page-form card" onSubmit={handleSubmit}>
           <h3>{editingId ? 'Edit Module' : 'Add New Module'}</h3>
           <div className="form-grid">
             <div className="form-field">
@@ -125,54 +137,66 @@ function Modules() {
             </div>
           </div>
           <div className="form-actions">
-            <button type="submit" className="primary-btn">
+            <button type="submit" className="btn btn-primary">
+              <span className="material-symbols-outlined">check</span>
               {editingId ? 'Update Module' : 'Add Module'}
             </button>
-            <button type="button" className="secondary-btn" onClick={handleCancel}>
+            <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
             </button>
           </div>
         </form>
       )}
 
-      <div className="modules-grid">
-        {modules.map((module) => (
-          <article key={module.id} className="module-card air-card">
-            <div className="module-header">
-              <div>
-                <span className="module-code">{module.code}</span>
+      <div className="card-grid">
+        {modules.map((module, index) => (
+          <article key={module.id} className={`card entity-card accent-${index % 4}`}>
+            <div className="entity-head">
+              <div className="entity-badge">{module.code.slice(0, 2).toUpperCase()}</div>
+              <div className="entity-title">
+                <span className="pill pill-soft">{module.code}</span>
                 <h3>{module.name}</h3>
               </div>
-              <div className="module-actions">
-                <button 
-                  type="button" 
+              <div className="row-actions">
+                <button
+                  type="button"
                   className="icon-btn"
                   onClick={() => handleEdit(module)}
                   aria-label="Edit module"
                 >
-                  ✏️
+                  <span className="material-symbols-outlined">edit</span>
                 </button>
-                <button 
-                  type="button" 
-                  className="icon-btn"
+                <button
+                  type="button"
+                  className="icon-btn icon-btn-danger"
                   onClick={() => handleDelete(module.id)}
                   aria-label="Delete module"
                 >
-                  🗑️
+                  <span className="material-symbols-outlined">delete</span>
                 </button>
               </div>
             </div>
-            <div className="module-details">
+
+            <div className="detail-list">
               <div className="detail-item">
-                <span className="detail-label">Credits:</span>
+                <span className="detail-label">
+                  <span className="material-symbols-outlined">workspace_premium</span>
+                  Credits
+                </span>
                 <span>{module.credits}</span>
               </div>
               <div className="detail-item">
-                <span className="detail-label">Semester:</span>
+                <span className="detail-label">
+                  <span className="material-symbols-outlined">calendar_today</span>
+                  Semester
+                </span>
                 <span>{module.semester}</span>
               </div>
               <div className="detail-item">
-                <span className="detail-label">Instructor:</span>
+                <span className="detail-label">
+                  <span className="material-symbols-outlined">person</span>
+                  Instructor
+                </span>
                 <span>{module.instructor}</span>
               </div>
             </div>
@@ -181,13 +205,18 @@ function Modules() {
       </div>
 
       {modules.length === 0 && !showForm && (
-        <div className="empty-state air-card">
-          <p>No modules added yet</p>
-          <button 
-            type="button" 
-            className="primary-btn"
+        <div className="empty-state card">
+          <div className="empty-icon">
+            <span className="material-symbols-outlined">school</span>
+          </div>
+          <h3>No modules yet</h3>
+          <p className="muted">Add your courses to track credits, instructors, and schedules.</p>
+          <button
+            type="button"
+            className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
+            <span className="material-symbols-outlined">add</span>
             Add Your First Module
           </button>
         </div>

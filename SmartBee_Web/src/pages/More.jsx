@@ -3,6 +3,12 @@ import '../App.css'
 
 const STATUSES = ['Present', 'Absent', 'Late']
 
+const STATUS_ICONS = {
+  Present: 'check_circle',
+  Absent: 'cancel',
+  Late: 'schedule'
+}
+
 const todayString = () => new Date().toISOString().slice(0, 10)
 
 function More() {
@@ -53,7 +59,7 @@ function More() {
   const sortedRecords = [...records].sort((a, b) => b.date.localeCompare(a.date))
 
   return (
-    <div className="modules-page">
+    <div className="page">
       <div className="page-header">
         <div>
           <h2>More</h2>
@@ -61,11 +67,18 @@ function More() {
         </div>
       </div>
 
-      <section className="more-section">
-        <h3>Attendance</h3>
-        <p className="muted">Mark your classes and keep an eye on your attendance rate</p>
+      <section className="section">
+        <div className="section-head">
+          <div className="section-icon">
+            <span className="material-symbols-outlined icon-fill">fact_check</span>
+          </div>
+          <div>
+            <h3>Attendance</h3>
+            <p className="muted">Mark your classes and keep an eye on your attendance rate</p>
+          </div>
+        </div>
 
-        <form className="page-form air-card attendance-form" onSubmit={handleSubmit}>
+        <form className="page-form card attendance-form" onSubmit={handleSubmit}>
           <div className="form-grid">
             <div className="form-field">
               <label htmlFor="module">Module</label>
@@ -99,43 +112,61 @@ function More() {
               </select>
             </div>
             <div className="form-field form-field-submit">
-              <button type="submit" className="primary-btn">Record</button>
+              <button type="submit" className="btn btn-primary">
+                <span className="material-symbols-outlined">add_task</span>
+                Record
+              </button>
             </div>
           </div>
         </form>
 
         {total > 0 ? (
           <>
-            <div className="task-summary">
-              <div className="summary-tile air-card">
-                <p className="section-label">Overall Rate</p>
+            <div className="stat-row">
+              <article className="stat-tile card tone-bee">
+                <span className="stat-icon material-symbols-outlined icon-fill">percent</span>
+                <p className="eyebrow">Overall Rate</p>
                 <h3>{overallRate}%</h3>
-              </div>
-              <div className="summary-tile air-card">
-                <p className="section-label">Classes Marked</p>
+                <div className="progress">
+                  <div className="progress-fill" style={{ width: `${overallRate}%` }} />
+                </div>
+              </article>
+              <article className="stat-tile card tone-info">
+                <span className="stat-icon material-symbols-outlined icon-fill">event_available</span>
+                <p className="eyebrow">Classes Marked</p>
                 <h3>{total}</h3>
-              </div>
-              <div className="summary-tile air-card">
-                <p className="section-label">Attended</p>
+                <p className="muted small">Across {byModule.length} module{byModule.length === 1 ? '' : 's'}</p>
+              </article>
+              <article className="stat-tile card tone-success">
+                <span className="stat-icon material-symbols-outlined icon-fill">how_to_reg</span>
+                <p className="eyebrow">Attended</p>
                 <h3>{presentCount}</h3>
-              </div>
+                <p className="muted small">Keep showing up</p>
+              </article>
             </div>
 
-            <div className="modules-grid">
-              {byModule.map(stat => (
-                <article key={stat.module} className="module-card air-card">
-                  <div className="module-header">
-                    <div>
-                      <span className="module-code">{stat.module}</span>
+            <div className="card-grid">
+              {byModule.map((stat, index) => (
+                <article key={stat.module} className={`card entity-card accent-${index % 4}`}>
+                  <div className="entity-head">
+                    <div className="entity-badge">{stat.module.slice(0, 2).toUpperCase()}</div>
+                    <div className="entity-title">
+                      <span className="pill pill-soft">{stat.module}</span>
                       <h3>{stat.rate}% attended</h3>
                     </div>
                   </div>
-                  <div className="rate-bar" role="img" aria-label={`${stat.rate} percent attendance`}>
-                    <div className="rate-fill" style={{ width: `${stat.rate}%` }} />
+                  <div className="progress">
+                    <div
+                      className={`progress-fill ${stat.rate < 75 ? 'progress-low' : ''}`}
+                      style={{ width: `${stat.rate}%` }}
+                    />
                   </div>
-                  <div className="module-details">
+                  <div className="detail-list">
                     <div className="detail-item">
-                      <span className="detail-label">Present:</span>
+                      <span className="detail-label">
+                        <span className="material-symbols-outlined">how_to_reg</span>
+                        Present
+                      </span>
                       <span>{stat.present} of {stat.total}</span>
                     </div>
                   </div>
@@ -143,23 +174,35 @@ function More() {
               ))}
             </div>
 
-            <div className="air-card record-list">
-              <p className="section-label">Recent Records</p>
+            <div className="card record-list">
+              <div className="card-head">
+                <div>
+                  <p className="eyebrow">History</p>
+                  <h3>Recent Records</h3>
+                </div>
+              </div>
               <ul>
                 {sortedRecords.map(record => (
                   <li key={record.id}>
-                    <span className="record-date">{record.date}</span>
-                    <p>{record.module}</p>
-                    <span className={`status-tag status-${record.status.toLowerCase()}`}>
+                    <span className={`status-icon status-${record.status.toLowerCase()}`}>
+                      <span className="material-symbols-outlined icon-fill">
+                        {STATUS_ICONS[record.status]}
+                      </span>
+                    </span>
+                    <div className="record-body">
+                      <p className="record-module">{record.module}</p>
+                      <p className="muted small">{record.date}</p>
+                    </div>
+                    <span className={`pill pill-${record.status.toLowerCase()}`}>
                       {record.status}
                     </span>
                     <button
                       type="button"
-                      className="icon-btn"
+                      className="icon-btn icon-btn-danger"
                       onClick={() => handleDelete(record.id)}
                       aria-label="Delete record"
                     >
-                      🗑️
+                      <span className="material-symbols-outlined">delete</span>
                     </button>
                   </li>
                 ))}
@@ -167,31 +210,59 @@ function More() {
             </div>
           </>
         ) : (
-          <div className="empty-state air-card">
-            <p>No attendance recorded yet — mark a class above to see your stats</p>
+          <div className="empty-state card">
+            <div className="empty-icon">
+              <span className="material-symbols-outlined">fact_check</span>
+            </div>
+            <h3>No attendance recorded</h3>
+            <p className="muted">Mark a class above to start seeing your stats.</p>
           </div>
         )}
       </section>
 
-      <section className="more-section">
-        <h3>About SmartBee</h3>
-        <p className="muted">
-          SmartBee is an open source platform that brings modules, planning, attendance,
-          and an AI study companion into one place. Contributions are welcome.
-        </p>
-        <div className="modules-grid">
-          <article className="module-card air-card">
-            <h3>Documentation</h3>
+      <section className="section">
+        <div className="section-head">
+          <div className="section-icon">
+            <span className="material-symbols-outlined icon-fill">info</span>
+          </div>
+          <div>
+            <h3>About SmartBee</h3>
             <p className="muted">
+              An open source platform bringing modules, planning, attendance, and an AI
+              study companion into one place.
+            </p>
+          </div>
+        </div>
+
+        <div className="card-grid">
+          <article className="card info-card">
+            <div className="info-icon">
+              <span className="material-symbols-outlined">menu_book</span>
+            </div>
+            <h3>Documentation</h3>
+            <p className="muted small">
               API reference and interactive docs are served by the backend at
               <code> /api/docs</code> when it is running locally.
             </p>
           </article>
-          <article className="module-card air-card">
+          <article className="card info-card">
+            <div className="info-icon">
+              <span className="material-symbols-outlined">code</span>
+            </div>
             <h3>Contributing</h3>
-            <p className="muted">
+            <p className="muted small">
               Fork the repository, branch from <code>main</code>, and keep pull requests
               focused. See the root README for the full guide.
+            </p>
+          </article>
+          <article className="card info-card">
+            <div className="info-icon">
+              <span className="material-symbols-outlined">favorite</span>
+            </div>
+            <h3>Open Source</h3>
+            <p className="muted small">
+              Contributions are welcome — fix bugs, improve docs, add features, or just
+              share feedback.
             </p>
           </article>
         </div>

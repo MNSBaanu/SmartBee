@@ -4,6 +4,13 @@ import '../App.css'
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 const TYPES = ['Lecture', 'Lab', 'Tutorial', 'Seminar']
 
+const TYPE_ICONS = {
+  Lecture: 'co_present',
+  Lab: 'science',
+  Tutorial: 'groups',
+  Seminar: 'record_voice_over'
+}
+
 const emptyForm = {
   day: 'Monday',
   title: '',
@@ -57,71 +64,82 @@ function Schedule() {
 
   const sortByTime = (a, b) => a.start.localeCompare(b.start)
 
-  const renderEntry = (entry) => (
-    <article key={entry.id} className="class-block">
+  const renderEntry = (entry, index) => (
+    <article key={entry.id} className={`class-block accent-${index % 4}`}>
       <div className="class-block-head">
-        <span className="class-time">{entry.start} – {entry.end}</span>
-        <div className="module-actions">
+        <span className="class-time">
+          <span className="material-symbols-outlined">schedule</span>
+          {entry.start} – {entry.end}
+        </span>
+        <div className="row-actions">
           <button
             type="button"
-            className="icon-btn"
+            className="icon-btn icon-btn-sm"
             onClick={() => handleEdit(entry)}
             aria-label="Edit class"
           >
-            ✏️
+            <span className="material-symbols-outlined">edit</span>
           </button>
           <button
             type="button"
-            className="icon-btn"
+            className="icon-btn icon-btn-sm icon-btn-danger"
             onClick={() => handleDelete(entry.id)}
             aria-label="Remove class"
           >
-            🗑️
+            <span className="material-symbols-outlined">delete</span>
           </button>
         </div>
       </div>
       <h4>{entry.title}</h4>
-      <p className="muted">{[entry.code, entry.room].filter(Boolean).join(' • ')}</p>
-      <span className="class-tag">{entry.type}</span>
+      {(entry.code || entry.room) && (
+        <p className="muted small">{[entry.code, entry.room].filter(Boolean).join(' • ')}</p>
+      )}
+      <span className="pill pill-soft">
+        <span className="material-symbols-outlined">{TYPE_ICONS[entry.type]}</span>
+        {entry.type}
+      </span>
     </article>
   )
 
   return (
-    <div className="modules-page">
+    <div className="page">
       <div className="page-header">
         <div>
           <h2>Weekly Schedule</h2>
           <p className="muted">Plan your classes, labs, and tutorials</p>
         </div>
         <div className="header-tools">
-          <div className="view-toggle" role="group" aria-label="Schedule view">
+          <div className="segmented" role="group" aria-label="Schedule view">
             <button
               type="button"
-              className={`toggle-chip ${view === 'grid' ? 'toggle-chip-active' : ''}`}
+              className={`seg ${view === 'grid' ? 'seg-active' : ''}`}
               onClick={() => setView('grid')}
             >
+              <span className="material-symbols-outlined">grid_view</span>
               Grid
             </button>
             <button
               type="button"
-              className={`toggle-chip ${view === 'list' ? 'toggle-chip-active' : ''}`}
+              className={`seg ${view === 'list' ? 'seg-active' : ''}`}
               onClick={() => setView('list')}
             >
+              <span className="material-symbols-outlined">view_agenda</span>
               List
             </button>
           </div>
           <button
             type="button"
-            className="primary-btn"
+            className="btn btn-primary"
             onClick={() => (showForm ? handleCancel() : setShowForm(true))}
           >
-            {showForm ? 'Cancel' : '+ Add Class'}
+            <span className="material-symbols-outlined">{showForm ? 'close' : 'add'}</span>
+            {showForm ? 'Cancel' : 'Add Class'}
           </button>
         </div>
       </div>
 
       {showForm && (
-        <form className="page-form air-card" onSubmit={handleSubmit}>
+        <form className="page-form card" onSubmit={handleSubmit}>
           <h3>{editingId ? 'Edit Class' : 'Add New Class'}</h3>
           <div className="form-grid">
             <div className="form-field">
@@ -197,10 +215,11 @@ function Schedule() {
             </div>
           </div>
           <div className="form-actions">
-            <button type="submit" className="primary-btn">
+            <button type="submit" className="btn btn-primary">
+              <span className="material-symbols-outlined">check</span>
               {editingId ? 'Update Class' : 'Add Class'}
             </button>
-            <button type="button" className="secondary-btn" onClick={handleCancel}>
+            <button type="button" className="btn btn-ghost" onClick={handleCancel}>
               Cancel
             </button>
           </div>
@@ -212,13 +231,15 @@ function Schedule() {
           {DAYS.map(day => {
             const dayEntries = entries.filter(entry => entry.day === day).sort(sortByTime)
             return (
-              <section key={day} className="day-column air-card">
+              <section key={day} className="day-column card">
                 <div className="day-head">
-                  <p className="section-label">{day.slice(0, 3)}</p>
-                  <span className="day-count">{dayEntries.length}</span>
+                  <p className="eyebrow">{day.slice(0, 3)}</p>
+                  <span className={`day-count ${dayEntries.length ? 'day-count-on' : ''}`}>
+                    {dayEntries.length}
+                  </span>
                 </div>
                 {dayEntries.length === 0
-                  ? <p className="muted day-empty">No classes</p>
+                  ? <p className="muted small day-empty">Free day</p>
                   : dayEntries.map(renderEntry)}
               </section>
             )
@@ -232,8 +253,11 @@ function Schedule() {
             const dayEntries = entries.filter(entry => entry.day === day).sort(sortByTime)
             if (dayEntries.length === 0) return null
             return (
-              <section key={day} className="list-day air-card">
-                <h3>{day}</h3>
+              <section key={day} className="card list-day">
+                <div className="card-head">
+                  <h3>{day}</h3>
+                  <span className="pill pill-soft">{dayEntries.length} scheduled</span>
+                </div>
                 <div className="list-day-entries">
                   {dayEntries.map(renderEntry)}
                 </div>
@@ -244,20 +268,25 @@ function Schedule() {
       )}
 
       {entries.length === 0 && !showForm && (
-        <div className="empty-state air-card">
-          <p>Your week is empty — add your first class to build a schedule</p>
+        <div className="empty-state card">
+          <div className="empty-icon">
+            <span className="material-symbols-outlined">calendar_month</span>
+          </div>
+          <h3>Your week is empty</h3>
+          <p className="muted">Add your first class to start building a weekly schedule.</p>
           <button
             type="button"
-            className="primary-btn"
+            className="btn btn-primary"
             onClick={() => setShowForm(true)}
           >
+            <span className="material-symbols-outlined">add</span>
             Add Your First Class
           </button>
         </div>
       )}
 
       {entries.length > 0 && (
-        <p className="muted schedule-footnote">
+        <p className="muted small page-footnote">
           {entries.length} {entries.length === 1 ? 'class' : 'classes'} scheduled this week
         </p>
       )}
