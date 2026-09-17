@@ -8,11 +8,11 @@ import Tasks from './pages/Tasks'
 import More from './pages/More'
 
 const NAV_ITEMS = [
-  { path: '/', label: 'Dashboard', icon: 'space_dashboard', title: 'Dashboard' },
-  { path: '/modules', label: 'Modules', icon: 'school', title: 'Campus Modules' },
-  { path: '/schedule', label: 'Schedule', icon: 'calendar_month', title: 'Weekly Schedule' },
-  { path: '/tasks', label: 'Tasks', icon: 'checklist', title: 'Tasks' },
-  { path: '/more', label: 'More', icon: 'tune', title: 'More' }
+  { path: '/', label: 'Dashboard', icon: 'space_dashboard' },
+  { path: '/modules', label: 'Modules', icon: 'school' },
+  { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
+  { path: '/tasks', label: 'Tasks', icon: 'checklist' },
+  { path: '/more', label: 'More', icon: 'tune' }
 ]
 
 function Sidebar({ open, onClose }) {
@@ -66,11 +66,6 @@ function Sidebar({ open, onClose }) {
 }
 
 function Topbar({ onMenu }) {
-  const location = useLocation()
-  const current = NAV_ITEMS.find(item =>
-    item.path === '/' ? location.pathname === '/' : location.pathname.startsWith(item.path)
-  )
-
   return (
     <header className="topbar">
       <button
@@ -81,11 +76,6 @@ function Topbar({ onMenu }) {
       >
         <span className="material-symbols-outlined">menu</span>
       </button>
-
-      <div className="topbar-title">
-        <p className="eyebrow">SmartBee</p>
-        <h1>{current?.title ?? 'SmartBee'}</h1>
-      </div>
 
       <div className="topbar-search">
         <span className="material-symbols-outlined">search</span>

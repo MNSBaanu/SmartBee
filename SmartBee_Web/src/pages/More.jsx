@@ -219,54 +219,6 @@ function More() {
           </div>
         )}
       </section>
-
-      <section className="section">
-        <div className="section-head">
-          <div className="section-icon">
-            <span className="material-symbols-outlined icon-fill">info</span>
-          </div>
-          <div>
-            <h3>About SmartBee</h3>
-            <p className="muted">
-              An open source platform bringing modules, planning, attendance, and an AI
-              study companion into one place.
-            </p>
-          </div>
-        </div>
-
-        <div className="card-grid">
-          <article className="card info-card">
-            <div className="info-icon">
-              <span className="material-symbols-outlined">menu_book</span>
-            </div>
-            <h3>Documentation</h3>
-            <p className="muted small">
-              API reference and interactive docs are served by the backend at
-              <code> /api/docs</code> when it is running locally.
-            </p>
-          </article>
-          <article className="card info-card">
-            <div className="info-icon">
-              <span className="material-symbols-outlined">code</span>
-            </div>
-            <h3>Contributing</h3>
-            <p className="muted small">
-              Fork the repository, branch from <code>main</code>, and keep pull requests
-              focused. See the root README for the full guide.
-            </p>
-          </article>
-          <article className="card info-card">
-            <div className="info-icon">
-              <span className="material-symbols-outlined">favorite</span>
-            </div>
-            <h3>Open Source</h3>
-            <p className="muted small">
-              Contributions are welcome — fix bugs, improve docs, add features, or just
-              share feedback.
-            </p>
-          </article>
-        </div>
-      </section>
     </div>
   )
 }

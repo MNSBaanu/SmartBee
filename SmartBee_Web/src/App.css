@@ -168,7 +168,8 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
   padding: 0.85rem 2rem;
@@ -179,11 +180,8 @@
 
 .icon-btn.menu-btn {
   display: none;
-}
-
-.topbar-title h1 {
-  font-size: 1.15rem;
-  font-weight: 700;
+  grid-column: 1;
+  justify-self: start;
 }
 
 .eyebrow {
@@ -195,9 +193,8 @@
 }
 
 .topbar-search {
-  flex: 1;
-  max-width: 420px;
-  margin-left: auto;
+  grid-column: 2;
+  width: clamp(200px, 32vw, 420px);
   display: flex;
   align-items: center;
   gap: 0.55rem;
@@ -232,8 +229,10 @@
 }
 
 .topbar-actions {
+  grid-column: 3;
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 0.6rem;
 }
 
@@ -1490,41 +1489,6 @@
   font-weight: 700;
 }
 
-.info-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--sh-2);
-}
-
-.info-card h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.35rem;
-}
-
-.info-icon {
-  display: grid;
-  place-items: center;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: var(--r-md);
-  background: var(--bee-tint);
-  color: var(--bee-600);
-  margin-bottom: 0.85rem;
-}
-
-code {
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 0.05rem 0.35rem;
-  font-size: 0.85em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
 /* ==========================================================================
    Responsive
    ========================================================================== */
@@ -1569,6 +1533,11 @@ code {
 }
 
 @media (max-width: 860px) {
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .topbar-search {
     display: none;
   }
@@ -1611,10 +1580,6 @@ code {
 
   .topbar {
     padding: 0.75rem 1rem;
-  }
-
-  .topbar-title h1 {
-    font-size: 1rem;
   }
 
   .btn-bee .btn-text,
