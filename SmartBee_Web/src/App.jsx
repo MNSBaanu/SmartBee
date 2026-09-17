@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import './App.css'
 import Home from './pages/Home'
 import Modules from './pages/Modules'
+import Schedule from './pages/Schedule'
+import Tasks from './pages/Tasks'
+import More from './pages/More'
 
 function Navigation() {
   const location = useLocation()
@@ -68,9 +71,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/modules" element={<Modules />} />
-          <Route path="/schedule" element={<div className="coming-soon">Schedule - Coming Soon</div>} />
-          <Route path="/tasks" element={<div className="coming-soon">Tasks - Coming Soon</div>} />
-          <Route path="/more" element={<div className="coming-soon">More - Coming Soon</div>} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/more" element={<More />} />
         </Routes>
       </div>
     </BrowserRouter>
