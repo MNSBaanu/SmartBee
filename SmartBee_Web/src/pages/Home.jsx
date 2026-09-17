@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../App.css'
 
 const STATS = [
@@ -56,10 +57,10 @@ function Home() {
               <span className="material-symbols-outlined">event_note</span>
               Open My Planner
             </button>
-            <button type="button" className="btn btn-ghost">
+            <Link to="/focus" className="btn btn-ghost">
               <span className="material-symbols-outlined">timer</span>
               Start Focus Session
-            </button>
+            </Link>
           </div>
         </div>
 

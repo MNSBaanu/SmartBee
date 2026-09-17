@@ -1624,6 +1624,267 @@
 }
 
 /* ==========================================================================
+   Focus sessions
+   ========================================================================== */
+.wall-clock {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+}
+
+.wall-clock .material-symbols-outlined {
+  font-size: 1.5rem;
+  color: var(--bee-600);
+}
+
+.wall-time {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.session-types {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.session-type {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.session-type:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-2);
+}
+
+.session-type h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.session-type .pill {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.session-icon {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  clip-path: var(--hex);
+  background: var(--surface-2);
+  color: var(--ink-3);
+  font-size: 1.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.session-type-active {
+  border-color: var(--bee-400);
+  background: var(--bee-tint);
+  box-shadow: 0 0 0 3px var(--bee-soft);
+}
+
+.session-type-active .session-icon {
+  background: var(--bee-500);
+  color: #fff;
+}
+
+.focus-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.timer-card {
+  grid-column: span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-card .card-head {
+  width: 100%;
+}
+
+.timer-ring {
+  position: relative;
+  width: 17rem;
+  height: 17rem;
+  max-width: 100%;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    var(--ring-color, var(--bee-500)) 0 var(--progress, 0%),
+    var(--surface-2) var(--progress, 0%) 100%
+  );
+  box-shadow: var(--sh-2);
+  margin: 0.5rem 0 1.25rem;
+}
+
+.phase-rest .timer-ring {
+  --ring-color: #38bdf8;
+}
+
+.timer-face {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: calc(100% - 1.75rem);
+  height: calc(100% - 1.75rem);
+  border-radius: 50%;
+  background: var(--surface);
+}
+
+.timer-display {
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.round-dots {
+  display: flex;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+}
+
+.round-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  clip-path: var(--hex);
+  background: var(--line-strong);
+}
+
+.round-dot-done {
+  background: var(--bee-500);
+}
+
+.round-dot-current {
+  background: var(--bee-600);
+  transform: scale(1.35);
+}
+
+.timer-controls {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.subject-field {
+  width: 100%;
+  max-width: 24rem;
+}
+
+.focus-side {
+  grid-column: span 5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.focus-stats {
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 0;
+}
+
+.session-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.session-log li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.session-log li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.log-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  clip-path: var(--hex);
+  flex-shrink: 0;
+  background: var(--success-bg);
+  color: var(--success);
+}
+
+.log-icon .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+
+.log-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.log-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1180px) {
+  .session-types {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timer-card,
+  .focus-side {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 720px) {
+  .session-types,
+  .focus-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .timer-ring {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .timer-display {
+    font-size: 2.75rem;
+  }
+
+  .wall-clock {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
    Friends
    ========================================================================== */
 .search-field {
