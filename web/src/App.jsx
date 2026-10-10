@@ -8,6 +8,8 @@ import Tasks from './pages/Tasks'
 import More from './pages/More'
 import Friends from './pages/Friends'
 import Focus from './pages/Focus'
+import Login from './pages/Login'
+import { AuthProvider, useAuth } from './auth'
 
 const NAV_ITEMS = [
   { path: '/', label: 'Dashboard', icon: 'hive' },
@@ -86,6 +88,7 @@ function Sidebar({ open, onClose, collapsed, onToggle }) {
 }
 
 function Topbar({ onMenu }) {
+  const { user, logout } = useAuth()
   return (
     <header className="topbar">
       <button
@@ -111,7 +114,12 @@ function Topbar({ onMenu }) {
           <img src="/SmartBee.png" alt="" className="bee-icon" />
           <span>Bee AI</span>
         </button>
-        <div className="avatar" aria-hidden="true">B</div>
+        <div className="avatar" title={user?.name} aria-hidden="true">
+          {(user?.name || 'B').charAt(0).toUpperCase()}
+        </div>
+        <button type="button" className="icon-btn" onClick={logout} aria-label="Log out">
+          <span className="material-symbols-outlined">logout</span>
+        </button>
       </div>
     </header>
   )
@@ -152,11 +160,22 @@ function Shell() {
   )
 }
 
-function App() {
+function Gate() {
+  const { user, loading } = useAuth()
+  if (loading) return null
+  if (!user) return <Login />
   return (
     <BrowserRouter>
       <Shell />
     </BrowserRouter>
+  )
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <Gate />
+    </AuthProvider>
   )
 }
 

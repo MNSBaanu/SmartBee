@@ -2018,3 +2018,33 @@
     padding: 0.6rem 0;
   }
 }
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-input {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
+  color: var(--ink);
+  font: inherit;
+}
+
+.auth-error {
+  color: #b91c1c;
+  font-size: 0.875rem;
+}
