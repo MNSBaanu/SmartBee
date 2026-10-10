@@ -92,7 +92,7 @@ Protected routes require header: `Authorization: Bearer <token>`
 
 ### Installation
 ```bash
-cd SmartBee_API
+cd api
 
 npm install
 
@@ -125,7 +125,7 @@ AI_API_KEY=your-ai-key
 ## Project Structure
 
 ```
-SmartBee_API/
+api/
 ├── src/
 │   ├── controllers/
 │   ├── models/

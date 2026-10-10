@@ -56,7 +56,7 @@ npx expo start --web
 ## Project Structure
 
 ```
-SmartBee_App/
+app/
 ├── app/
 │   ├── (tabs)/              # Tab-based navigation
 │   │   ├── index.tsx        # Home screen

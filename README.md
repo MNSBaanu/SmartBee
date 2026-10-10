@@ -12,27 +12,27 @@ SmartBee brings together essential campus management tools in one place, helping
 
 ```text
 SmartBee/
-  SmartBee_API/   # Backend API service
-  SmartBee_App/   # Mobile app (React Native + Expo)
-  SmartBee_Web/   # Web application (React + Vite)
+  api/   # Backend API service
+  app/   # Mobile app (React Native + Expo)
+  web/   # Web application (React + Vite)
   supabase/       # Database migrations and schema
   README.md
 ```
 
 ## Modules
 
-### SmartBee_Web
+### web
 Frontend web application providing a responsive interface for campus management.
 
 - Framework: React 18
 - Build Tool: Vite
 - Features: Module management, daily planner, attendance tracking, virtual assistant
-- Location: `SmartBee_Web/`
+- Location: `web/`
 
-### SmartBee_App
+### app
 Cross-platform mobile application for iOS and Android with native mobile experience.
 
-### SmartBee_API
+### api
 Backend API service providing data management and business logic.
 
 ### Supabase
@@ -59,21 +59,21 @@ Database layer with PostgreSQL for data persistence and real-time features.
 
 ### Web Application
 ```bash
-cd SmartBee_Web
+cd web
 npm install
 npm run dev
 ```
 
 ### Mobile Application
 ```bash
-cd SmartBee_App
+cd app
 npm install
 npx expo start
 ```
 
 ### Backend API
 ```bash
-cd SmartBee_API
+cd api
 npm install
 cp .env.example .env
 npm run dev
@@ -91,7 +91,7 @@ SmartBee is open source and **contributions are welcome** from everyone.
 
 1. Fork the repository and create a branch from `main`
 2. Follow existing code style and patterns in the module you’re changing
-3. Add or update tests where applicable (especially for `SmartBee_API`)
+3. Add or update tests where applicable (especially for `api`)
 4. Keep pull requests focused and describe what changed and why
 
 Questions or ideas? Open an issue — we’re happy to help you get started.

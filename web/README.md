@@ -50,7 +50,7 @@ The app will be available at `http://localhost:5173`
 ## Project Structure
 
 ```
-SmartBee_Web/
+web/
 ├── public/              # Static assets
 │   └── SmartBee.png    # Logo and favicon
 ├── src/
