@@ -11,6 +11,9 @@ const config = {
     apiKey: process.env.AI_API_KEY,
   },
   databaseUrl: process.env.DATABASE_URL,
+  corsOrigins: process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',').map((o) => o.trim())
+    : true,
 };
 
 module.exports = config;
