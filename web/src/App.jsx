@@ -16,8 +16,6 @@ const NAV_ITEMS = [
   { path: '/modules', label: 'Modules', icon: 'school' },
   { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
   { path: '/tasks', label: 'Tasks', icon: 'checklist' },
-  { path: '/focus', label: 'Focus', icon: 'timer' },
-  { path: '/friends', label: 'Friends', icon: 'group' },
   { path: '/more', label: 'More', icon: 'tune' }
 ]
 
