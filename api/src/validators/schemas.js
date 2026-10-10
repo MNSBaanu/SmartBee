@@ -50,6 +50,23 @@ const taskUpdateSchema = z.object({
   body: taskSchema.shape.body.partial(),
 });
 
+const scheduleSchema = z.object({
+  body: z.object({
+    day: z.enum(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+    title: z.string().min(1).max(200),
+    code: z.string().max(50).optional().default(''),
+    start: z.string().min(1).max(10),
+    end: z.string().min(1).max(10),
+    room: z.string().max(100).optional().default(''),
+    type: z.enum(['Lecture', 'Lab', 'Tutorial', 'Seminar']),
+  }),
+});
+
+const scheduleUpdateSchema = z.object({
+  params: z.object({ id: z.coerce.number().int().positive() }),
+  body: scheduleSchema.shape.body.partial(),
+});
+
 const attendanceSchema = z.object({
   body: z.object({
     moduleId: z.number().int().positive(),
@@ -93,6 +110,8 @@ module.exports = {
   moduleUpdateSchema,
   taskSchema,
   taskUpdateSchema,
+  scheduleSchema,
+  scheduleUpdateSchema,
   attendanceSchema,
   attendanceQuerySchema,
   chatSchema,

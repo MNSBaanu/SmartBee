@@ -56,3 +56,16 @@ CREATE TABLE IF NOT EXISTS daily_plans (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   UNIQUE (user_id, date)
 );
+
+CREATE TABLE IF NOT EXISTS schedule_entries (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  day TEXT NOT NULL,
+  title TEXT NOT NULL,
+  code TEXT NOT NULL DEFAULT '',
+  start_time TEXT NOT NULL,
+  end_time TEXT NOT NULL,
+  room TEXT NOT NULL DEFAULT '',
+  type TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS schedule_user_idx ON schedule_entries(user_id);

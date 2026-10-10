@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { api } from '../api'
 import '../App.css'
 
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -28,20 +29,28 @@ function Schedule() {
   const [editingId, setEditingId] = useState(null)
   const [view, setView] = useState('grid')
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    api.get('/schedule').then(setEntries).catch(err => alert(err.message))
+  }, [])
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const { id, ...body } = formData
 
-    if (editingId) {
-      setEntries(entries.map(entry =>
-        entry.id === editingId ? { ...formData, id: editingId } : entry
-      ))
-      setEditingId(null)
-    } else {
-      setEntries([...entries, { ...formData, id: Date.now() }])
+    try {
+      if (editingId) {
+        const updated = await api.put(`/schedule/${editingId}`, body)
+        setEntries(entries.map(entry => (entry.id === editingId ? updated : entry)))
+        setEditingId(null)
+      } else {
+        const created = await api.post('/schedule', body)
+        setEntries([...entries, created])
+      }
+      setFormData(emptyForm)
+      setShowForm(false)
+    } catch (err) {
+      alert(err.message)
     }
-
-    setFormData(emptyForm)
-    setShowForm(false)
   }
 
   const handleEdit = (entry) => {
@@ -50,9 +59,13 @@ function Schedule() {
     setShowForm(true)
   }
 
-  const handleDelete = (id) => {
-    if (confirm('Remove this class from your schedule?')) {
+  const handleDelete = async (id) => {
+    if (!confirm('Remove this class from your schedule?')) return
+    try {
+      await api.del(`/schedule/${id}`)
       setEntries(entries.filter(entry => entry.id !== id))
+    } catch (err) {
+      alert(err.message)
     }
   }
 

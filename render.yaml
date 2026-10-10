@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     rootDir: api
-    buildCommand: npm ci
+    buildCommand: npm ci && npm run migrate
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

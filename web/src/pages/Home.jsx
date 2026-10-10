@@ -1,44 +1,41 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { api } from '../api'
+import { useAuth } from '../auth'
 import '../App.css'
 
-const STATS = [
-  {
-    label: 'Attendance',
-    value: '89%',
-    hint: '3 more classes this week',
-    icon: 'fact_check',
-    tone: 'success'
-  },
-  {
-    label: 'Classes Today',
-    value: '2',
-    hint: 'Next one in 45 mins',
-    icon: 'school',
-    tone: 'info'
-  },
-  {
-    label: 'Due Today',
-    value: '1',
-    hint: 'AI Mini Project',
-    icon: 'assignment_late',
-    tone: 'danger'
-  },
-  {
-    label: 'Focus Streak',
-    value: '4d',
-    hint: 'Keep the momentum going',
-    icon: 'local_fire_department',
-    tone: 'bee'
-  }
-]
-
-const UPCOMING = [
-  { time: '10:00', meridiem: 'AM', title: 'DBMS Lab', detail: 'Lab 3 • Practical', icon: 'science' },
-  { time: '01:30', meridiem: 'PM', title: 'Library Book Return', detail: 'Reminder', icon: 'menu_book' },
-  { time: '04:00', meridiem: 'PM', title: 'Coding Club Meetup', detail: 'Auditorium', icon: 'groups' }
-]
+const day = d => (d || '').slice(0, 10)
+const fmtDate = d => new Date(`${day(d)}T00:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
 
 function Home() {
+  const { user } = useAuth()
+  const [tasks, setTasks] = useState([])
+  const [modules, setModules] = useState([])
+
+  useEffect(() => {
+    api.get('/tasks').then(setTasks).catch(() => {})
+    api.get('/modules').then(setModules).catch(() => {})
+  }, [])
+
+  const today = new Date().toLocaleDateString('en-CA')
+  const active = tasks.filter(t => !t.completed)
+  const dueToday = active.filter(t => day(t.dueDate) === today)
+  const overdue = active.filter(t => day(t.dueDate) && day(t.dueDate) < today)
+  const upcoming = active
+    .filter(t => day(t.dueDate) >= today)
+    .sort((a, b) => day(a.dueDate).localeCompare(day(b.dueDate)))
+  const nearest = upcoming[0]
+  const progress = tasks.length ? Math.round(((tasks.length - active.length) / tasks.length) * 100) : 0
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+
+  const stats = [
+    { label: 'Modules', value: modules.length, hint: 'Courses you are tracking', icon: 'school', tone: 'info' },
+    { label: 'Active Tasks', value: active.length, hint: `${tasks.length - active.length} completed`, icon: 'fact_check', tone: 'success' },
+    { label: 'Due Today', value: dueToday.length, hint: dueToday[0]?.title || 'Nothing due today', icon: 'assignment_late', tone: 'danger' },
+    { label: 'Overdue', value: overdue.length, hint: overdue.length ? 'Catch up when you can' : 'You are on track', icon: 'local_fire_department', tone: 'bee' }
+  ]
+
   return (
     <div className="dash">
       <section className="hero">
@@ -47,27 +44,26 @@ function Home() {
             <span className="material-symbols-outlined icon-fill">wb_sunny</span>
             Today in the hive
           </span>
-          <h2>Good morning, Baanu</h2>
+          <h2>{greeting}, {user?.name}</h2>
           <p className="muted">
-            You have <strong>2 classes</strong>, <strong>1 assignment</strong> due, and a
-            club event at 4:00 PM. Bee has already mapped the shortest route.
+            You have <strong>{active.length} active {active.length === 1 ? 'task' : 'tasks'}</strong>, <strong>{dueToday.length}</strong> due today.
           </p>
           <div className="hero-actions">
             <button type="button" className="btn btn-primary">
               <span className="material-symbols-outlined">event_note</span>
               Open My Planner
             </button>
-            <Link to="/focus" className="btn btn-ghost">
-              <span className="material-symbols-outlined">timer</span>
-              Start Focus Session
+            <Link to="/tasks" className="btn btn-ghost">
+              <span className="material-symbols-outlined">checklist</span>
+              View Tasks
             </Link>
           </div>
         </div>
 
         <div className="hero-ring" aria-hidden="true">
           <div className="ring">
-            <span className="ring-value">68%</span>
-            <span className="ring-label">Day done</span>
+            <span className="ring-value">{progress}%</span>
+            <span className="ring-label">Tasks done</span>
           </div>
         </div>
       </section>
@@ -92,7 +88,7 @@ function Home() {
       </section>
 
       <section className="stat-row">
-        {STATS.map(stat => (
+        {stats.map(stat => (
           <article key={stat.label} className={`stat-tile card tone-${stat.tone}`}>
             <span className="stat-icon material-symbols-outlined icon-fill">{stat.icon}</span>
             <p className="eyebrow">{stat.label}</p>
@@ -103,50 +99,22 @@ function Home() {
       </section>
 
       <div className="dash-grid">
-        <section className="card next-class">
-          <div className="card-head">
-            <div>
-              <p className="eyebrow">Up next</p>
-              <h3>Operating Systems</h3>
-            </div>
-            <span className="pill pill-info">In 45 mins</span>
-          </div>
-          <div className="meta-row">
-            <span className="meta">
-              <span className="material-symbols-outlined">location_on</span>
-              Room B-204
-            </span>
-            <span className="meta">
-              <span className="material-symbols-outlined">person</span>
-              Dr. Smith
-            </span>
-            <span className="meta">
-              <span className="material-symbols-outlined">schedule</span>
-              09:00 – 10:30
-            </span>
-          </div>
-          <div className="progress">
-            <div className="progress-fill" style={{ width: '35%' }} />
-          </div>
-          <p className="muted small">Module progress • 35% of syllabus covered</p>
-        </section>
-
         <section className="card deadline-card">
           <div className="card-head">
             <div>
               <p className="eyebrow">Nearest deadline</p>
-              <h3>AI Mini Project</h3>
+              <h3>{nearest ? nearest.title : 'All clear'}</h3>
             </div>
-            <span className="pill pill-danger">Due 11:59 PM</span>
+            {nearest && <span className="pill pill-danger">Due {fmtDate(nearest.dueDate)}</span>}
           </div>
           <p className="muted">
-            Submission closes tonight. Bee suggests finishing the evaluation section first.
+            {nearest ? nearest.description || 'Stay on top of it and tick it off.' : 'No upcoming deadlines.'}
           </p>
           <div className="hero-actions">
-            <button type="button" className="btn btn-soft">
-              <span className="material-symbols-outlined">splitscreen</span>
-              Break into steps
-            </button>
+            <Link to="/tasks" className="btn btn-soft">
+              <span className="material-symbols-outlined">checklist</span>
+              Open tasks
+            </Link>
           </div>
         </section>
 
@@ -182,29 +150,32 @@ function Home() {
           <div className="card-head">
             <div>
               <p className="eyebrow">Upcoming</p>
-              <h3>Rest of your day</h3>
+              <h3>Next deadlines</h3>
             </div>
           </div>
-          <ul className="timeline">
-            {UPCOMING.map(item => (
-              <li key={item.title}>
-                <div className="timeline-time">
-                  <strong>{item.time}</strong>
-                  <span>{item.meridiem}</span>
-                </div>
-                <span className="timeline-dot" aria-hidden="true" />
-                <div className="timeline-body">
-                  <div className="timeline-icon">
-                    <span className="material-symbols-outlined">{item.icon}</span>
+          {upcoming.length === 0 ? (
+            <p className="muted">No upcoming tasks. Add one from the Tasks page.</p>
+          ) : (
+            <ul className="timeline">
+              {upcoming.slice(0, 4).map(item => (
+                <li key={item.id}>
+                  <div className="timeline-time">
+                    <strong>{fmtDate(item.dueDate)}</strong>
                   </div>
-                  <div>
-                    <p className="timeline-title">{item.title}</p>
-                    <p className="muted small">{item.detail}</p>
+                  <span className="timeline-dot" aria-hidden="true" />
+                  <div className="timeline-body">
+                    <div className="timeline-icon">
+                      <span className="material-symbols-outlined">assignment</span>
+                    </div>
+                    <div>
+                      <p className="timeline-title">{item.title}</p>
+                      <p className="muted small">{item.category} • {item.priority}</p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </div>
     </div>

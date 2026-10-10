@@ -2,6 +2,7 @@ const { Router } = require('express');
 const authRoutes = require('./authRoutes');
 const moduleRoutes = require('./moduleRoutes');
 const taskRoutes = require('./taskRoutes');
+const scheduleRoutes = require('./scheduleRoutes');
 const attendanceRoutes = require('./attendanceRoutes');
 const chatRoutes = require('./chatRoutes');
 const plannerRoutes = require('./plannerRoutes');
@@ -28,6 +29,7 @@ router.get('/health', async (_req, res) => {
 router.use('/auth', authRoutes);
 router.use('/modules', moduleRoutes);
 router.use('/tasks', taskRoutes);
+router.use('/schedule', scheduleRoutes);
 router.use('/attendance', attendanceRoutes);
 router.use('/chat', chatRoutes);
 router.use('/planner', plannerRoutes);
