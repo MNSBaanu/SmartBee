@@ -104,6 +104,16 @@ function Topbar({ onMenu }) {
       </div>
 
       <div className="topbar-actions">
+        <a
+          className="icon-btn"
+          href={import.meta.env.VITE_APP_DOWNLOAD_URL || '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download the app"
+          title="Download the app"
+        >
+          <span className="material-symbols-outlined">download</span>
+        </a>
         <button type="button" className="icon-btn" aria-label="Notifications">
           <span className="material-symbols-outlined">notifications</span>
           <span className="dot" />
