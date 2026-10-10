@@ -1,13 +1,13 @@
-/**
- * Placeholder migration script.
- * Add SQL migrations under ../supabase/migrations when PostgreSQL is configured.
- */
-const { isSupabaseConfigured } = require('../src/config/database');
+const fs = require('fs');
+const path = require('path');
+const { pool } = require('../src/config/database');
 
-console.log('SmartBee API migrations');
-if (isSupabaseConfigured()) {
-  console.log('Supabase is configured. Apply migrations via Supabase CLI: supabase db push');
-} else {
-  console.log('Using in-memory store. Set SUPABASE_URL and SUPABASE_KEY for persistent storage.');
-}
-console.log('No migrations to run for in-memory mode.');
+(async () => {
+  const sql = fs.readFileSync(path.join(__dirname, '../db/schema.sql'), 'utf8');
+  await pool.query(sql);
+  console.log('Migration complete');
+  await pool.end();
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

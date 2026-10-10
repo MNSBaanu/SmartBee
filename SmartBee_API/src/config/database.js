@@ -1,10 +1,11 @@
-const { createClient } = require('@supabase/supabase-js');
+const { Pool } = require('pg');
 const config = require('./index');
 
-let supabase = null;
+const isLocal = !config.databaseUrl || /localhost|127\.0\.0\.1/.test(config.databaseUrl);
 
-if (config.supabase.url && config.supabase.key) {
-  supabase = createClient(config.supabase.url, config.supabase.key);
-}
+const pool = new Pool({
+  connectionString: config.databaseUrl,
+  ssl: isLocal ? undefined : { rejectUnauthorized: false },
+});
 
-module.exports = { supabase, isSupabaseConfigured: () => Boolean(supabase) };
+module.exports = { pool, query: (text, params) => pool.query(text, params) };

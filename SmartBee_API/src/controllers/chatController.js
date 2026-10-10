@@ -7,7 +7,7 @@ const send = asyncHandler(async (req, res) => {
 });
 
 const history = asyncHandler(async (req, res) => {
-  const data = chatService.getHistory(req.user.id);
+  const data = await chatService.getHistory(req.user.id);
   res.json({ success: true, data });
 });
 

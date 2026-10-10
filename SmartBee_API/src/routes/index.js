@@ -5,17 +5,22 @@ const taskRoutes = require('./taskRoutes');
 const attendanceRoutes = require('./attendanceRoutes');
 const chatRoutes = require('./chatRoutes');
 const plannerRoutes = require('./plannerRoutes');
-const { isSupabaseConfigured } = require('../config/database');
+const { query } = require('../config/database');
 
 const router = Router();
 
-router.get('/health', (_req, res) => {
+router.get('/health', async (_req, res) => {
+  let database = false;
+  try {
+    await query('SELECT 1');
+    database = true;
+  } catch {}
   res.json({
     success: true,
     data: {
       status: 'ok',
       timestamp: new Date().toISOString(),
-      supabase: isSupabaseConfigured(),
+      database,
     },
   });
 });

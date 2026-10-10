@@ -1,5 +1,6 @@
-const config = require('../config');
-const { store, nextId } = require('../models/store');
+const { query } = require('../config/database');
+
+const COLS = 'id, role, content, created_at AS "createdAt"';
 
 const buildStubReply = (message) => {
   const lower = message.toLowerCase();
@@ -15,38 +16,27 @@ const buildStubReply = (message) => {
   return "I'm your SmartBee virtual friend! Ask me about tasks, modules, attendance, or your daily plan.";
 };
 
+const insert = async (userId, role, content) =>
+  (
+    await query(
+      `INSERT INTO chat_messages (user_id, role, content) VALUES ($1, $2, $3) RETURNING ${COLS}`,
+      [userId, role, content]
+    )
+  ).rows[0];
+
 const sendMessage = async (userId, message) => {
-  let reply;
-  if (config.ai.apiKey) {
-    reply = buildStubReply(message);
-  } else {
-    reply = buildStubReply(message);
-  }
-
-  const entry = {
-    id: nextId('chat'),
-    userId,
-    role: 'user',
-    content: message,
-    createdAt: new Date().toISOString(),
-  };
-  const assistantEntry = {
-    id: nextId('chat'),
-    userId,
-    role: 'assistant',
-    content: reply,
-    createdAt: new Date().toISOString(),
-  };
-
-  store.chatMessages.push(entry, assistantEntry);
-
+  const reply = buildStubReply(message);
+  const entry = await insert(userId, 'user', message);
+  const assistantEntry = await insert(userId, 'assistant', reply);
   return { message: entry, reply: assistantEntry };
 };
 
-const getHistory = (userId, limit = 50) =>
-  store.chatMessages
-    .filter((m) => m.userId === userId)
-    .slice(-limit)
-    .map(({ userId: _, ...rest }) => rest);
+const getHistory = async (userId, limit = 50) =>
+  (
+    await query(
+      `SELECT * FROM (SELECT ${COLS} FROM chat_messages WHERE user_id = $1 ORDER BY id DESC LIMIT $2) t ORDER BY id`,
+      [userId, limit]
+    )
+  ).rows;
 
 module.exports = { sendMessage, getHistory };

@@ -16,7 +16,7 @@
   "keywords": ["smartbee", "api", "express"],
   "license": "UNLICENSED",
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.1",
+    "pg": "^8.13.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",

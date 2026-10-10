@@ -8,7 +8,7 @@ SmartBee API is a RESTful service that handles backend operations for the SmartB
 
 ## Status
 
-✅ **Initial implementation** — Express server, JWT auth, CRUD endpoints, Swagger docs, and Vitest tests. Uses an in-memory store by default; configure Supabase for persistent storage.
+✅ **Initial implementation** — Express server, JWT auth, CRUD endpoints, Swagger docs, and Vitest tests. Persists data in PostgreSQL (set `DATABASE_URL`, run `npm run migrate`).
 
 ## Features
 
@@ -24,7 +24,7 @@ SmartBee API is a RESTful service that handles backend operations for the SmartB
 
 - **Runtime**: Node.js 18+
 - **Framework**: Express.js
-- **Database**: In-memory (dev) / PostgreSQL via Supabase (production)
+- **Database**: PostgreSQL (`pg`)
 - **Authentication**: JWT
 - **API Documentation**: Swagger UI at `/api/docs`
 - **Validation**: Zod
@@ -118,8 +118,7 @@ PORT=3000
 DATABASE_URL=postgresql://...
 JWT_SECRET=your-secret-key
 JWT_EXPIRES_IN=7d
-SUPABASE_URL=https://...
-SUPABASE_KEY=your-key
+DATABASE_URL=postgres://user:pass@host/db
 AI_API_KEY=your-ai-key
 ```
 
@@ -147,7 +146,7 @@ SmartBee_API/
 ## Development Roadmap
 
 - [x] Set up Express server
-- [x] Configure database connection (Supabase client + in-memory fallback)
+- [x] Configure PostgreSQL connection (pg pool)
 - [x] Implement authentication system
 - [x] Create module management endpoints
 - [x] Add attendance tracking
@@ -157,7 +156,7 @@ SmartBee_API/
 - [x] Write API documentation (Swagger)
 - [x] Add comprehensive tests (initial suite)
 - [ ] Set up CI/CD pipeline
-- [ ] Persist all entities in Supabase/PostgreSQL
+- [x] Persist all entities in PostgreSQL
 
 ## API Documentation
 

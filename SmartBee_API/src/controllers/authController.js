@@ -17,7 +17,7 @@ const logout = asyncHandler(async (req, res) => {
 });
 
 const me = asyncHandler(async (req, res) => {
-  const user = authService.getMe(req.user.id);
+  const user = await authService.getMe(req.user.id);
   res.json({ success: true, data: user });
 });
 

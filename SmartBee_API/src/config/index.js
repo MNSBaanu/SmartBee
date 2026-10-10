@@ -7,10 +7,6 @@ const config = {
     secret: process.env.JWT_SECRET || 'dev-secret-change-in-production',
     expiresIn: process.env.JWT_EXPIRES_IN || '7d',
   },
-  supabase: {
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY,
-  },
   ai: {
     apiKey: process.env.AI_API_KEY,
   },

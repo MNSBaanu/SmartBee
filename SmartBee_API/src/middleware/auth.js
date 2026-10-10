@@ -1,30 +1,30 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const AppError = require('../utils/AppError');
-const { store } = require('../models/store');
+const { query } = require('../config/database');
 
-const authenticate = (req, _res, next) => {
+const authenticate = async (req, _res, next) => {
   const header = req.headers.authorization;
   if (!header?.startsWith('Bearer ')) {
     return next(new AppError('Authentication required', 401));
   }
 
   const token = header.slice(7);
-  if (!store.sessions.has(token)) {
-    return next(new AppError('Session expired or invalid', 401));
+  let payload;
+  try {
+    payload = jwt.verify(token, config.jwt.secret);
+  } catch {
+    return next(new AppError('Invalid token', 401));
   }
 
   try {
-    const payload = jwt.verify(token, config.jwt.secret);
-    const user = store.users.find((u) => u.id === payload.sub);
-    if (!user) {
-      return next(new AppError('User not found', 401));
-    }
-    req.user = { id: user.id, email: user.email, name: user.name };
+    const { rows } = await query('SELECT id, email, name FROM users WHERE id = $1', [payload.sub]);
+    if (!rows[0]) return next(new AppError('User not found', 401));
+    req.user = rows[0];
     req.token = token;
     next();
-  } catch {
-    next(new AppError('Invalid token', 401));
+  } catch (err) {
+    next(err);
   }
 };
 

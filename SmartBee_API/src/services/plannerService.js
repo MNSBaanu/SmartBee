@@ -1,19 +1,17 @@
-const { store, nextId } = require('../models/store');
+const { query } = require('../config/database');
 const taskService = require('./taskService');
 
 const todayString = () => new Date().toISOString().slice(0, 10);
 
-const getDaily = (userId, date = todayString()) => {
-  const plan = store.dailyPlans.find((p) => p.userId === userId && p.date === date);
-  if (plan) {
-    const { userId: _, ...rest } = plan;
-    return rest;
-  }
-  return { date, items: [], generated: false };
+const COLS = 'id, date, items, generated, created_at AS "createdAt"';
+
+const getDaily = async (userId, date = todayString()) => {
+  const { rows } = await query(`SELECT ${COLS} FROM daily_plans WHERE user_id = $1 AND date = $2`, [userId, date]);
+  return rows[0] || { date, items: [], generated: false };
 };
 
-const generate = (userId, { date, focusAreas }) => {
-  const tasks = taskService.list(userId).filter((t) => !t.completed);
+const generate = async (userId, { date, focusAreas }) => {
+  const tasks = (await taskService.list(userId)).filter((t) => !t.completed);
   const pending = tasks.slice(0, 5).map((t) => ({
     time: '09:00',
     title: t.title,
@@ -34,24 +32,13 @@ const generate = (userId, { date, focusAreas }) => {
     { time: '18:00', title: 'Wrap up & plan tomorrow', type: 'routine' },
   ];
 
-  const existingIndex = store.dailyPlans.findIndex((p) => p.userId === userId && p.date === date);
-  const plan = {
-    id: existingIndex >= 0 ? store.dailyPlans[existingIndex].id : nextId('plan'),
-    userId,
-    date,
-    items,
-    generated: true,
-    createdAt: new Date().toISOString(),
-  };
-
-  if (existingIndex >= 0) {
-    store.dailyPlans[existingIndex] = plan;
-  } else {
-    store.dailyPlans.push(plan);
-  }
-
-  const { userId: _, ...rest } = plan;
-  return rest;
+  const { rows } = await query(
+    `INSERT INTO daily_plans (user_id, date, items, generated) VALUES ($1, $2, $3, true)
+     ON CONFLICT (user_id, date) DO UPDATE SET items = EXCLUDED.items, created_at = now()
+     RETURNING ${COLS}`,
+    [userId, date, JSON.stringify(items)]
+  );
+  return rows[0];
 };
 
 module.exports = { getDaily, generate };
