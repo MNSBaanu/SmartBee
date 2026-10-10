@@ -98,4 +98,4 @@ Questions or ideas? Open an issue — we’re happy to help you get started.
 
 ## License
 
-Open source. A formal license file will be added to the repository; until then, treat the project as openly available for community contribution and learning.
+Released under the [MIT License](LICENSE).

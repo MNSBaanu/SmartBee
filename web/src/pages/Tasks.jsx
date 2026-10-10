@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { api } from '../api'
 import '../App.css'
 
 const PRIORITIES = ['High', 'Medium', 'Low']
@@ -12,6 +13,24 @@ const emptyForm = {
   notes: ''
 }
 
+const fromApi = t => ({
+  id: t.id,
+  title: t.title,
+  module: t.category,
+  dueDate: t.dueDate,
+  priority: t.priority,
+  notes: t.description,
+  completed: t.completed
+})
+
+const toApi = t => ({
+  title: t.title,
+  category: t.module || 'General',
+  dueDate: t.dueDate,
+  priority: t.priority,
+  description: t.notes
+})
+
 function Tasks() {
   const [tasks, setTasks] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -19,20 +38,27 @@ function Tasks() {
   const [editingId, setEditingId] = useState(null)
   const [filter, setFilter] = useState('All')
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    api.get('/tasks').then(list => setTasks(list.map(fromApi))).catch(err => alert(err.message))
+  }, [])
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (editingId) {
-      setTasks(tasks.map(task =>
-        task.id === editingId ? { ...task, ...formData } : task
-      ))
-      setEditingId(null)
-    } else {
-      setTasks([...tasks, { ...formData, id: Date.now(), completed: false }])
+    try {
+      if (editingId) {
+        const updated = fromApi(await api.put(`/tasks/${editingId}`, toApi(formData)))
+        setTasks(tasks.map(task => (task.id === editingId ? updated : task)))
+        setEditingId(null)
+      } else {
+        const created = fromApi(await api.post('/tasks', toApi(formData)))
+        setTasks([...tasks, created])
+      }
+      setFormData(emptyForm)
+      setShowForm(false)
+    } catch (err) {
+      alert(err.message)
     }
-
-    setFormData(emptyForm)
-    setShowForm(false)
   }
 
   const handleEdit = (task) => {
@@ -42,16 +68,24 @@ function Tasks() {
     setShowForm(true)
   }
 
-  const handleDelete = (id) => {
-    if (confirm('Are you sure you want to delete this task?')) {
+  const handleDelete = async (id) => {
+    if (!confirm('Are you sure you want to delete this task?')) return
+    try {
+      await api.del(`/tasks/${id}`)
       setTasks(tasks.filter(task => task.id !== id))
+    } catch (err) {
+      alert(err.message)
     }
   }
 
-  const handleToggle = (id) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ))
+  const handleToggle = async (id) => {
+    const task = tasks.find(t => t.id === id)
+    try {
+      const updated = fromApi(await api.put(`/tasks/${id}`, { completed: !task.completed }))
+      setTasks(tasks.map(t => (t.id === id ? updated : t)))
+    } catch (err) {
+      alert(err.message)
+    }
   }
 
   const handleCancel = () => {

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { api } from '../api'
 import '../App.css'
 
 const emptyForm = {
@@ -15,20 +16,28 @@ function Modules() {
   const [formData, setFormData] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    api.get('/modules').then(setModules).catch(err => alert(err.message))
+  }, [])
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (editingId) {
-      setModules(modules.map(mod =>
-        mod.id === editingId ? { ...formData, id: editingId } : mod
-      ))
-      setEditingId(null)
-    } else {
-      setModules([...modules, { ...formData, id: Date.now() }])
+    try {
+      const { id, userId, ...body } = formData
+      if (editingId) {
+        const updated = await api.put(`/modules/${editingId}`, body)
+        setModules(modules.map(mod => (mod.id === editingId ? updated : mod)))
+        setEditingId(null)
+      } else {
+        const created = await api.post('/modules', body)
+        setModules([...modules, created])
+      }
+      setFormData(emptyForm)
+      setShowForm(false)
+    } catch (err) {
+      alert(err.message)
     }
-
-    setFormData(emptyForm)
-    setShowForm(false)
   }
 
   const handleEdit = (module) => {
@@ -37,9 +46,13 @@ function Modules() {
     setShowForm(true)
   }
 
-  const handleDelete = (id) => {
-    if (confirm('Are you sure you want to delete this module?')) {
+  const handleDelete = async (id) => {
+    if (!confirm('Are you sure you want to delete this module?')) return
+    try {
+      await api.del(`/modules/${id}`)
       setModules(modules.filter(mod => mod.id !== id))
+    } catch (err) {
+      alert(err.message)
     }
   }
 
