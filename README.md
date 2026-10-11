@@ -1,100 +1,95 @@
-# SmartBee
+<div align="center">
 
-SmartBee is an **open source** platform designed to simplify campus life for students. It helps manage academic tasks, track modules, monitor attendance, and provides AI-powered assistance to make student life easier and more organized.
+# 🐝 SmartBee
 
-**Contributions are welcome** — whether you fix bugs, improve docs, add features, or share feedback.
+**One app for your classes, tasks, schedule and attendance — with an AI study buddy.**
 
-## Overview
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
+![React](https://img.shields.io/badge/React-18-61dafb)
+![Expo](https://img.shields.io/badge/Expo-54-000020)
+![Postgres](https://img.shields.io/badge/Postgres-Neon-336791)
 
-SmartBee brings together essential campus management tools in one place, helping students stay on top of academic responsibilities, deadlines, and daily schedules with intelligent planning and reminders.
+[Live demo](#) · [Download the app](#) · [API docs](#) · [Report a bug](../../issues)
 
-## Repository Structure
+</div>
 
-```text
-SmartBee/
-  api/   # Backend API service
-  app/   # Mobile app (React Native + Expo)
-  web/   # Web application (React + Vite)
-  supabase/       # Database migrations and schema
-  README.md
-```
+<!-- Add screenshots here, e.g. docs/screenshots/home.png, schedule.png, bee-chat.png -->
 
-## Modules
+## Why SmartBee
 
-### web
-Frontend web application providing a responsive interface for campus management.
+Student life is scattered across timetables, chat groups, notes and spreadsheets. SmartBee puts it in one open-source place, so you always know what's next.
 
-- Framework: React 18
-- Build Tool: Vite
-- Features: Module management, daily planner, attendance tracking, virtual assistant
-- Location: `web/`
+## Features
 
-### app
-Cross-platform mobile application for iOS and Android with native mobile experience.
-
-### api
-Backend API service providing data management and business logic.
-
-### Supabase
-Database layer with PostgreSQL for data persistence and real-time features.
-
-## Key Features
-
--  **Module Management** — Track courses, credits, instructors, and schedules
--  **Smart Planner** — AI-powered daily planning and task organization
--  **Attendance Tracking** — Monitor class attendance and get alerts
--  **Virtual Friend** — AI assistant for breaking down tasks and motivation
--  **Smart Reminders** — Never miss deadlines or important events
--  **Cross-Platform** — Access from web or mobile devices
+- **Modules** — track courses, credits, instructors and schedules
+- **Tasks** — deadlines and to-dos linked to your modules
+- **Schedule** — weekly timetable and daily view
+- **Attendance** — monitor attendance per module
+- **Bee AI** — chat assistant that helps break down tasks and plan your day
+- **Web + mobile** — React web app and an Expo app
 
 ## Tech Stack
 
-- **Frontend Web**: React 18, Vite, React Router
-- **Mobile**: React Native, Expo, Expo Router
-- **Backend**: Node.js, Express, JWT, Zod
-- **Database**: Supabase (PostgreSQL)
-- **Styling**: Custom CSS with responsive design
+| Part | Stack |
+| --- | --- |
+| `web/` | React 18, Vite, Tailwind, React Router |
+| `app/` | React Native, Expo, TypeScript |
+| `api/` | Node.js, Express, JWT, Zod, Swagger, Vitest |
+| Database | PostgreSQL (Neon) |
+| Hosting | Vercel (web), Render (API) |
 
 ## Getting Started
 
-### Web Application
-```bash
-cd web
-npm install
-npm run dev
-```
+**Prerequisites:** Node.js 18+ and a PostgreSQL database (a free [Neon](https://neon.tech) project works).
 
-### Mobile Application
-```bash
-cd app
-npm install
-npx expo start
-```
+### 1. API
 
-### Backend API
 ```bash
 cd api
-npm install
-cp .env.example .env
+npm ci
+cp .env.example .env   # set DATABASE_URL, JWT_SECRET, CORS_ORIGIN, AI_API_KEY
+npm run migrate
 npm run dev
 ```
 
 API: `http://localhost:3000` · Docs: `http://localhost:3000/api/docs`
 
-See each module’s README for more detail.
+### 2. Web
+
+```bash
+cd web
+npm ci
+npm run dev
+```
+
+### 3. Mobile
+
+```bash
+cd app
+npm ci
+npx expo start
+```
+
+## Project Structure
+
+```text
+SmartBee/
+  api/   # Express API, migrations, tests
+  app/   # Mobile app (Expo)
+  web/   # Web app (React + Vite)
+```
 
 ## Contributing
 
-SmartBee is open source and **contributions are welcome** from everyone.
+Contributions are welcome — bug fixes, docs, features or feedback.
 
-**Before you contribute**
+1. Fork the repo and branch from `main`
+2. Follow the code style of the module you're changing
+3. Add or update tests where applicable (especially in `api`)
+4. Keep pull requests focused and explain what changed and why
 
-1. Fork the repository and create a branch from `main`
-2. Follow existing code style and patterns in the module you’re changing
-3. Add or update tests where applicable (especially for `api`)
-4. Keep pull requests focused and describe what changed and why
-
-Questions or ideas? Open an issue — we’re happy to help you get started.
+Not sure where to start? Check the [issues](../../issues) or open one with your idea.
 
 ## License
 
