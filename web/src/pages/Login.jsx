@@ -30,6 +30,7 @@ export default function Login() {
       <form className="card auth-card" onSubmit={submit}>
         <img src="/SmartBee.png" alt="" className="brand-logo" />
         <h2>{isRegister ? 'Create your account' : 'Welcome back'}</h2>
+        <p className="auth-sub">{isRegister ? 'Free forever. No card needed.' : 'Log in to see what’s next today.'}</p>
         {isRegister && (
           <input
             className="auth-input"

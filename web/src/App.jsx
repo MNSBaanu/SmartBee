@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Routes, Route, NavLink, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
 import Modules from './pages/Modules'
@@ -9,6 +9,7 @@ import More from './pages/More'
 import Friends from './pages/Friends'
 import Focus from './pages/Focus'
 import Login from './pages/Login'
+import Landing from './pages/Landing'
 import { AuthProvider, useAuth } from './auth'
 
 const NAV_ITEMS = [
@@ -161,6 +162,7 @@ function Shell() {
             <Route path="/focus" element={<Focus />} />
             <Route path="/friends" element={<Friends />} />
             <Route path="/more" element={<More />} />
+            <Route path="/login" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
       </div>
@@ -171,10 +173,16 @@ function Shell() {
 function Gate() {
   const { user, loading } = useAuth()
   if (loading) return null
-  if (!user) return <Login />
   return (
     <BrowserRouter>
-      <Shell />
+      {user ? (
+        <Shell />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+      )}
     </BrowserRouter>
   )
 }

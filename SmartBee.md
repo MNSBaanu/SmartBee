@@ -5,7 +5,7 @@ tags: [project, react, express, postgres]
 status: in-progress
 version: 0.1.0
 created: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-11
 repo: https://github.com/MNSBaanu/SmartBee
 author: MNS Baanu
 ---
@@ -48,3 +48,5 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 
 ## Log
 - 2026-10-10: Web auth and Modules/Tasks wired to API; added render.yaml, vercel.json, LICENSE.
+- 2026-10-11: Added public landing page (web/src/pages/Landing.jsx); logged-out users see it at / and Login at /login.
+- 2026-10-11: Expanded landing page: stats, product preview, Bee AI demo, how-it-works steps, final CTA.
