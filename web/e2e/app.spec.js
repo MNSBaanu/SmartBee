@@ -49,6 +49,15 @@ test('unknown route while logged in', async ({ page }) => {
   await expect(page).toHaveURL(/\/$/)
 })
 
+test('widget shows today’s classes', async ({ page, errors }) => {
+  await page.goto('/widget')
+  await expect(page.getByRole('heading', { name: 'Today’s classes' })).toBeVisible()
+  await expect(page.getByText('No classes today.')).toBeVisible()
+  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute('href', '/manifest.webmanifest')
+  await expectNoHorizontalScroll(page)
+  expect(errors).toEqual([])
+})
+
 test('modules: add, edit and delete', async ({ page }) => {
   page.on('dialog', dialog => dialog.accept())
   await page.goto('/modules')

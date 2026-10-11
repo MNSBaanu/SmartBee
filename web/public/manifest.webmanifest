@@ -1,0 +1,18 @@
+{
+  "name": "SmartBee",
+  "short_name": "SmartBee",
+  "description": "Your campus companion: today's classes at a glance.",
+  "start_url": "/widget",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f5f2",
+  "theme_color": "#fecc0b",
+  "icons": [
+    { "src": "/SmartBee.png", "sizes": "2000x2000", "type": "image/png", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Today's classes", "url": "/widget", "icons": [{ "src": "/SmartBee.png", "sizes": "2000x2000" }] },
+    { "name": "Schedule", "url": "/schedule" },
+    { "name": "Tasks", "url": "/tasks" }
+  ]
+}

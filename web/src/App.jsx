@@ -10,6 +10,7 @@ import Friends from './pages/Friends'
 import Focus from './pages/Focus'
 import Login from './pages/Login'
 import Landing from './pages/Landing'
+import Widget from './pages/Widget'
 import { AuthProvider, useAuth } from './auth'
 
 const NAV_ITEMS = [
@@ -181,7 +182,10 @@ function Gate() {
   return (
     <BrowserRouter>
       {user ? (
-        <Shell />
+        <Routes>
+          <Route path="/widget" element={<Widget />} />
+          <Route path="*" element={<Shell />} />
+        </Routes>
       ) : (
         <Routes>
           <Route path="/" element={<Landing />} />

@@ -43,6 +43,7 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - [ ] Wire Schedule and Home to the API
 - [ ] API tables for Friends, Focus and Social Events
 - [ ] Mobile app integration
+- [ ] Native Android/iOS home-screen widget (needs mobile API integration + Expo dev build)
 - [ ] Rotate Neon DB password, clear test data
 - [ ] Submit to builtlist.space
 
@@ -51,3 +52,4 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - 2026-10-11: Added public landing page (web/src/pages/Landing.jsx); logged-out users see it at / and Login at /login.
 - 2026-10-11: Expanded landing page: stats, product preview, Bee AI demo, how-it-works steps, final CTA.
 - 2026-10-11: Added Playwright e2e suite (web/e2e, desktop + mobile). Fixed icon overflow, logged-in catch-all route, dead download links; added Focus/Friends to nav.
+- 2026-10-11: Made the web app an installable PWA (web/public/manifest.webmanifest) with a pinnable /widget page showing today's classes (web/src/pages/Widget.jsx). Removed GitHub from the landing nav (it stays in the footer).
