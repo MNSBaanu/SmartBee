@@ -7,6 +7,7 @@ export default function Login() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const isRegister = mode === 'register'
   const update = field => e => setForm(prev => ({ ...prev, [field]: e.target.value }))
@@ -48,15 +49,25 @@ export default function Login() {
           onChange={update('email')}
           required
         />
-        <input
-          className="auth-input"
-          type="password"
-          placeholder="Password"
-          minLength={8}
-          value={form.password}
-          onChange={update('password')}
-          required
-        />
+        <div className="auth-password">
+          <input
+            className="auth-input"
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            minLength={8}
+            value={form.password}
+            onChange={update('password')}
+            required
+          />
+          <button
+            type="button"
+            className="auth-eye"
+            onClick={() => setShowPassword(value => !value)}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+            <span className="material-symbols-outlined">{showPassword ? 'visibility_off' : 'visibility'}</span>
+          </button>
+        </div>
         {error && <p className="auth-error">{error}</p>}
         <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
           {isRegister ? 'Sign up' : 'Log in'}

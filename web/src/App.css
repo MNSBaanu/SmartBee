@@ -2080,6 +2080,32 @@
   box-shadow: 0 0 0 3px var(--bee-soft);
 }
 
+.auth-password {
+  position: relative;
+  display: flex;
+}
+
+.auth-password .auth-input {
+  flex: 1;
+  padding-right: 3rem;
+}
+
+.auth-eye {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  padding: 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.auth-eye:hover { color: var(--bee-ink); }
+
 .auth-error {
   color: #b91c1c;
   font-size: 0.875rem;
