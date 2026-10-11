@@ -36,10 +36,11 @@ function Tasks() {
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
+  const [error, setError] = useState('')
   const [filter, setFilter] = useState('All')
 
   useEffect(() => {
-    api.get('/tasks').then(list => setTasks(list.map(fromApi))).catch(err => alert(err.message))
+    api.get('/tasks').then(list => setTasks(list.map(fromApi))).catch(err => setError(err.message))
   }, [])
 
   const handleSubmit = async (e) => {
@@ -57,7 +58,7 @@ function Tasks() {
       setFormData(emptyForm)
       setShowForm(false)
     } catch (err) {
-      alert(err.message)
+      setError(err.message)
     }
   }
 
@@ -74,7 +75,7 @@ function Tasks() {
       await api.del(`/tasks/${id}`)
       setTasks(tasks.filter(task => task.id !== id))
     } catch (err) {
-      alert(err.message)
+      setError(err.message)
     }
   }
 
@@ -84,7 +85,7 @@ function Tasks() {
       const updated = fromApi(await api.put(`/tasks/${id}`, { completed: !task.completed }))
       setTasks(tasks.map(t => (t.id === id ? updated : t)))
     } catch (err) {
-      alert(err.message)
+      setError(err.message)
     }
   }
 
@@ -140,6 +141,7 @@ function Tasks() {
 
   return (
     <div className="page">
+      {error && <p className="auth-error" role="alert">{error}</p>}
       <div className="page-header">
         <div>
           <h2>Tasks</h2>
@@ -218,6 +220,7 @@ function Tasks() {
                 type="date"
                 value={formData.dueDate}
                 onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
+                required
               />
             </div>
             <div className="form-field">

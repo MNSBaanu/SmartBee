@@ -70,7 +70,7 @@ export default function Login() {
         </div>
         {error && <p className="auth-error">{error}</p>}
         <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
-          {isRegister ? 'Sign up' : 'Log in'}
+          {busy ? 'Please wait…' : isRegister ? 'Sign up' : 'Log in'}
         </button>
         <button
           type="button"

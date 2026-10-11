@@ -27,10 +27,11 @@ function Schedule() {
   const [showForm, setShowForm] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
   const [editingId, setEditingId] = useState(null)
+  const [error, setError] = useState('')
   const [view, setView] = useState('grid')
 
   useEffect(() => {
-    api.get('/schedule').then(setEntries).catch(err => alert(err.message))
+    api.get('/schedule').then(setEntries).catch(err => setError(err.message))
   }, [])
 
   const handleSubmit = async (e) => {
@@ -49,7 +50,7 @@ function Schedule() {
       setFormData(emptyForm)
       setShowForm(false)
     } catch (err) {
-      alert(err.message)
+      setError(err.message)
     }
   }
 
@@ -65,7 +66,7 @@ function Schedule() {
       await api.del(`/schedule/${id}`)
       setEntries(entries.filter(entry => entry.id !== id))
     } catch (err) {
-      alert(err.message)
+      setError(err.message)
     }
   }
 
@@ -116,6 +117,7 @@ function Schedule() {
 
   return (
     <div className="page">
+      {error && <p className="auth-error" role="alert">{error}</p>}
       <div className="page-header">
         <div>
           <h2>Weekly Schedule</h2>

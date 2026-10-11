@@ -16,8 +16,12 @@ async function request(method, path, body) {
     body: body ? JSON.stringify(body) : undefined,
   })
   const json = await res.json().catch(() => ({}))
+  if (res.status === 401 && token) {
+    setToken(null)
+    window.location.assign('/login')
+  }
   if (!res.ok) {
-    const error = new Error(json.message || 'Something went wrong')
+    const error = new Error(json.error || json.message || 'Something went wrong')
     error.status = res.status
     throw error
   }

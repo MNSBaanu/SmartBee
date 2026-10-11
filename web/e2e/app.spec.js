@@ -84,6 +84,7 @@ test('tasks: add, complete and delete', async ({ page }) => {
   await page.goto('/tasks')
   await page.getByRole('button', { name: /Add Task/i }).click()
   await page.getByPlaceholder('e.g., Complete AI Mini Project').fill('Write report')
+  await page.locator('#dueDate').fill('2030-01-15')
   await page.locator('form button[type="submit"]').click()
   const task = page.getByRole('heading', { name: 'Write report' })
   await expect(task).toBeVisible()

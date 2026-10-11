@@ -11,10 +11,11 @@ function Home() {
   const { user } = useAuth()
   const [tasks, setTasks] = useState([])
   const [modules, setModules] = useState([])
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    api.get('/tasks').then(setTasks).catch(() => {})
-    api.get('/modules').then(setModules).catch(() => {})
+    api.get('/tasks').then(setTasks).catch(err => setError(err.message))
+    api.get('/modules').then(setModules).catch(err => setError(err.message))
   }, [])
 
   const today = new Date().toLocaleDateString('en-CA')
@@ -38,6 +39,7 @@ function Home() {
 
   return (
     <div className="dash">
+      {error && <p className="auth-error" role="alert">{error}</p>}
       <section className="hero">
         <div className="hero-body">
           <span className="pill pill-bee">

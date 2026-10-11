@@ -46,6 +46,13 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - [ ] Native Android/iOS home-screen widget (needs mobile API integration + Expo dev build)
 - [ ] Rotate Neon DB password, clear test data
 - [ ] Submit to builtlist.space
+- [x] Expired token mid-session shows raw alerts instead of logging out (web/src/api.js)
+- [x] Replace alert() with inline errors; Home swallows API errors
+- [ ] hero-bee.png is 1.4 MB; convert to WebP and resize
+- [ ] Notifications, Bee AI, "Start a chat" and topbar search are not wired up; Bee AI button hidden on mobile
+- [ ] No security headers in web/vercel.json
+- [ ] Schedule and widget support weekdays only
+- [ ] Delete live e2e test accounts (e2e-live-*@smartbee.test) from production DB
 
 ## Log
 - 2026-10-10: Web auth and Modules/Tasks wired to API; added render.yaml, vercel.json, LICENSE.
@@ -53,3 +60,6 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - 2026-10-11: Expanded landing page: stats, product preview, Bee AI demo, how-it-works steps, final CTA.
 - 2026-10-11: Added Playwright e2e suite (web/e2e, desktop + mobile). Fixed icon overflow, logged-in catch-all route, dead download links; added Focus/Friends to nav.
 - 2026-10-11: Made the web app an installable PWA (web/public/manifest.webmanifest) with a pinnable /widget page showing today's classes (web/src/pages/Widget.jsx). Removed GitHub from the landing nav (it stays in the footer).
+- 2026-10-11: Live test on Vercel/Render. Fixed task create 400 (due date now required), API error messages (`error` field), login "Please wait…" during cold start, auto-logout on 401, inline errors instead of alert() on Modules/Tasks/Schedule/Home.
+- 2026-10-11: Added human-style e2e journeys (web/e2e/human.spec.js): sign-up through every feature to the widget and logout, keyboard-only login, and clicking every button on every page. No new issues found.
+- 2026-10-11: Web audit. Bumped react-router 7.13.1 → 7.18.4 (npm audit: 2 high, now 0) and added a meta description. Remaining findings moved to Open issues.
