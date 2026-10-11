@@ -7,6 +7,8 @@ const FEATURES = [
   { icon: 'checklist', title: 'Tasks', text: 'Deadlines and to-dos linked to the modules they belong to.' },
   { icon: 'calendar_month', title: 'Schedule', text: 'Your weekly timetable and today’s classes at a glance.' },
   { icon: 'how_to_reg', title: 'Attendance', text: 'Keep an eye on attendance so nothing slips.' },
+  { icon: 'timer', title: 'Focus', text: 'Timed study sessions that keep you on track.' },
+  { icon: 'group', title: 'Friends', text: 'Study with classmates and see who’s in your classes.' },
   { icon: 'auto_awesome', title: 'Bee AI', text: 'Breaks big assignments into small, doable steps.' },
   { icon: 'devices', title: 'Web + mobile', text: 'Use it in the browser or on your phone.' }
 ]
@@ -156,6 +158,7 @@ function Landing() {
 
       <footer className="landing-foot">
         <p>Open source under the MIT License. Contributions welcome on <a href={REPO} target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+        <p>© 2026 SmartBee · Built by <a href="https://github.com/MNSBaanu" target="_blank" rel="noopener noreferrer">MNS Baanu</a></p>
       </footer>
     </div>
   )

@@ -91,6 +91,10 @@ Contributions are welcome — bug fixes, docs, features or feedback.
 
 Not sure where to start? Check the [issues](../../issues) or open one with your idea.
 
+## Author
+
+Created and maintained by **MNS Baanu** ([@MNSBaanu](https://github.com/MNSBaanu)).
+
 ## License
 
 Released under the [MIT License](LICENSE).
