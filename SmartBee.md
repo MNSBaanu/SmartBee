@@ -41,7 +41,7 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 
 ## Open issues
 - [ ] Wire Schedule and Home to the API
-- [ ] API tables for Friends, Focus and Social Events
+- [ ] API table for Focus sessions
 - [ ] Mobile app integration
 - [ ] Native Android/iOS home-screen widget (needs mobile API integration + Expo dev build)
 - [ ] Rotate Neon DB password, clear test data
@@ -63,3 +63,4 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - 2026-10-11: Live test on Vercel/Render. Fixed task create 400 (due date now required), API error messages (`error` field), login "Please wait…" during cold start, auto-logout on 401, inline errors instead of alert() on Modules/Tasks/Schedule/Home.
 - 2026-10-11: Added human-style e2e journeys (web/e2e/human.spec.js): sign-up through every feature to the widget and logout, keyboard-only login, and clicking every button on every page. No new issues found.
 - 2026-10-11: Web audit. Bumped react-router 7.13.1 → 7.18.4 (npm audit: 2 high, now 0) and added a meta description. Remaining findings moved to Open issues.
+- 2026-10-11: Scope cleanup. Removed the Friends page and the Home planner strip, renamed the Bee card label to "Study Assistant", dropped Friends and Social Events from plans.

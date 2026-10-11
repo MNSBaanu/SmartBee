@@ -9,7 +9,7 @@ test.describe('Landing page', () => {
     await page.goto('/')
     await expect(page).toHaveTitle(/.+/)
     await expect(page.getByRole('heading', { level: 1 })).toContainText('classes, tasks and attendance')
-    await expect(page.locator('.landing-card')).toHaveCount(8)
+    await expect(page.locator('.landing-card')).toHaveCount(7)
     await expect(page.locator('.landing-foot')).toContainText('MNS Baanu')
     await expect(page.locator('img[src="/hero-bee.png"]')).toBeVisible()
     const broken = await page.evaluate(() =>

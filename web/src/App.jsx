@@ -6,7 +6,6 @@ import Modules from './pages/Modules'
 import Schedule from './pages/Schedule'
 import Tasks from './pages/Tasks'
 import More from './pages/More'
-import Friends from './pages/Friends'
 import Focus from './pages/Focus'
 import Login from './pages/Login'
 import Landing from './pages/Landing'
@@ -19,7 +18,6 @@ const NAV_ITEMS = [
   { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
   { path: '/tasks', label: 'Tasks', icon: 'checklist' },
   { path: '/focus', label: 'Focus', icon: 'timer' },
-  { path: '/friends', label: 'Friends', icon: 'group' },
   { path: '/more', label: 'More', icon: 'tune' }
 ]
 
@@ -165,7 +163,6 @@ function Shell() {
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/focus" element={<Focus />} />
-            <Route path="/friends" element={<Friends />} />
             <Route path="/more" element={<More />} />
             <Route path="/login" element={<Navigate to="/" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />

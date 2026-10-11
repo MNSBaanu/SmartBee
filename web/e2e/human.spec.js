@@ -50,7 +50,7 @@ test('a new student signs up and uses the whole app', async ({ page, isMobile, e
   await page.locator('form button[type="submit"]').click()
   await expect(page.getByText('Operating Systems').first()).toBeVisible()
 
-  for (const label of ['Focus', 'Friends', 'More', 'Dashboard']) {
+  for (const label of ['Focus','More', 'Dashboard']) {
     await goTo(page, isMobile, label)
     await expect(page.getByRole('heading').first()).toBeVisible()
     await expectNoHorizontalScroll(page)
@@ -88,7 +88,7 @@ test('clicking every button on every page never crashes', async ({ page, errors 
   test.setTimeout(300000)
   page.on('dialog', dialog => dialog.dismiss())
   await mockApi(page, { loggedIn: true })
-  for (const path of ['/', '/modules', '/schedule', '/tasks', '/focus', '/friends', '/more', '/widget']) {
+  for (const path of ['/', '/modules', '/schedule', '/tasks', '/focus','/more', '/widget']) {
     await page.goto(path)
     await expect(page.getByRole('heading').first()).toBeVisible()
     const count = await page.locator('main button:visible, .widget button:visible').count()

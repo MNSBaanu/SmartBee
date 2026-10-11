@@ -70,25 +70,6 @@ function Home() {
         </div>
       </section>
 
-      <section className="planner-strip" aria-label="Quick planner">
-        <div className="strip-segment">
-          <p className="strip-label">What</p>
-          <p className="strip-value">Plan my day</p>
-        </div>
-        <div className="strip-segment">
-          <p className="strip-label">When</p>
-          <p className="strip-value">Today</p>
-        </div>
-        <div className="strip-segment">
-          <p className="strip-label">Focus</p>
-          <p className="strip-value">Classes + Assignment</p>
-        </div>
-        <button type="button" className="btn btn-primary strip-cta">
-          <span className="material-symbols-outlined">auto_awesome</span>
-          Ask Bee
-        </button>
-      </section>
-
       <section className="stat-row">
         {stats.map(stat => (
           <article key={stat.label} className={`stat-tile card tone-${stat.tone}`}>
@@ -125,7 +106,7 @@ function Home() {
             <div className="bee-head">
               <img src="/SmartBee.png" alt="" className="bee-avatar" />
               <div>
-                <p className="eyebrow">Virtual Friend</p>
+                <p className="eyebrow">Study Assistant</p>
                 <h3>Bee says</h3>
               </div>
             </div>

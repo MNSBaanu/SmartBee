@@ -8,7 +8,6 @@ const FEATURES = [
   { icon: 'calendar_month', title: 'Schedule', text: 'Your weekly timetable and today’s classes at a glance.' },
   { icon: 'how_to_reg', title: 'Attendance', text: 'Keep an eye on attendance so nothing slips.' },
   { icon: 'timer', title: 'Focus', text: 'Timed study sessions that keep you on track.' },
-  { icon: 'group', title: 'Friends', text: 'Study with classmates and see who’s in your classes.' },
   { icon: 'auto_awesome', title: 'Bee AI', text: 'Breaks big assignments into small, doable steps.' },
   { icon: 'devices', title: 'Web + mobile', text: 'Use it in the browser or on your phone.' }
 ]

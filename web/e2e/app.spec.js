@@ -6,7 +6,6 @@ const PAGES = [
   { path: '/schedule', heading: 'Weekly Schedule' },
   { path: '/tasks', heading: 'Tasks' },
   { path: '/focus', heading: 'Focus Sessions' },
-  { path: '/friends', heading: 'Find Friends' },
   { path: '/more', heading: 'More' }
 ]
 
