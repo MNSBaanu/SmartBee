@@ -44,7 +44,6 @@ function Landing() {
         <nav className="landing-links">
           <a href="#features">Features</a>
           <a href="#how">How it works</a>
-          <a href={REPO} target="_blank" rel="noopener noreferrer">GitHub</a>
           <Link to="/login" className="btn btn-primary">Log in</Link>
         </nav>
       </header>
