@@ -13,6 +13,9 @@ dist-ssr/
 web-build/
 .expo/
 coverage/
+test-results/
+playwright-report/
+playwright/.cache/
 
 # Logs
 logs/

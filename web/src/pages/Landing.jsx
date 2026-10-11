@@ -32,7 +32,7 @@ const PREVIEW = [
 ]
 
 function Landing() {
-  const downloadUrl = import.meta.env.VITE_APP_DOWNLOAD_URL || '#'
+  const downloadUrl = import.meta.env.VITE_APP_DOWNLOAD_URL
 
   return (
     <div className="landing">
@@ -56,10 +56,12 @@ function Landing() {
           <p>SmartBee is a free campus-life companion with an AI study buddy that helps you plan what’s next.</p>
           <div className="landing-cta">
             <Link to="/login" className="btn btn-primary">Get started free</Link>
-            <a className="btn" href={downloadUrl} target="_blank" rel="noopener noreferrer">
-              <span className="material-symbols-outlined">download</span>
-              Download the app
-            </a>
+            {downloadUrl && (
+              <a className="btn" href={downloadUrl} target="_blank" rel="noopener noreferrer">
+                <span className="material-symbols-outlined">download</span>
+                Download the app
+              </a>
+            )}
           </div>
           <ul className="landing-trust">
             <li><span className="material-symbols-outlined icon-fill">check_circle</span>Free forever</li>

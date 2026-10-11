@@ -50,3 +50,4 @@ Stateless JWT auth. Responses are `{success, data}`; the token is in `data.token
 - 2026-10-10: Web auth and Modules/Tasks wired to API; added render.yaml, vercel.json, LICENSE.
 - 2026-10-11: Added public landing page (web/src/pages/Landing.jsx); logged-out users see it at / and Login at /login.
 - 2026-10-11: Expanded landing page: stats, product preview, Bee AI demo, how-it-works steps, final CTA.
+- 2026-10-11: Added Playwright e2e suite (web/e2e, desktop + mobile). Fixed icon overflow, logged-in catch-all route, dead download links; added Focus/Friends to nav.

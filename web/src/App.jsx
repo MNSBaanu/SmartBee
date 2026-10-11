@@ -17,6 +17,8 @@ const NAV_ITEMS = [
   { path: '/modules', label: 'Modules', icon: 'school' },
   { path: '/schedule', label: 'Schedule', icon: 'calendar_month' },
   { path: '/tasks', label: 'Tasks', icon: 'checklist' },
+  { path: '/focus', label: 'Focus', icon: 'timer' },
+  { path: '/friends', label: 'Friends', icon: 'group' },
   { path: '/more', label: 'More', icon: 'tune' }
 ]
 
@@ -105,16 +107,18 @@ function Topbar({ onMenu }) {
       </div>
 
       <div className="topbar-actions">
-        <a
-          className="icon-btn"
-          href={import.meta.env.VITE_APP_DOWNLOAD_URL || '#'}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Download the app"
-          title="Download the app"
-        >
-          <span className="material-symbols-outlined">download</span>
-        </a>
+        {import.meta.env.VITE_APP_DOWNLOAD_URL && (
+          <a
+            className="icon-btn"
+            href={import.meta.env.VITE_APP_DOWNLOAD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Download the app"
+            title="Download the app"
+          >
+            <span className="material-symbols-outlined">download</span>
+          </a>
+        )}
         <button type="button" className="icon-btn" aria-label="Notifications">
           <span className="material-symbols-outlined">notifications</span>
           <span className="dot" />
@@ -163,6 +167,7 @@ function Shell() {
             <Route path="/friends" element={<Friends />} />
             <Route path="/more" element={<More />} />
             <Route path="/login" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
       </div>
